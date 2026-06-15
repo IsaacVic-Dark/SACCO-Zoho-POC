@@ -3,33 +3,35 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Umoja SACCO | Secure Savings & Loans</title>
+<title>Umoja Sacco | A Basket for All Your Financial Needs</title>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --g50: #f0faf0;
-    --g100: #d4f0d4;
-    --g200: #a8e0a8;
-    --g400: #4caf50;
-    --g500: #388e3c;
-    --g600: #2e7d32;  
-    --g700: #1b5e20;
-    --g800: #1a3d1a;
-    --neutral50: #fafaf9;
-    --neutral100: #f4f4f0;
-    --neutral200: #e8e8e0;
-    --neutral400: #a0a098;
-    --neutral600: #52524e;
-    --neutral800: #1c1c1a;
+    /* Umoja Sacco brand palette */
+    --g50: #fff0ee;
+    --g100: #ffd0cb;
+    --g200: #ffb3ab;
+    --g400: #f77060;
+    --g500: #f55544;  /* primary red */
+    --g600: #d93f2e;
+    --g700: #14556c;  /* secondary teal */
+    --g800: #0d3545;
+    --neutral50: #fafafa;
+    --neutral100: #f4f4f4;
+    --neutral200: #e8e8e8;
+    --neutral400: #a0a0a0;
+    --neutral600: #525252;
+    --neutral700: #3a3a3a;
+    --neutral800: #1c1c1c;
     --white: #ffffff;
     --radius-sm: 10px;
     --radius-md: 16px;
     --radius-lg: 24px;
     --radius-xl: 32px;
-    --shadow-card: 0 2px 20px rgba(46,125,50,0.08), 0 1px 4px rgba(0,0,0,0.04);
-    --shadow-hover: 0 8px 32px rgba(46,125,50,0.14), 0 2px 8px rgba(0,0,0,0.06);
+    --shadow-card: 0 2px 20px rgba(245,85,68,0.08), 0 1px 4px rgba(0,0,0,0.04);
+    --shadow-hover: 0 8px 32px rgba(245,85,68,0.14), 0 2px 8px rgba(0,0,0,0.06);
   }
 
   html { scroll-behavior: smooth; }
@@ -45,58 +47,86 @@
 
   h1, h2, h3, h4 { font-family: 'Fraunces', serif; font-weight: 700; line-height: 1.2; }
 
-  /* ── NAV ── */
-  nav {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: rgba(255,255,255,0.92);
-    backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--neutral200);
-    padding: 0 5%;
+  /* ── TOP CONTACT BAR ── */
+  .top-bar {
+    background: var(--g700);
+    color: rgba(255,255,255,0.88);
+    font-size: 13px;
+    padding: 8px 5%;
   }
-  .nav-inner {
+  .top-bar-inner {
     max-width: 1200px;
     margin: 0 auto;
-    height: 68px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 16px;
   }
-  .nav-logo {
+  .top-bar-contact { display: flex; align-items: center; gap: 24px; }
+  .top-bar-contact a {
+    color: rgba(255,255,255,0.88);
+    text-decoration: none;
     display: flex;
     align-items: center;
-    gap: 10px;
-    text-decoration: none;
+    gap: 6px;
+    transition: color 0.2s;
   }
-  .nav-logo-icon {
-    width: 38px;
-    height: 38px;
-    background: var(--g500);
-    border-radius: 10px;
+  .top-bar-contact a:hover { color: #fff; }
+  .top-bar-socials { display: flex; align-items: center; gap: 12px; }
+  .top-bar-socials a {
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.25);
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: all 0.2s;
   }
+  .top-bar-socials a:hover { background: rgba(255,255,255,0.15); color: #fff; border-color: rgba(255,255,255,0.5); }
+  .top-bar-socials svg { width: 13px; height: 13px; fill: currentColor; }
+
+  /* ── NAV ── */
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.95); backdrop-filter: blur(16px); border-bottom: 1px solid var(--neutral200); padding: 0 5%; }
+  .nav-inner { max-width: 1200px; margin: 0 auto; height: 68px; display: flex; align-items: center; justify-content: space-between; }
+  .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .nav-logo-icon { width: 38px; height: 38px; background: var(--g500); border-radius: 10px; display: flex; align-items: center; justify-content: center; }
   .nav-logo-icon svg { fill: white; width: 22px; height: 22px; }
   .nav-logo-text { font-family: 'Fraunces', serif; font-size: 20px; font-weight: 700; color: var(--g700); }
   .nav-logo-sub { font-size: 11px; color: var(--g500); font-weight: 500; letter-spacing: 0.05em; display: block; line-height: 1; }
-  .nav-links { display: flex; align-items: center; gap: 32px; }
+  .nav-links { display: flex; align-items: center; gap: 28px; }
   .nav-links a { text-decoration: none; color: var(--neutral600); font-size: 15px; font-weight: 500; transition: color 0.2s; }
   .nav-links a:hover { color: var(--g600); }
-  .nav-cta {
-    background: var(--g500);
-    color: white !important;
-    padding: 9px 22px;
-    border-radius: var(--radius-sm);
-    font-weight: 600 !important;
-    transition: background 0.2s !important;
-  }
+  .nav-cta { background: var(--g500); color: white !important; padding: 9px 22px; border-radius: var(--radius-sm); font-weight: 600 !important; transition: background 0.2s !important; }
   .nav-cta:hover { background: var(--g600) !important; color: white !important; }
+  /* Dropdown */
+  .nav-dropdown { position: relative; }
+  .nav-drop-btn { background: none; border: none; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; color: var(--neutral600); cursor: pointer; display: flex; align-items: center; gap: 5px; padding: 0; transition: color 0.2s; }
+  .nav-drop-btn:hover { color: var(--g600); }
+  .drop-arrow { width: 10px; height: 7px; transition: transform 0.2s; }
+  .nav-dropdown:hover .drop-arrow { transform: rotate(180deg); }
+  .nav-drop-menu { position: absolute; top: calc(100% + 14px); left: 50%; transform: translateX(-50%) translateY(6px); background: white; border: 1px solid var(--neutral200); border-radius: var(--radius-md); box-shadow: 0 8px 32px rgba(0,0,0,0.12); min-width: 230px; padding: 8px 0; opacity: 0; pointer-events: none; transition: opacity 0.18s ease, transform 0.18s ease; z-index: 200; }
+  .nav-dropdown:hover .nav-drop-menu, .nav-dropdown:focus-within .nav-drop-menu { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+  .nav-drop-menu a { display: block; padding: 10px 20px; font-size: 14px; color: var(--neutral700) !important; text-decoration: none; transition: background 0.15s; white-space: nowrap; }
+  .nav-drop-menu a:hover { background: var(--g50); color: var(--g600) !important; }
+  .nav-drop-menu a + a { border-top: 1px solid var(--neutral100); }
+  .nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+  .nav-hamburger span { display: block; width: 24px; height: 2px; background: var(--neutral800); border-radius: 2px; }
+  .mobile-menu { display: none; flex-direction: column; gap: 4px; padding: 12px 5% 20px; border-top: 1px solid var(--neutral200); background: white; }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { padding: 10px 4px; font-size: 15px; color: var(--neutral700); text-decoration: none; border-bottom: 1px solid var(--neutral100); }
+  .mob-group { display: flex; flex-direction: column; }
+  .mob-group-btn { background: none; border: none; border-bottom: 1px solid var(--neutral100); font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; color: var(--neutral700); text-align: left; padding: 10px 4px; cursor: pointer; display: flex; justify-content: space-between; }
+  .mob-group-items { display: none; padding-left: 16px; }
+  .mob-group.open .mob-group-items { display: flex; flex-direction: column; }
+  .mob-group-items a { font-size: 14px; color: var(--neutral600) !important; }
+  @media (max-width: 960px) { .nav-links { display: none !important; } .nav-hamburger { display: flex; } }
 
   /* ── HERO ── */
   .hero {
-    background: linear-gradient(135deg, var(--g700) 0%, var(--g500) 60%, var(--g400) 100%);
+    background: linear-gradient(135deg, var(--g800) 0%, var(--g700) 50%, var(--g500) 100%);
     padding: 50px 5% 80px;
     position: relative;
     overflow: hidden;
@@ -703,20 +733,105 @@
 </head>
 <body>
 
+<!-- TOP CONTACT BAR -->
+<div class="top-bar">
+  <div class="top-bar-inner">
+    <div class="top-bar-contact">
+      <a href="tel:0792333111">
+        <svg viewBox="0 0 24 24" style="width:13px;height:13px;fill:currentColor;"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+        0792 333 111
+      </a>
+      <a href="mailto:customercare@umojasacco.co.ke">
+        <svg viewBox="0 0 24 24" style="width:13px;height:13px;fill:currentColor;"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        customercare@umojasacco.co.ke
+      </a>
+    </div>
+    <div class="top-bar-socials">
+      <a href="https://www.facebook.com/UmojaSaccoLtd" target="_blank" title="Facebook">
+        <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+      </a>
+      <a href="https://twitter.com/umojasaccoltd" target="_blank" title="Twitter / X">
+        <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/umoja_sacco" target="_blank" title="Instagram">
+        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+      </a>
+      <a href="https://www.youtube.com/@umojasaccoltd9864" target="_blank" title="YouTube">
+        <svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.96A29 29 0 0023 12a29 29 0 00-.46-5.58zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg>
+      </a>
+    </div>
+  </div>
+</div>
+
 <!-- NAV -->
 <nav>
   <div class="nav-inner">
-    <a href="#" class="nav-logo">
+    <a href="index.html" class="nav-logo">
       <div class="nav-logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7v10c0 5.25 3.75 10.15 10 11.25C18.25 27.15 22 22.25 22 17V7L12 2zm0 2.18l8 4.44V17c0 4.25-2.83 8.25-8 9.43C6.83 25.25 4 21.25 4 17V8.62l8-4.44z"/></svg></div>
-      <div><span class="nav-logo-text">Umoja SACCO</span></div>
+      <div><span class="nav-logo-text">Umoja Sacco</span></div>
     </a>
     <div class="nav-links">
       <a href="#about">About</a>
-      <a href="#features">Services</a>
-      <a href="#how">How It Works</a>
-      <a href="#testimonials">Members</a>
-      <a href="#membership" class="nav-cta">Join Now</a>
+      <div class="nav-dropdown">
+        <button class="nav-drop-btn">Services <svg class="drop-arrow" viewBox="0 0 12 8"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg></button>
+        <div class="nav-drop-menu">
+          <a href="#">Visa Branded ATMs</a>
+          <a href="#">Mobile Banking</a>
+          <a href="#">Paybill</a>
+          <a href="#">Lipa Na Umoja Merchant Settlement</a>
+          <a href="#">Umoja Sacco Agents</a>
+          <a href="#">Internet Banking</a>
+          <a href="join.html">Join Us</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <button class="nav-drop-btn">Products <svg class="drop-arrow" viewBox="0 0 12 8"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg></button>
+        <div class="nav-drop-menu">
+          <a href="products.html?type=savings">Savings Products</a>
+          <a href="products.html?type=loan">Loan Products</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <button class="nav-drop-btn">Resources <svg class="drop-arrow" viewBox="0 0 12 8"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg></button>
+        <div class="nav-drop-menu">
+          <a href="#">Sacco Downloads</a>
+          <a href="#">Tenders</a>
+          <a href="#">Notices</a>
+          <a href="#">Careers</a>
+        </div>
+      </div>
+      <a href="#contact">Contact Us</a>
+      <a href="join.html" class="nav-cta">Join Now</a>
     </div>
+    <button class="nav-hamburger" id="navHamburger"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#about">About</a>
+    <div class="mob-group">
+      <button class="mob-group-btn" onclick="this.parentElement.classList.toggle('open')">Services <span>▾</span></button>
+      <div class="mob-group-items">
+        <a href="#">Visa Branded ATMs</a>
+        <a href="#">Mobile Banking</a>
+        <a href="#">Paybill</a>
+        <a href="#">Internet Banking</a>
+        <a href="join.html">Join Us</a>
+      </div>
+    </div>
+    <div class="mob-group">
+      <button class="mob-group-btn" onclick="this.parentElement.classList.toggle('open')">Products <span>▾</span></button>
+      <div class="mob-group-items">
+        <a href="products.html?type=savings">Savings Products</a>
+        <a href="products.html?type=loan">Loan Products</a>
+      </div>
+    </div>
+    <div class="mob-group">
+      <button class="mob-group-btn" onclick="this.parentElement.classList.toggle('open')">Resources <span>▾</span></button>
+      <div class="mob-group-items">
+        <a href="#">Sacco Downloads</a><a href="#">Tenders</a><a href="#">Notices</a><a href="#">Careers</a>
+      </div>
+    </div>
+    <a href="#contact">Contact Us</a>
+    <a href="join.html" class="nav-cta" style="display:inline-block;margin-top:8px;">Join Now</a>
   </div>
 </nav>
 
@@ -724,14 +839,14 @@
 <section class="hero">
   <div class="hero-inner">
     <div>
-      <h1>Your Savings.<br><em>Smarter. Faster.</em><br>Together.</h1>
-      <p>Umoja SACCO brings modern financial tools to every member — loans, savings, and seamless digital onboarding.</p>
+      <h1>Your Financial<br><em>Basket. Built</em><br>for Growth.</h1>
+      <p>Umoja Sacco is your trusted cooperative financial partner , offering savings, loans, investment products, and digital banking across Kenya.</p>
       <div class="hero-btns"><a href="#membership" class="btn-primary">Apply for Membership</a><a href="#features" class="btn-outline">Explore Services</a></div>
     </div>
     <div class="hero-card">
       <div class="hero-card-label">SACCO at a Glance</div>
-      <div class="stat-grid"><div class="stat-item"><div class="stat-num">12,400+</div><div class="stat-desc">Active Members</div></div><div class="stat-item"><div class="stat-num">KSh 2.3B</div><div class="stat-desc">Total Deposits</div></div><div class="stat-item"><div class="stat-num">98.6%</div><div class="stat-desc">Loan Repayment Rate</div></div><div class="stat-item"><div class="stat-num">14%</div><div class="stat-desc">Annual Dividend</div></div></div>
-      <div class="badge-note"><p>Empowering members through secure savings, flexible loans, and sustainable wealth creation — fully compliant with SASRA regulations.</p></div>
+      <div class="stat-grid"><div class="stat-item"><div class="stat-num">350,000+</div><div class="stat-desc">Members</div></div><div class="stat-item"><div class="stat-num">KSh 5B+</div><div class="stat-desc">Total Deposits</div></div><div class="stat-item"><div class="stat-num">31</div><div class="stat-desc">Branches Nationwide</div></div><div class="stat-item"><div class="stat-num">300+</div><div class="stat-desc">SACCO Agents</div></div></div>
+      <div class="badge-note"><p>Committed to growing your financial life , from savings and loans to investment products and digital banking. SASRA-licensed and trusted since 1999.</p></div>
     </div>
   </div>
 </section>
@@ -741,14 +856,14 @@
   <div class="section-inner">
     <div class="section-tag">Our Services</div>
     <h2 class="section-title">Everything a modern<br>cooperative needs</h2>
-    <p class="section-sub">From savings accounts to loan processing — streamlined through our integrated digital platform for a smooth member experience.</p>
+    <p class="section-sub">From savings accounts to loan processing , streamlined through our integrated digital platform for a smooth member experience.</p>
     <div class="features-grid">
       <div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg></div><h3>Savings & Deposits</h3><p>Earn competitive interest on regular savings, fixed deposits, and holiday savings accounts. Track every shilling in real time.</p><span class="feature-sacco-tag">via Core Banking System</span></div>
-      <div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg></div><h3>Digital Membership</h3><p>Apply and onboard entirely online. Our automated KYC verification processes your documents — no branch visit needed.</p><span class="feature-sacco-tag">via Digital Onboarding Hub</span></div>
+      <div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg></div><h3>Digital Membership</h3><p>Apply and onboard entirely online. Our automated KYC verification processes your documents , no branch visit needed.</p><span class="feature-sacco-tag">via Digital Onboarding Hub</span></div>
       <div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg></div><h3>Loan Processing</h3><p>Apply for personal, business, or emergency loans. Our workflow automation processes approvals within 24 hours, with instant disbursement via M-Pesa.</p><span class="feature-sacco-tag">via Loan Origination System</span></div>
       <div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg></div><h3>Financial Reports</h3><p>Members get instant access to statements, dividend summaries, and loan schedules through a personalised member dashboard.</p><span class="feature-sacco-tag">via Reporting & Analytics</span></div>
-      <div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg></div><h3>Member Support</h3><p>24/7 support through our helpdesk. Raise a ticket, track status, and get responses from our team — all in one thread.</p><span class="feature-sacco-tag">via Member Care Portal</span></div>
-      <div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg></div><h3>Secure & Compliant</h3><p>Fully SASRA-compliant operations with enterprise-grade security — two-factor authentication, audit trails, and encrypted member data.</p><span class="feature-sacco-tag">via SASRA Standards</span></div>
+      <div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg></div><h3>Member Support</h3><p>24/7 support through our helpdesk. Raise a ticket, track status, and get responses from our team , all in one thread.</p><span class="feature-sacco-tag">via Member Care Portal</span></div>
+      <div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg></div><h3>Secure & Compliant</h3><p>Fully SASRA-compliant operations with enterprise-grade security , two-factor authentication, audit trails, and encrypted member data.</p><span class="feature-sacco-tag">via SASRA Standards</span></div>
     </div>
   </div>
 </section>
@@ -758,7 +873,7 @@
   <div class="integration-inner">
     <div class="section-tag" style="background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.2);color:rgba(255,255,255,0.9);">Integrated Platform</div>
     <h2 class="integration-title">One ecosystem.<br>Every SACCO need.</h2>
-    <p class="integration-sub">Umoja SACCO runs on a unified digital core — eliminating silos and manual work across all operations.</p>
+    <p class="integration-sub">Umoja Sacco runs on a unified digital core , eliminating silos and manual work across all operations.</p>
     <div class="integration-grid">
       <div class="integration-item"><div class="int-dot"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></div><div class="integration-item-name">Member CRM</div><div class="integration-item-desc">Member profiles, KYC tracking, and relationship history in one place.</div></div>
       <div class="integration-item"><div class="int-dot"><svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg></div><div class="integration-item-name">Digital Forms</div><div class="integration-item-desc">Digital membership applications with e-signature support for agreements.</div></div>
@@ -777,10 +892,10 @@
     <h2 class="section-title">From application to<br>active member in 48 hours</h2>
     <p class="section-sub">Our automated back-end processes ensure a seamless, paperless onboarding journey for every member.</p>
     <div class="steps-grid">
-      <div class="step-item"><div class="step-num">1</div><h4>Fill the Form</h4><p>Complete the digital membership application below — it takes under 10 minutes.</p><div class="step-sacco">Online Application Portal</div></div>
+      <div class="step-item"><div class="step-num">1</div><h4>Fill the Form</h4><p>Complete the digital membership application below , it takes under 10 minutes.</p><div class="step-sacco">Online Application Portal</div></div>
       <div class="step-item"><div class="step-num">2</div><h4>KYC Verification</h4><p>Your ID and documents are verified automatically using our document workflow.</p><div class="step-sacco">Automated KYC Engine</div></div>
-      <div class="step-item"><div class="step-num">3</div><h4>Pay Registration</h4><p>Receive an M-Pesa STK push for your KSh 2,000 registration fee — zero friction.</p><div class="step-sacco">M-Pesa Integration</div></div>
-      <div class="step-item"><div class="step-num">4</div><h4>Sign Digitally</h4><p>Your membership agreement is sent and signed electronically — no printing required.</p><div class="step-sacco">Digital Signature</div></div>
+      <div class="step-item"><div class="step-num">3</div><h4>Pay Registration</h4><p>Receive an M-Pesa STK push for your KSh 2,000 registration fee , zero friction.</p><div class="step-sacco">M-Pesa Integration</div></div>
+      <div class="step-item"><div class="step-num">4</div><h4>Sign Digitally</h4><p>Your membership agreement is sent and signed electronically , no printing required.</p><div class="step-sacco">Digital Signature</div></div>
       <div class="step-item"><div class="step-num">5</div><h4>Welcome Aboard</h4><p>Your member portal goes live instantly. Start saving, borrowing, and tracking dividends.</p><div class="step-sacco">Member Dashboard</div></div>
     </div>
   </div>
@@ -789,12 +904,12 @@
 <!-- MEMBERSHIP APPLICATION (updated all Zoho references) -->
 <section class="membership-section" id="membership">
   <div class="membership-inner">
-    <div style="margin-bottom:48px;"><div class="section-tag">Membership Application</div><h2 class="section-title">Join Umoja SACCO today</h2><p class="section-sub">We're excited to help you start your financial journey. Select A loan/savings product to continue</p></div>
+    <div style="margin-bottom:48px;"><div class="section-tag">Membership Application</div><h2 class="section-title">Join Umoja Sacco today</h2><p class="section-sub">We're excited to help you start your financial journey. Select A loan/savings product to continue</p></div>
     <div class="membership-layout">
       <div class="membership-info">
         <h2>Why become a member?</h2>
-        <p>Umoja SACCO has been helping Kenyans build financial security since 2003. Our fully digital operations make joining easier — and smarter — than ever before.</p>
-        <ul class="benefit-list"><li><div class="benefit-check"><svg viewBox="0 0 12 9"><path d="M1 4l3.5 3.5L11 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><span>Up to 3× your savings as a loan, disbursed within 24 hours</span></li><li><div class="benefit-check"><svg viewBox="0 0 12 9"><path d="M1 4l3.5 3.5L11 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><span>Annual dividend of up to 14% on your deposits</span></li><li><div class="benefit-check"><svg viewBox="0 0 12 9"><path d="M1 4l3.5 3.5L11 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><span>Real-time account monitoring via your member dashboard</span></li><li><div class="benefit-check"><svg viewBox="0 0 12 9"><path d="M1 4l3.5 3.5L11 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><span>Life insurance coverage linked to your savings balance</span></li><li><div class="benefit-check"><svg viewBox="0 0 12 9"><path d="M1 4l3.5 3.5L11 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><span>Zero paperwork — entire journey handled digitally via our core platform</span></li></ul>
+        <p>Umoja Sacco has been helping Kenyans build financial security since 1999. Our fully digital operations make joining easier , and smarter , than ever before.</p>
+        <ul class="benefit-list"><li><div class="benefit-check"><svg viewBox="0 0 12 9"><path d="M1 4l3.5 3.5L11 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><span>Up to 3× your savings as a loan, disbursed within 24 hours</span></li><li><div class="benefit-check"><svg viewBox="0 0 12 9"><path d="M1 4l3.5 3.5L11 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><span>Annual dividend of up to 14% on your deposits</span></li><li><div class="benefit-check"><svg viewBox="0 0 12 9"><path d="M1 4l3.5 3.5L11 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><span>Real-time account monitoring via your member dashboard</span></li><li><div class="benefit-check"><svg viewBox="0 0 12 9"><path d="M1 4l3.5 3.5L11 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><span>Life insurance coverage linked to your savings balance</span></li><li><div class="benefit-check"><svg viewBox="0 0 12 9"><path d="M1 4l3.5 3.5L11 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><span>Zero paperwork , entire journey handled digitally via our core platform</span></li></ul>
       </div>
 
       <!-- Form Card -->
@@ -831,7 +946,7 @@
           </div>
         </div>
         <div id="section2" style="display:none;">
-          <div class="form-section-title">Open Your Account — Terms and Conditions</div>
+          <div class="form-section-title">Open Your Account , Terms and Conditions</div>
           <div class="tc-box">
             <h4>1. Account Opening</h4>
             <p>By opening an account, you agree to provide accurate and truthful information. We reserve the right to verify the information provided and may refuse to open an account at our discretion.</p>
@@ -852,13 +967,13 @@
           <div class="doc-req-card"><div class="doc-req-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg></div><div class="doc-req-text"><strong>National ID / Passport</strong><span>A clear copy of your front and back ID, or passport bio-data page.</span></div></div>
           <div class="doc-req-card"><div class="doc-req-icon"><svg viewBox="0 0 24 24"><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg></div><div class="doc-req-text"><strong>KRA PIN Certificate</strong><span>Your current Kenya Revenue Authority PIN certificate.</span></div></div>
           <div class="form-row" style="margin-top:18px;">
-            <div class="form-group"><label>Upload ID / Passport <span class="req">*</span></label><div class="upload-area"><svg viewBox="0 0 24 24"><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg><p>Click to upload or drag & drop</p><span>JPG, PNG or PDF — max 5MB</span></div></div>
-            <div class="form-group"><label>Upload KRA PIN Certificate <span class="req">*</span></label><div class="upload-area"><svg viewBox="0 0 24 24"><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg><p>Click to upload or drag & drop</p><span>JPG, PNG or PDF — max 5MB</span></div></div>
+            <div class="form-group"><label>Upload ID / Passport <span class="req">*</span></label><div class="upload-area"><svg viewBox="0 0 24 24"><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg><p>Click to upload or drag & drop</p><span>JPG, PNG or PDF , max 5MB</span></div></div>
+            <div class="form-group"><label>Upload KRA PIN Certificate <span class="req">*</span></label><div class="upload-area"><svg viewBox="0 0 24 24"><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg><p>Click to upload or drag & drop</p><span>JPG, PNG or PDF , max 5MB</span></div></div>
           </div>
         </div>
         <div id="section4" style="display:none;">
           <div class="form-section-title">Details Verification</div>
-          <div class="form-row single"><div class="form-group"><label for="m_country">Country of Residence <span class="req">*</span></label><select id="m_country"><option value="">— Select Country —</option><option selected>Kenya</option><option>Uganda</option><option>Tanzania</option><option>Rwanda</option><option>South Sudan</option><option>Other</option></select></div></div>
+          <div class="form-row single"><div class="form-group"><label for="m_country">Country of Residence <span class="req">*</span></label><select id="m_country"><option value="">, Select Country ,</option><option selected>Kenya</option><option>Uganda</option><option>Tanzania</option><option>Rwanda</option><option>South Sudan</option><option>Other</option></select></div></div>
           <div class="form-row"><div class="form-group"><label for="m_email">Registered Email Address <span class="req">*</span></label><input type="email" id="m_email" placeholder="you@example.com" /></div><div class="form-group"><label for="m_phone">Registered Phone Number <span class="req">*</span></label><input type="tel" id="m_phone" placeholder="+254 7XX XXX XXX" /></div></div>
         </div>
         <div id="section5" style="display:none;">
@@ -870,25 +985,25 @@
           <div class="form-section-title">Personal Details</div>
           <div class="form-row"><div class="form-group"><label for="fname">Full Name <span class="req">*</span></label><input type="text" id="fname" placeholder="e.g. Amina Wanjiku Odhiambo" /></div><div class="form-group"><label for="id_no">ID No. <span class="req">*</span></label><input type="text" id="id_no" placeholder="12345678" /></div></div>
           <div class="form-row"><div class="form-group"><label for="dob">Date of Birth <span class="req">*</span></label><input type="date" id="dob" /></div><div class="form-group"><label>Gender <span class="req">*</span></label><div class="radio-group"><label class="radio-opt"><input type="radio" name="gender" value="female" /> Female</label><label class="radio-opt"><input type="radio" name="gender" value="male" /> Male</label><label class="radio-opt"><input type="radio" name="gender" value="other" /> Prefer not to say</label></div></div></div>
-          <div class="form-row"><div class="form-group"><label for="m_marital">Marital Status</label><select id="m_marital"><option value="">— Select —</option><option>Single</option><option>Married</option><option>Divorced</option><option>Widowed</option></select></div><div class="form-group"><label for="m_occupation">Occupation</label><input type="text" id="m_occupation" placeholder="e.g. Teacher" /></div></div>
+          <div class="form-row"><div class="form-group"><label for="m_marital">Marital Status</label><select id="m_marital"><option value="">, Select ,</option><option>Single</option><option>Married</option><option>Divorced</option><option>Widowed</option></select></div><div class="form-group"><label for="m_occupation">Occupation</label><input type="text" id="m_occupation" placeholder="e.g. Teacher" /></div></div>
           <div class="form-divider"></div>
           <div class="form-section-title">Address Details</div>
           <div class="form-row single"><div class="form-group"><label for="addr_line">Address Line <span class="req">*</span></label><input type="text" id="addr_line" placeholder="e.g. House No., Street, Estate" /></div></div>
           <div class="form-row"><div class="form-group"><label for="addr_city">City / Town <span class="req">*</span></label><input type="text" id="addr_city" placeholder="e.g. Nairobi" /></div><div class="form-group"><label for="addr_zip">Postal Code / ZIP <span class="req">*</span></label><input type="text" id="addr_zip" placeholder="e.g. 00100" /></div></div>
-          <div class="form-row"><div class="form-group"><label for="addr_state">State / Province / Region <span class="req">*</span></label><input type="text" id="addr_state" placeholder="e.g. Nairobi County" /></div><div class="form-group"><label for="addr_country">Country <span class="req">*</span></label><select id="addr_country"><option value="">— Select Country —</option><option selected>Kenya</option><option>Uganda</option><option>Tanzania</option><option>Rwanda</option><option>South Sudan</option><option>Other</option></select></div></div>
+          <div class="form-row"><div class="form-group"><label for="addr_state">State / Province / Region <span class="req">*</span></label><input type="text" id="addr_state" placeholder="e.g. Nairobi County" /></div><div class="form-group"><label for="addr_country">Country <span class="req">*</span></label><select id="addr_country"><option value="">, Select Country ,</option><option selected>Kenya</option><option>Uganda</option><option>Tanzania</option><option>Rwanda</option><option>South Sudan</option><option>Other</option></select></div></div>
         </div>
         <div id="section7" style="display:none;">
           <div class="form-section-title">Next of Kin</div>
-          <div class="form-row"><div class="form-group"><label for="kin_name">Full Name <span class="req">*</span></label><input type="text" id="kin_name" placeholder="e.g. John Odhiambo" /></div><div class="form-group"><label for="kin_relation">Relationship <span class="req">*</span></label><select id="kin_relation"><option value="">— Select —</option><option>Spouse</option><option>Parent</option><option>Child</option><option>Sibling</option><option>Other</option></select></div></div>
+          <div class="form-row"><div class="form-group"><label for="kin_name">Full Name <span class="req">*</span></label><input type="text" id="kin_name" placeholder="e.g. John Odhiambo" /></div><div class="form-group"><label for="kin_relation">Relationship <span class="req">*</span></label><select id="kin_relation"><option value="">, Select ,</option><option>Spouse</option><option>Parent</option><option>Child</option><option>Sibling</option><option>Other</option></select></div></div>
           <div class="form-row"><div class="form-group"><label for="kin_phone">Phone Number <span class="req">*</span></label><input type="tel" id="kin_phone" placeholder="+254 7XX XXX XXX" /></div><div class="form-group"><label for="kin_id">ID / Passport Number <span class="req">*</span></label><input type="text" id="kin_id" placeholder="12345678" /></div></div>
           <div class="form-row"><div class="form-group"><label for="kin_email">Email Address</label><input type="email" id="kin_email" placeholder="kin@example.com" /></div><div class="form-group"><label for="kin_dob">Date of Birth</label><input type="date" id="kin_dob" /></div></div>
           <div class="form-row single"><div class="form-group"><label for="kin_address">Physical Address</label><input type="text" id="kin_address" placeholder="e.g. House No., Street, Town" /></div></div>
         </div>
-        <div id="section8" style="display:none;"><div class="form-section-title">Review & Declaration</div><div style="background:var(--neutral50);border:1px solid var(--neutral200);border-radius:var(--radius-sm);padding:20px;margin-bottom:24px;"><p style="font-size:14px;color:var(--neutral600);line-height:1.8;">By submitting this form, I confirm that:</p><ul style="font-size:14px;color:var(--neutral600);line-height:2;padding-left:20px;margin-top:8px;"><li>All information provided is true and accurate to the best of my knowledge.</li><li>I have read and agree to the Umoja SACCO membership terms and bylaws.</li><li>I consent to KYC verification and credit checks as permitted by law.</li><li>I agree to pay the KSh 2,000 registration fee within 7 days of approval.</li><li>My data will be stored and processed in accordance with the Privacy Policy.</li></ul></div><div class="form-group" style="margin-bottom:24px;"><label class="check-opt" style="align-items:flex-start;gap:12px;"><input type="checkbox" id="declaration" style="margin-top:2px;" /><span style="font-size:14px;color:var(--neutral700);line-height:1.6;">I have read and agree to the <a href="#" style="color:var(--g600);text-decoration:underline;">Terms & Conditions</a> and <a href="#" style="color:var(--g600);text-decoration:underline;">Privacy Policy</a>. I understand my membership agreement will be sent for digital signature.</span></label></div><div class="form-group" style="margin-bottom:24px;"><label for="signature">Digital Signature (Full Name as confirmation) <span class="req">*</span></label><input type="text" id="signature" placeholder="Type your full name as your digital signature" style="font-style:italic;" /><p class="form-hint">This acts as your electronic signature for the membership agreement.</p></div><div style="background:var(--g50);border:1px solid var(--g200);border-radius:var(--radius-sm);padding:18px 20px;display:flex;gap:14px;align-items:flex-start;"><svg style="fill:var(--g500);width:20px;height:20px;flex-shrink:0;margin-top:2px;" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg><div><div style="font-size:14px;font-weight:600;color:var(--g700);margin-bottom:4px;">What happens next?</div><p style="font-size:13px;color:var(--g700);line-height:1.7;">Your application enters our member system instantly. Our membership team is notified, and you'll receive a WhatsApp confirmation within 5 minutes. Full approval takes 24–48 hours, after which you'll receive a link to sign your membership agreement digitally.</p></div></div></div>
+        <div id="section8" style="display:none;"><div class="form-section-title">Review & Declaration</div><div style="background:var(--neutral50);border:1px solid var(--neutral200);border-radius:var(--radius-sm);padding:20px;margin-bottom:24px;"><p style="font-size:14px;color:var(--neutral600);line-height:1.8;">By submitting this form, I confirm that:</p><ul style="font-size:14px;color:var(--neutral600);line-height:2;padding-left:20px;margin-top:8px;"><li>All information provided is true and accurate to the best of my knowledge.</li><li>I have read and agree to the Umoja Sacco membership terms and bylaws.</li><li>I consent to KYC verification and credit checks as permitted by law.</li><li>I agree to pay the KSh 2,000 registration fee within 7 days of approval.</li><li>My data will be stored and processed in accordance with the Privacy Policy.</li></ul></div><div class="form-group" style="margin-bottom:24px;"><label class="check-opt" style="align-items:flex-start;gap:12px;"><input type="checkbox" id="declaration" style="margin-top:2px;" /><span style="font-size:14px;color:var(--neutral700);line-height:1.6;">I have read and agree to the <a href="#" style="color:var(--g600);text-decoration:underline;">Terms & Conditions</a> and <a href="#" style="color:var(--g600);text-decoration:underline;">Privacy Policy</a>. I understand my membership agreement will be sent for digital signature.</span></label></div><div class="form-group" style="margin-bottom:24px;"><label for="signature">Digital Signature (Full Name as confirmation) <span class="req">*</span></label><input type="text" id="signature" placeholder="Type your full name as your digital signature" style="font-style:italic;" /><p class="form-hint">This acts as your electronic signature for the membership agreement.</p></div><div style="background:var(--g50);border:1px solid var(--g200);border-radius:var(--radius-sm);padding:18px 20px;display:flex;gap:14px;align-items:flex-start;"><svg style="fill:var(--g500);width:20px;height:20px;flex-shrink:0;margin-top:2px;" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg><div><div style="font-size:14px;font-weight:600;color:var(--g700);margin-bottom:4px;">What happens next?</div><p style="font-size:13px;color:var(--g700);line-height:1.7;">Your application enters our member system instantly. Our membership team is notified, and you'll receive a WhatsApp confirmation within 5 minutes. Full approval takes 24–48 hours, after which you'll receive a link to sign your membership agreement digitally.</p></div></div></div>
 
         <div class="form-footer" id="formNavMembership"><button type="button" id="prevBtnM" onclick="changeStep('membership',-1)" style="background:transparent;border:1.5px solid var(--neutral200);padding:12px 24px;border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;cursor:pointer;color:var(--neutral600);display:none;">← Back</button><button type="button" id="nextBtnM" onclick="changeStep('membership',1)" class="form-submit" style="margin-left:auto;">Next Step<svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg></button></div>
         </div>
-        <div class="form-card success-card" id="successCardMembership"><div class="success-icon"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div><h3>Application Submitted!</h3><p>Thank you for applying to join Umoja SACCO. Your application has been received and a WhatsApp confirmation is on its way.</p><div class="success-note"><strong>What happens next:</strong>  Application record created in member system<br> Membership team notified via internal workflow<br> Confirmation sent via WhatsApp / SMS<br> KYC verification in progress...<br> Digital membership agreement being prepared...</div><button onclick="resetForm('membership')" style="margin-top:24px;background:transparent;border:1.5px solid var(--g500);color:var(--g600);padding:10px 24px;border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-weight:600;cursor:pointer;font-size:14px;">Start a New Application</button></div>
+        <div class="form-card success-card" id="successCardMembership"><div class="success-icon"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div><h3>Application Submitted!</h3><p>Thank you for applying to join Umoja Sacco. Your application has been received and a WhatsApp confirmation is on its way.</p><div class="success-note"><strong>What happens next:</strong>  Application record created in member system<br> Membership team notified via internal workflow<br> Confirmation sent via WhatsApp / SMS<br> KYC verification in progress...<br> Digital membership agreement being prepared...</div><button onclick="resetForm('membership')" style="margin-top:24px;background:transparent;border:1.5px solid var(--g500);color:var(--g600);padding:10px 24px;border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-weight:600;cursor:pointer;font-size:14px;">Start a New Application</button></div>
         </div>
         <!-- ================= END MEMBERSHIP FORM ================= -->
 
@@ -906,8 +1021,8 @@
         <div id="lsection1">
           <div class="form-section-title">Loan Details</div>
           <div class="form-row"><div class="form-group"><label for="l_member_no">Member Number <span class="req">*</span></label><input type="text" id="l_member_no" placeholder="e.g. UM-002345" /></div><div class="form-group"><label for="l_fullname">Full Name <span class="req">*</span></label><input type="text" id="l_fullname" placeholder="e.g. Amina Wanjiku Odhiambo" /></div></div>
-          <div class="form-row"><div class="form-group"><label for="l_type">Loan Product <span class="req">*</span></label><select id="l_type"><option value="">— Select type —</option><option>Emergency Loan</option><option>Development Loan</option><option>School Fees Loan</option><option>Business Loan</option><option>Asset Financing</option><option>Salary Advance</option></select></div><div class="form-group"><label for="l_amount">Loan Amount Requested (KSh) <span class="req">*</span></label><input type="number" id="l_amount" placeholder="e.g. 150000" min="0" /></div></div>
-          <div class="form-row"><div class="form-group"><label for="l_period">Repayment Period (Months) <span class="req">*</span></label><select id="l_period"><option value="">— Select —</option><option>3</option><option>6</option><option>12</option><option>24</option><option>36</option><option>48</option><option>60</option></select></div><div class="form-group"><label for="l_purpose">Purpose of Loan <span class="req">*</span></label><input type="text" id="l_purpose" placeholder="e.g. School fees, business stock" /></div></div>
+          <div class="form-row"><div class="form-group"><label for="l_type">Loan Product <span class="req">*</span></label><select id="l_type"><option value="">, Select type ,</option><option>Emergency Loan</option><option>Development Loan</option><option>School Fees Loan</option><option>Business Loan</option><option>Asset Financing</option><option>Salary Advance</option></select></div><div class="form-group"><label for="l_amount">Loan Amount Requested (KSh) <span class="req">*</span></label><input type="number" id="l_amount" placeholder="e.g. 150000" min="0" /></div></div>
+          <div class="form-row"><div class="form-group"><label for="l_period">Repayment Period (Months) <span class="req">*</span></label><select id="l_period"><option value="">, Select ,</option><option>3</option><option>6</option><option>12</option><option>24</option><option>36</option><option>48</option><option>60</option></select></div><div class="form-group"><label for="l_purpose">Purpose of Loan <span class="req">*</span></label><input type="text" id="l_purpose" placeholder="e.g. School fees, business stock" /></div></div>
           <div class="form-row single"><div class="form-group"><label>Repayment Method <span class="req">*</span></label><div class="radio-group"><label class="radio-opt"><input type="radio" name="l_repay" value="payroll" checked /> Payroll Deduction</label><label class="radio-opt"><input type="radio" name="l_repay" value="mpesa" /> M-Pesa</label><label class="radio-opt"><input type="radio" name="l_repay" value="bank" /> Bank Standing Order</label></div></div></div>
           <div class="form-row"><div class="form-group"><label for="l_current_savings">Current Savings Balance (KSh)</label><input type="number" id="l_current_savings" placeholder="e.g. 80000" min="0" /></div><div class="form-group"><label for="l_existing_loan">Existing Loan Balance (KSh)</label><input type="number" id="l_existing_loan" placeholder="e.g. 0" min="0" /></div></div>
         </div>
@@ -916,11 +1031,11 @@
           <div class="form-section-title">Employment & Income</div>
           <div class="form-row single"><div class="form-group"><label>Employment Status <span class="req">*</span></label><div class="radio-group"><label class="radio-opt"><input type="radio" name="l_empstatus" value="employed" /> Employed</label><label class="radio-opt"><input type="radio" name="l_empstatus" value="self" /> Self-employed</label><label class="radio-opt"><input type="radio" name="l_empstatus" value="business" /> Business Owner</label><label class="radio-opt"><input type="radio" name="l_empstatus" value="retired" /> Retired</label></div></div></div>
           <div class="form-row"><div class="form-group"><label for="l_employer">Employer / Business Name <span class="req">*</span></label><input type="text" id="l_employer" placeholder="e.g. Safaricom PLC" /></div><div class="form-group"><label for="l_job_title">Job Title / Role <span class="req">*</span></label><input type="text" id="l_job_title" placeholder="e.g. Senior Accountant" /></div></div>
-          <div class="form-row"><div class="form-group"><label for="l_income">Monthly Net Income (KSh) <span class="req">*</span></label><select id="l_income"><option value="">— Select range —</option><option>Below KSh 20,000</option><option>KSh 20,000 – 50,000</option><option>KSh 50,000 – 100,000</option><option>KSh 100,000 – 250,000</option><option>Above KSh 250,000</option></select></div><div class="form-group"><label for="l_years">Years in Current Employment <span class="req">*</span></label><input type="number" id="l_years" placeholder="e.g. 3" min="0" max="50" /></div></div>
+          <div class="form-row"><div class="form-group"><label for="l_income">Monthly Net Income (KSh) <span class="req">*</span></label><select id="l_income"><option value="">, Select range ,</option><option>Below KSh 20,000</option><option>KSh 20,000 – 50,000</option><option>KSh 50,000 – 100,000</option><option>KSh 100,000 – 250,000</option><option>Above KSh 250,000</option></select></div><div class="form-group"><label for="l_years">Years in Current Employment <span class="req">*</span></label><input type="number" id="l_years" placeholder="e.g. 3" min="0" max="50" /></div></div>
           <div class="form-row"><div class="form-group"><label for="l_other_income">Other Sources of Income (KSh/month)</label><input type="number" id="l_other_income" placeholder="e.g. 5000 (optional)" min="0" /></div><div class="form-group"><label for="l_monthly_expenses">Estimated Monthly Expenses (KSh)</label><input type="number" id="l_monthly_expenses" placeholder="e.g. 30000" min="0" /></div></div>
           <div class="form-divider"></div>
           <div class="form-section-title">Upload Supporting Documents</div>
-          <div class="form-row"><div class="form-group"><label>Latest Payslip / Income Proof <span class="req">*</span></label><div class="upload-area"><svg viewBox="0 0 24 24"><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg><p>Click to upload or drag & drop</p><span>JPG, PNG or PDF — max 5MB</span></div></div><div class="form-group"><label>Bank Statement (Last 3 Months)</label><div class="upload-area"><svg viewBox="0 0 24 24"><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg><p>Click to upload or drag & drop</p><span>JPG, PNG or PDF — max 5MB</span></div></div></div>
+          <div class="form-row"><div class="form-group"><label>Latest Payslip / Income Proof <span class="req">*</span></label><div class="upload-area"><svg viewBox="0 0 24 24"><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg><p>Click to upload or drag & drop</p><span>JPG, PNG or PDF , max 5MB</span></div></div><div class="form-group"><label>Bank Statement (Last 3 Months)</label><div class="upload-area"><svg viewBox="0 0 24 24"><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg><p>Click to upload or drag & drop</p><span>JPG, PNG or PDF , max 5MB</span></div></div></div>
         </div>
 
         <div id="lsection3" style="display:none;">
@@ -937,7 +1052,7 @@
 
         <div id="lsection4" style="display:none;">
           <div class="form-section-title">Review & Declaration</div>
-          <div style="background:var(--neutral50);border:1px solid var(--neutral200);border-radius:var(--radius-sm);padding:20px;margin-bottom:24px;"><p style="font-size:14px;color:var(--neutral600);line-height:1.8;">By submitting this loan application, I confirm that:</p><ul style="font-size:14px;color:var(--neutral600);line-height:2;padding-left:20px;margin-top:8px;"><li>All information provided is true, accurate and complete.</li><li>I authorize Umoja SACCO to verify my employment, income and credit history.</li><li>I understand my savings and guarantors' shares may be used as collateral.</li><li>I agree to repay this loan as per the schedule and applicable interest rates.</li><li>My data will be processed in accordance with the Privacy Policy.</li></ul></div>
+          <div style="background:var(--neutral50);border:1px solid var(--neutral200);border-radius:var(--radius-sm);padding:20px;margin-bottom:24px;"><p style="font-size:14px;color:var(--neutral600);line-height:1.8;">By submitting this loan application, I confirm that:</p><ul style="font-size:14px;color:var(--neutral600);line-height:2;padding-left:20px;margin-top:8px;"><li>All information provided is true, accurate and complete.</li><li>I authorize Umoja Sacco to verify my employment, income and credit history.</li><li>I understand my savings and guarantors' shares may be used as collateral.</li><li>I agree to repay this loan as per the schedule and applicable interest rates.</li><li>My data will be processed in accordance with the Privacy Policy.</li></ul></div>
           <div class="form-group" style="margin-bottom:24px;"><label class="check-opt" style="align-items:flex-start;gap:12px;"><input type="checkbox" id="l_declaration" style="margin-top:2px;" /><span style="font-size:14px;color:var(--neutral700);line-height:1.6;">I have read and agree to the <a href="#" style="color:var(--g600);text-decoration:underline;">Loan Terms & Conditions</a> and <a href="#" style="color:var(--g600);text-decoration:underline;">Privacy Policy</a>.</span></label></div>
           <div class="form-group" style="margin-bottom:24px;"><label for="l_signature">Digital Signature (Full Name as confirmation) <span class="req">*</span></label><input type="text" id="l_signature" placeholder="Type your full name as your digital signature" style="font-style:italic;" /><p class="form-hint">This acts as your electronic signature for the loan agreement.</p></div>
           <div style="background:var(--g50);border:1px solid var(--g200);border-radius:var(--radius-sm);padding:18px 20px;display:flex;gap:14px;align-items:flex-start;"><svg style="fill:var(--g500);width:20px;height:20px;flex-shrink:0;margin-top:2px;" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg><div><div style="font-size:14px;font-weight:600;color:var(--g700);margin-bottom:4px;">What happens next?</div><p style="font-size:13px;color:var(--g700);line-height:1.7;">Your loan application is sent to our credit team for review and guarantor confirmation. You'll receive a WhatsApp update within 24 hours, and disbursement follows via M-Pesa or bank transfer upon approval.</p></div></div>
@@ -957,7 +1072,7 @@
           <div class="prog-step" id="sprog2"><div class="prog-num">2</div><span>Contribution Details</span></div><div class="prog-line" id="sline2"></div>
           <div class="prog-step" id="sprog3"><div class="prog-num">3</div><span>Review & Submit</span></div>
         </div>
-        <div class="form-header"><h3>Savings Application Form</h3><p>Open or top up a savings product with Umoja SACCO.</p></div>
+        <div class="form-header"><h3>Savings Application Form</h3><p>Open or top up a savings product with Umoja Sacco.</p></div>
 
         <div id="ssection1">
           <div class="form-section-title">Personal & Account Information</div>
@@ -971,13 +1086,13 @@
           <div class="form-section-title">Contribution Details</div>
           <div class="form-row single"><div class="form-group"><label>Monthly Savings Contribution <span class="req">*</span></label><div class="amount-options" id="amountOptionsSavings"><div class="amount-pill active" data-val="500">KSh 500</div><div class="amount-pill" data-val="1000">KSh 1,000</div><div class="amount-pill" data-val="2000">KSh 2,000</div><div class="amount-pill custom" data-val="custom">Custom</div></div><input type="number" id="custom_amount_savings" placeholder="Enter custom amount (KSh)" style="display:none;" /><p class="form-hint">Minimum KSh 500/month. Deducted automatically via standing order or M-Pesa.</p></div></div>
           <div class="form-row single"><div class="form-group"><label>Preferred Payment Method <span class="req">*</span></label><div class="radio-group"><label class="radio-opt"><input type="radio" name="s_paymethod" value="mpesa" checked /> M-Pesa</label><label class="radio-opt"><input type="radio" name="s_paymethod" value="bank" /> Bank Transfer</label><label class="radio-opt"><input type="radio" name="s_paymethod" value="payroll" /> Payroll Deduction</label></div></div></div>
-          <div class="form-row"><div class="form-group"><label for="s_initial_deposit">Initial Deposit Amount (KSh) <span class="req">*</span></label><input type="number" id="s_initial_deposit" placeholder="e.g. 1000" min="0" /></div><div class="form-group"><label for="s_term">Fixed Deposit Term (Months)</label><select id="s_term"><option value="">— N/A or select term —</option><option>3</option><option>6</option><option>12</option><option>24</option></select></div></div>
+          <div class="form-row"><div class="form-group"><label for="s_initial_deposit">Initial Deposit Amount (KSh) <span class="req">*</span></label><input type="number" id="s_initial_deposit" placeholder="e.g. 1000" min="0" /></div><div class="form-group"><label for="s_term">Fixed Deposit Term (Months)</label><select id="s_term"><option value="">, N/A or select term ,</option><option>3</option><option>6</option><option>12</option><option>24</option></select></div></div>
           <div class="form-divider"></div>
           <div class="form-section-title">Beneficiary (Optional)</div>
-          <div class="form-row"><div class="form-group"><label for="s_beneficiary_name">Beneficiary Full Name</label><input type="text" id="s_beneficiary_name" placeholder="e.g. John Odhiambo" /></div><div class="form-group"><label for="s_beneficiary_relation">Relationship</label><select id="s_beneficiary_relation"><option value="">— Select —</option><option>Spouse</option><option>Parent</option><option>Child</option><option>Sibling</option><option>Other</option></select></div></div>
+          <div class="form-row"><div class="form-group"><label for="s_beneficiary_name">Beneficiary Full Name</label><input type="text" id="s_beneficiary_name" placeholder="e.g. John Odhiambo" /></div><div class="form-group"><label for="s_beneficiary_relation">Relationship</label><select id="s_beneficiary_relation"><option value="">, Select ,</option><option>Spouse</option><option>Parent</option><option>Child</option><option>Sibling</option><option>Other</option></select></div></div>
           <div class="form-divider"></div>
           <div class="form-section-title">Communication Preferences</div>
-          <div class="form-group"><label style="margin-bottom:12px;">I'd like to receive updates via <span class="req">*</span></label><div class="checkbox-group"><label class="check-opt"><input type="checkbox" checked /><span>WhatsApp messages — account alerts & dividends</span></label><label class="check-opt"><input type="checkbox" checked /><span>Email newsletters — SACCO news and financial tips</span></label><label class="check-opt"><input type="checkbox" /><span>SMS notifications — transaction confirmations</span></label></div></div>
+          <div class="form-group"><label style="margin-bottom:12px;">I'd like to receive updates via <span class="req">*</span></label><div class="checkbox-group"><label class="check-opt"><input type="checkbox" checked /><span>WhatsApp messages , account alerts & dividends</span></label><label class="check-opt"><input type="checkbox" checked /><span>Email newsletters , SACCO news and financial tips</span></label><label class="check-opt"><input type="checkbox" /><span>SMS notifications , transaction confirmations</span></label></div></div>
         </div>
 
         <div id="ssection3" style="display:none;">
@@ -1001,13 +1116,57 @@
 
 
 <!-- TESTIMONIALS & CTA / FOOTER (unchanged except footer) -->
-<section class="testimonials-section" id="testimonials"><div class="section-inner"><div class="section-tag">Member Stories</div><h2 class="section-title">What our members say</h2><p class="section-sub">Over 12,000 Kenyans trust Umoja SACCO with their financial future.</p><div class="testimonials-grid"><div class="testimonial-card"><div class="stars">★★★★★</div><q>The online application was so smooth — I applied on my phone during lunch and had my membership approved by evening. The member portal makes it easy to track my savings every day.</q><div class="testimonial-author"><div class="author-avatar">AW</div><div><div class="author-name">Amina Wanjiku</div><div class="author-role">Teacher, Nairobi — Member since 2022</div></div></div></div><div class="testimonial-card"><div class="stars">★★★★★</div><q>I got a business development loan in less than 24 hours. The M-Pesa disbursement was instant. This is what modern SACCO banking should look like.</q><div class="testimonial-author"><div class="author-avatar">DK</div><div><div class="author-name">David Kipchoge</div><div class="author-role">Entrepreneur, Eldoret — Member since 2019</div></div></div></div><div class="testimonial-card"><div class="stars">★★★★★</div><q>The WhatsApp updates from the SACCO are super helpful — I know exactly when my contribution has been received and when interest is credited. I've recommended Umoja to my entire department.</q><div class="testimonial-author"><div class="author-avatar">PN</div><div><div class="author-name">Patricia Nyambura</div><div class="author-role">Nurse, Mombasa — Member since 2021</div></div></div></div></div></div></section>
+<section class="testimonials-section" id="testimonials"><div class="section-inner"><div class="section-tag">Member Stories</div><h2 class="section-title">What our members say</h2><p class="section-sub">Over 350,000 Kenyans trust Umoja Sacco with their financial future.</p><div class="testimonials-grid"><div class="testimonial-card"><div class="stars">★★★★★</div><q>The online application was so smooth , I applied on my phone during lunch and had my membership approved by evening. The member portal makes it easy to track my savings every day.</q><div class="testimonial-author"><div class="author-avatar">AW</div><div><div class="author-name">Amina Wanjiku</div><div class="author-role">Teacher, Nairobi , Member since 2022</div></div></div></div><div class="testimonial-card"><div class="stars">★★★★★</div><q>I got a business development loan in less than 24 hours. The M-Pesa disbursement was instant. This is what modern SACCO banking should look like.</q><div class="testimonial-author"><div class="author-avatar">DK</div><div><div class="author-name">David Kipchoge</div><div class="author-role">Entrepreneur, Eldoret , Member since 2019</div></div></div></div><div class="testimonial-card"><div class="stars">★★★★★</div><q>The WhatsApp updates from the SACCO are super helpful , I know exactly when my contribution has been received and when interest is credited. I've recommended Umoja Sacco to my entire department.</q><div class="testimonial-author"><div class="author-avatar">PN</div><div><div class="author-name">Patricia Nyambura</div><div class="author-role">Nurse, Mombasa , Member since 2021</div></div></div></div></div></div></section>
 
-<section class="cta-section"><div class="cta-inner"><h2>Ready to take control of your financial future?</h2><p>Join 12,400+ members who are saving smarter and borrowing easier with Umoja SACCO's digital platform.</p><div class="cta-buttons"><a href="#membership" class="btn-primary">Apply for Membership</a><a href="mailto:info@umojasacco.co.ke" class="btn-outline">Talk to an Advisor</a></div></div></section>
+<!-- CONTACT SECTION -->
+<section id="contact" style="padding:80px 5%;background:var(--white);">
+  <div class="section-inner">
+    <div class="section-tag">Get In Touch</div>
+    <h2 class="section-title">Contact Us</h2>
+    <p class="section-sub" style="margin-bottom:48px;">We're here to help. Reach us through any of the channels below.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;">
+      <div style="background:var(--neutral50);border:1px solid var(--neutral200);border-radius:var(--radius-md);padding:28px 24px;">
+        <div style="width:48px;height:48px;background:var(--g50);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+          <svg viewBox="0 0 24 24" style="width:24px;height:24px;fill:var(--g500);"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+        </div>
+        <h4 style="font-size:16px;color:var(--neutral800);margin-bottom:6px;">Call Us</h4>
+        <p style="font-size:14px;color:var(--neutral600);line-height:1.6;"><a href="tel:+254792333111" style="color:var(--g600);text-decoration:none;font-weight:600;">+254 792 333 111</a><br>Monday – Friday: 8am – 5pm<br>Saturday: 9am – 1pm</p>
+      </div>
+      <div style="background:var(--neutral50);border:1px solid var(--neutral200);border-radius:var(--radius-md);padding:28px 24px;">
+        <div style="width:48px;height:48px;background:var(--g50);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+          <svg viewBox="0 0 24 24" style="width:24px;height:24px;fill:var(--g500);"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        </div>
+        <h4 style="font-size:16px;color:var(--neutral800);margin-bottom:6px;">Email Us</h4>
+        <p style="font-size:14px;color:var(--neutral600);line-height:1.6;"><a href="mailto:customercare@umojasacco.co.ke" style="color:var(--g600);text-decoration:none;font-weight:600;">customercare@umojasacco.co.ke</a><br>We respond within 24 hours on business days.</p>
+      </div>
+      <div style="background:var(--neutral50);border:1px solid var(--neutral200);border-radius:var(--radius-md);padding:28px 24px;">
+        <div style="width:48px;height:48px;background:var(--g50);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+          <svg viewBox="0 0 24 24" style="width:24px;height:24px;fill:var(--g500);"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg>
+        </div>
+        <h4 style="font-size:16px;color:var(--neutral800);margin-bottom:6px;">Visit Us</h4>
+        <p style="font-size:14px;color:var(--neutral600);line-height:1.6;">Umoja Sacco Plaza<br>Olkalou Town, Nyandarua<br><strong style="color:var(--neutral700);">31 branches</strong> across Kenya</p>
+      </div>
+      <div style="background:var(--neutral50);border:1px solid var(--neutral200);border-radius:var(--radius-md);padding:28px 24px;">
+        <div style="width:48px;height:48px;background:var(--g50);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+          <svg viewBox="0 0 24 24" style="width:24px;height:24px;fill:var(--g500);"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
+        </div>
+        <h4 style="font-size:16px;color:var(--neutral800);margin-bottom:6px;">WhatsApp / Social</h4>
+        <p style="font-size:14px;color:var(--neutral600);line-height:1.6;">Chat with us on WhatsApp for quick support or follow us on social media for updates, news, and financial tips.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-<footer><div class="footer-inner"><div class="footer-top"><div><div class="footer-logo">Umoja SACCO</div><p class="footer-tagline">Empowering Kenyan communities through cooperative savings and credit — fully digitised and SASRA-compliant.</p></div><div class="footer-col"><h4>Services</h4><a href="#">Savings Accounts</a><a href="#">Loan Products</a><a href="#">Fixed Deposits</a><a href="#">Group Savings</a></div><div class="footer-col"><h4>Membership</h4><a href="#membership">Apply Online</a><a href="#">Member Portal</a><a href="#">Dividends</a><a href="#">AGM Reports</a></div><div class="footer-col"><h4>Contact</h4><a href="#">+254 700 000 000</a><a href="#">info@umojasacco.co.ke</a><a href="#">Nairobi CBD Branch</a><a href="#">Privacy Policy</a></div></div><div class="footer-bottom"><p>© 2025 Umoja SACCO Ltd. Licensed by SASRA. All rights reserved.</p><div class="footer-tech">Digitised & automated by <strong>Umoja Digital Core</strong> — Member CRM · Loan Origination · Analytics · Workflows</div></div></div></footer>
+<section class="cta-section"><div class="cta-inner"><h2>Ready to take control of your financial future?</h2><p>Join 350,000+ members who are saving smarter and borrowing easier with Umoja Sacco's digital platform.</p><div class="cta-buttons"><a href="join.html" class="btn-primary">Apply for Membership</a><a href="mailto:info@umojasacco.co.ke" class="btn-outline">Talk to an Advisor</a></div></div></section>
+
+<footer><div class="footer-inner"><div class="footer-top"><div><div class="footer-logo">Umoja Sacco</div><p class="footer-tagline">A basket for all your financial needs , empowering members across Kenya through reliable savings, loans, and digital banking.</p></div><div class="footer-col"><h4>Services</h4><a href="#">Savings Accounts</a><a href="#">Loan Products</a><a href="#">Fixed Deposits</a><a href="#">Group Savings</a></div><div class="footer-col"><h4>Membership</h4><a href="#membership">Apply Online</a><a href="#">Member Portal</a><a href="#">Dividends</a><a href="#">AGM Reports</a></div><div class="footer-col"><h4>Contact</h4><a href="tel:+254792333111">+254 792 333 111</a><a href="mailto:customercare@umojasacco.co.ke">customercare@umojasacco.co.ke</a><a href="#">Olkalou Town , Umoja Sacco Plaza</a><a href="#">Privacy Policy</a></div></div><div class="footer-bottom"><p>© 2026 Umoja Sacco Ltd. Licensed by SASRA. All rights reserved.</p><div class="footer-tech">Regulated by SASRA &nbsp;·&nbsp; 31 Branches across Kenya &nbsp;·&nbsp; 350,000+ Members</div></div></div></footer>
 
 <script>
+  // Hamburger menu
+  document.getElementById('navHamburger').addEventListener('click', () => {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  });
+
   // Step config per form
   const formConfig = {
     membership: { total: 8, current: 1, prefix: 'm', sectionPrefix: 'section', formId: 'applicationForm', successId: 'successCardMembership', prevBtn: 'prevBtnM', nextBtn: 'nextBtnM' },

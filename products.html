@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Products | Umoja Sacco</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --g50: #fff0ee; --g100: #ffd0cb; --g200: #ffb3ab; --g400: #f77060;
+    --g500: #f55544; --g600: #d93f2e; --g700: #14556c; --g800: #0d3545;
+    --neutral50: #fafafa; --neutral100: #f4f4f4; --neutral200: #e8e8e8;
+    --neutral400: #a0a0a0; --neutral600: #525252; --neutral700: #3a3a3a;
+    --neutral800: #1c1c1c; --white: #ffffff;
+    --radius-sm: 10px; --radius-md: 16px; --radius-lg: 24px;
+    --shadow-card: 0 2px 20px rgba(245,85,68,0.08), 0 1px 4px rgba(0,0,0,0.04);
+    --shadow-hover: 0 8px 32px rgba(245,85,68,0.14), 0 2px 8px rgba(0,0,0,0.06);
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--neutral50); color: var(--neutral800); font-size: 16px; line-height: 1.6; overflow-x: hidden; }
+  h1,h2,h3,h4 { font-family: 'Fraunces', serif; font-weight: 700; line-height: 1.2; }
+
+  /* ── TOP BAR ── */
+  .top-bar { background: var(--g700); color: rgba(255,255,255,0.88); font-size: 13px; padding: 8px 5%; }
+  .top-bar-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .top-bar-contact { display: flex; align-items: center; gap: 24px; }
+  .top-bar-contact a { color: rgba(255,255,255,0.88); text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
+  .top-bar-contact a:hover { color: #fff; }
+  .top-bar-socials { display: flex; align-items: center; gap: 12px; }
+  .top-bar-socials a { color: rgba(255,255,255,0.75); text-decoration: none; width: 28px; height: 28px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.25); display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+  .top-bar-socials a:hover { background: rgba(255,255,255,0.15); color: #fff; }
+  .top-bar-socials svg { width: 13px; height: 13px; fill: currentColor; }
+
+  /* ── NAV ── */
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.95); backdrop-filter: blur(16px); border-bottom: 1px solid var(--neutral200); padding: 0 5%; }
+  .nav-inner { max-width: 1200px; margin: 0 auto; height: 68px; display: flex; align-items: center; justify-content: space-between; }
+  .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .nav-logo-icon { width: 38px; height: 38px; background: var(--g500); border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+  .nav-logo-icon svg { fill: white; width: 22px; height: 22px; }
+  .nav-logo-text { font-family: 'Fraunces', serif; font-size: 20px; font-weight: 700; color: var(--g700); }
+  .nav-links { display: flex; align-items: center; gap: 32px; }
+  .nav-links a { text-decoration: none; color: var(--neutral600); font-size: 15px; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--g600); }
+  .nav-cta { background: var(--g500); color: white !important; padding: 9px 22px; border-radius: var(--radius-sm); font-weight: 600 !important; transition: background 0.2s !important; }
+  .nav-cta:hover { background: var(--g600) !important; }
+
+  /* Dropdown */
+  .nav-dropdown { position: relative; }
+  .nav-drop-btn { background: none; border: none; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; color: var(--neutral600); cursor: pointer; display: flex; align-items: center; gap: 5px; padding: 0; transition: color 0.2s; }
+  .nav-drop-btn:hover { color: var(--g600); }
+  .drop-arrow { width: 10px; height: 7px; transition: transform 0.2s; }
+  .nav-dropdown:hover .drop-arrow { transform: rotate(180deg); }
+  .nav-drop-menu { position: absolute; top: calc(100% + 14px); left: 50%; transform: translateX(-50%) translateY(6px); background: white; border: 1px solid var(--neutral200); border-radius: var(--radius-md); box-shadow: 0 8px 32px rgba(0,0,0,0.12); min-width: 230px; padding: 8px 0; opacity: 0; pointer-events: none; transition: opacity 0.18s ease, transform 0.18s ease; z-index: 200; }
+  .nav-dropdown:hover .nav-drop-menu, .nav-dropdown:focus-within .nav-drop-menu { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+  .nav-drop-menu a { display: block; padding: 10px 20px; font-size: 14px; color: var(--neutral700) !important; text-decoration: none; transition: background 0.15s; white-space: nowrap; }
+  .nav-drop-menu a:hover { background: var(--g50); color: var(--g600) !important; }
+  .nav-drop-menu a + a { border-top: 1px solid var(--neutral100); }
+  .nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+  .nav-hamburger span { display: block; width: 24px; height: 2px; background: var(--neutral800); border-radius: 2px; }
+  .mobile-menu { display: none; flex-direction: column; gap: 4px; padding: 12px 5% 20px; border-top: 1px solid var(--neutral200); background: white; }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { padding: 10px 4px; font-size: 15px; color: var(--neutral700); text-decoration: none; border-bottom: 1px solid var(--neutral100); }
+  .mob-group { display: flex; flex-direction: column; }
+  .mob-group-btn { background: none; border: none; border-bottom: 1px solid var(--neutral100); font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; color: var(--neutral700); text-align: left; padding: 10px 4px; cursor: pointer; display: flex; justify-content: space-between; }
+  .mob-group-items { display: none; padding-left: 16px; }
+  .mob-group.open .mob-group-items { display: flex; flex-direction: column; }
+  .mob-group-items a { font-size: 14px; color: var(--neutral600) !important; }
+  @media (max-width: 960px) { .nav-links { display: none !important; } .nav-hamburger { display: flex; } }
+
+  /* ── PAGE HERO ── */
+  .page-hero {
+    background: linear-gradient(135deg, var(--g800) 0%, var(--g700) 50%, var(--g500) 100%);
+    padding: 56px 5% 72px;
+  }
+  .page-hero-inner { max-width: 1200px; margin: 0 auto; }
+  .page-hero h1 { font-size: clamp(32px, 4vw, 52px); color: white; margin-bottom: 14px; letter-spacing: -0.02em; }
+  .page-hero p { font-size: 18px; color: rgba(255,255,255,0.8); max-width: 580px; font-weight: 300; }
+  .breadcrumb { display: flex; align-items: center; gap: 8px; margin-bottom: 20px; font-size: 13px; color: rgba(255,255,255,0.6); }
+  .breadcrumb a { color: rgba(255,255,255,0.7); text-decoration: none; }
+  .breadcrumb a:hover { color: white; }
+  .breadcrumb span { color: rgba(255,255,255,0.4); }
+
+  /* ── PRODUCT TABS ── */
+  .products-section { padding: 64px 5%; }
+  .products-inner { max-width: 1200px; margin: 0 auto; }
+  .product-type-tabs { display: flex; gap: 0; background: var(--neutral100); border-radius: var(--radius-md); padding: 6px; margin-bottom: 48px; max-width: 440px; }
+  .product-type-tab {
+    flex: 1; text-align: center; padding: 12px 24px;
+    border-radius: 10px; font-size: 15px; font-weight: 600;
+    color: var(--neutral600); cursor: pointer; transition: all 0.2s;
+    border: none; background: transparent; font-family: 'DM Sans', sans-serif;
+  }
+  .product-type-tab.active { background: white; color: var(--g600); box-shadow: var(--shadow-card); }
+
+  /* ── PRODUCT CARDS GRID ── */
+  .products-wrap { display: none; }
+  .products-wrap.active { display: block; }
+  .product-cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-bottom: 56px; }
+  .product-card {
+    background: white; border-radius: var(--radius-md); border: 2px solid var(--neutral200);
+    padding: 28px; cursor: pointer; transition: all 0.2s; position: relative;
+  }
+  .product-card:hover { border-color: var(--g400); box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+  .product-card.selected { border-color: var(--g500); background: var(--g50); }
+  .product-card.selected::after { content: '✓'; position: absolute; top: 16px; right: 16px; width: 24px; height: 24px; background: var(--g500); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; }
+  .product-card-icon { width: 52px; height: 52px; background: var(--g50); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; margin-bottom: 18px; }
+  .product-card-icon svg { width: 26px; height: 26px; fill: var(--g500); }
+  .product-card h3 { font-size: 19px; color: var(--neutral800); margin-bottom: 8px; }
+  .product-card p { font-size: 14px; color: var(--neutral600); line-height: 1.65; }
+  .product-card .product-tag { display: inline-block; margin-top: 14px; font-size: 12px; font-weight: 600; background: var(--g50); color: var(--g600); padding: 3px 10px; border-radius: 100px; border: 1px solid var(--g100); }
+  .product-card .product-rate { margin-top: 10px; font-size: 13px; font-weight: 600; color: var(--g700); }
+
+  /* ── APPLICATION FORM ── */
+  .apply-form-section { background: var(--neutral100); border-radius: var(--radius-lg); padding: 40px; margin-top: 8px; display: none; }
+  .apply-form-section.show { display: block; }
+  .apply-form-header { margin-bottom: 32px; }
+  .apply-form-header h2 { font-size: 26px; color: var(--neutral800); margin-bottom: 6px; }
+  .apply-form-header p { font-size: 14px; color: var(--neutral600); }
+  .selected-product-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--g700); color: white; padding: 6px 16px; border-radius: 100px; font-size: 13px; font-weight: 600; margin-bottom: 24px; }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .form-grid .full { grid-column: 1 / -1; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  label { font-size: 13px; font-weight: 600; color: var(--neutral700); }
+  .req { color: var(--g500); margin-left: 2px; }
+  input[type="text"], input[type="email"], input[type="tel"], input[type="number"], input[type="date"], select, textarea {
+    width: 100%; padding: 11px 14px; border: 1.5px solid var(--neutral200);
+    border-radius: var(--radius-sm); font-family: 'DM Sans', sans-serif;
+    font-size: 14px; color: var(--neutral800); background: white;
+    transition: border-color 0.2s, box-shadow 0.2s; appearance: none; -webkit-appearance: none;
+  }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--g400); box-shadow: 0 0 0 3px rgba(245,85,68,0.1); }
+  select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; cursor: pointer; }
+  textarea { min-height: 90px; resize: vertical; }
+  .form-divider { height: 1px; background: var(--neutral200); margin: 24px 0; grid-column: 1/-1; }
+  .form-section-label { font-size: 12px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--g600); padding-bottom: 10px; border-bottom: 1px solid var(--neutral200); margin-bottom: 4px; grid-column: 1/-1; }
+  .upload-area { border: 2px dashed var(--neutral200); border-radius: var(--radius-sm); padding: 22px; text-align: center; cursor: pointer; transition: border-color 0.2s, background 0.2s; background: white; }
+  .upload-area:hover { border-color: var(--g400); background: var(--g50); }
+  .upload-area svg { width: 28px; height: 28px; fill: var(--neutral400); margin: 0 auto 8px; display: block; }
+  .upload-area p { font-size: 13px; color: var(--neutral600); }
+  .upload-area span { font-size: 11px; color: var(--neutral400); display: block; margin-top: 3px; }
+  .check-opt { display: flex; align-items: flex-start; gap: 10px; cursor: pointer; font-size: 14px; color: var(--neutral700); }
+  .check-opt input[type="checkbox"] { appearance: none; width: 18px; height: 18px; border: 2px solid var(--neutral400); border-radius: 5px; flex-shrink: 0; margin-top: 1px; cursor: pointer; transition: all 0.15s; display: grid; place-items: center; }
+  .check-opt input[type="checkbox"]:checked { background: var(--g500); border-color: var(--g500); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='9' viewBox='0 0 11 9'%3E%3Cpath d='M1 4l3.5 3.5L10 1' stroke='white' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: center; }
+  .form-actions { display: flex; align-items: center; justify-content: space-between; margin-top: 32px; flex-wrap: wrap; gap: 16px; grid-column: 1/-1; }
+  .btn-submit { background: var(--g500); color: white; border: none; padding: 14px 36px; border-radius: var(--radius-sm); font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: background 0.2s, transform 0.15s; }
+  .btn-submit:hover { background: var(--g600); transform: translateY(-1px); }
+  .btn-submit svg { fill: white; width: 18px; height: 18px; }
+  .secure-note { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--neutral400); }
+  .secure-note svg { fill: var(--neutral400); width: 14px; height: 14px; }
+
+  /* Success */
+  .success-card { display: none; text-align: center; padding: 56px 32px; }
+  .success-card.show { display: block; }
+  .success-icon { width: 72px; height: 72px; background: var(--g50); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; border: 2px solid var(--g200); }
+  .success-icon svg { fill: var(--g500); width: 34px; height: 34px; }
+  .success-card h3 { font-size: 26px; color: var(--neutral800); margin-bottom: 10px; }
+  .success-card p { font-size: 15px; color: var(--neutral600); max-width: 400px; margin: 0 auto 28px; line-height: 1.7; }
+  .btn-reset { background: transparent; border: 1.5px solid var(--g500); color: var(--g600); padding: 10px 28px; border-radius: var(--radius-sm); font-family: 'DM Sans', sans-serif; font-weight: 600; cursor: pointer; font-size: 14px; margin-right: 12px; }
+  .btn-home { background: var(--g500); color: white; padding: 10px 28px; border-radius: var(--radius-sm); font-family: 'DM Sans', sans-serif; font-weight: 600; cursor: pointer; font-size: 14px; border: none; text-decoration: none; display: inline-block; }
+
+  @media (max-width: 640px) { .form-grid { grid-template-columns: 1fr; } .product-cards-grid { grid-template-columns: 1fr; } .apply-form-section { padding: 24px 20px; } }
+
+  /* ── FOOTER ── */
+  footer { background: var(--g800); padding: 48px 5% 28px; }
+  .footer-inner { max-width: 1200px; margin: 0 auto; }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; display: flex; align-items: center; justify-content: space-between; }
+  .footer-bottom p { font-size: 13px; color: rgba(255,255,255,0.4); }
+</style>
+</head>
+<body>
+
+<!-- TOP CONTACT BAR -->
+<div class="top-bar">
+  <div class="top-bar-inner">
+    <div class="top-bar-contact">
+      <a href="tel:0792333111">
+        <svg viewBox="0 0 24 24" style="width:13px;height:13px;fill:currentColor;"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+        0792 333 111
+      </a>
+      <a href="mailto:customercare@umojasacco.co.ke">
+        <svg viewBox="0 0 24 24" style="width:13px;height:13px;fill:currentColor;"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        customercare@umojasacco.co.ke
+      </a>
+    </div>
+    <div class="top-bar-socials">
+      <a href="https://www.facebook.com/TowerSaccoLtd" target="_blank" title="Facebook"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+      <a href="https://twitter.com/towersaccoltd" target="_blank" title="Twitter"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+      <a href="https://www.instagram.com/tower_sacco" target="_blank" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7v10c0 5.25 3.75 10.15 10 11.25C18.25 27.15 22 22.25 22 17V7L12 2zm0 2.18l8 4.44V17c0 4.25-2.83 8.25-8 9.43C6.83 25.25 4 21.25 4 17V8.62l8-4.44z"/></svg></div>
+      <div><span class="nav-logo-text">Umoja Sacco</span></div>
+    </a>
+    <div class="nav-links">
+      <a href="index.html#about">About</a>
+      <div class="nav-dropdown">
+        <button class="nav-drop-btn">Services <svg class="drop-arrow" viewBox="0 0 12 8"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg></button>
+        <div class="nav-drop-menu">
+          <a href="#">Visa Branded ATMs</a>
+          <a href="#">Mobile Banking</a>
+          <a href="#">Paybill</a>
+          <a href="#">Lipa Na Umoja Merchant Settlement</a>
+          <a href="#">Umoja Sacco Agents</a>
+          <a href="#">Internet Banking</a>
+          <a href="join.html">Join Us</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <button class="nav-drop-btn" style="color:var(--g600);">Products <svg class="drop-arrow" viewBox="0 0 12 8"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg></button>
+        <div class="nav-drop-menu">
+          <a href="products.html?type=savings">Savings Products</a>
+          <a href="products.html?type=loan">Loan Products</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <button class="nav-drop-btn">Resources <svg class="drop-arrow" viewBox="0 0 12 8"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg></button>
+        <div class="nav-drop-menu">
+          <a href="#">Sacco Downloads</a>
+          <a href="#">Tenders</a>
+          <a href="#">Notices</a>
+          <a href="#">Careers</a>
+        </div>
+      </div>
+      <a href="index.html#contact">Contact Us</a>
+      <a href="join.html" class="nav-cta">Join Now</a>
+    </div>
+    <button class="nav-hamburger" id="navHamburger"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html#about">About</a>
+    <div class="mob-group">
+      <button class="mob-group-btn" onclick="this.parentElement.classList.toggle('open')">Services <span>▾</span></button>
+      <div class="mob-group-items">
+        <a href="#">Visa Branded ATMs</a>
+        <a href="#">Mobile Banking</a>
+        <a href="#">Paybill</a>
+        <a href="#">Internet Banking</a>
+        <a href="join.html">Join Us</a>
+      </div>
+    </div>
+    <div class="mob-group">
+      <button class="mob-group-btn" onclick="this.parentElement.classList.toggle('open')">Products <span>▾</span></button>
+      <div class="mob-group-items">
+        <a href="products.html?type=savings">Savings Products</a>
+        <a href="products.html?type=loan">Loan Products</a>
+      </div>
+    </div>
+    <div class="mob-group">
+      <button class="mob-group-btn" onclick="this.parentElement.classList.toggle('open')">Resources <span>▾</span></button>
+      <div class="mob-group-items">
+        <a href="#">Sacco Downloads</a><a href="#">Tenders</a><a href="#">Notices</a><a href="#">Careers</a>
+      </div>
+    </div>
+    <a href="index.html#contact">Contact Us</a>
+    <a href="join.html" class="nav-cta" style="display:inline-block;margin-top:8px;">Join Now</a>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span>›</span>
+      <span id="heroBreadcrumb">Products</span>
+    </div>
+    <h1 id="heroTitle">Our Products</h1>
+    <p id="heroSub">Choose a product below to learn more and submit your application — we'll get back to you within 24 hours.</p>
+  </div>
+</div>
+
+<!-- PRODUCTS SECTION -->
+<section class="products-section">
+  <div class="products-inner">
+
+    <!-- Tabs -->
+    <div class="product-type-tabs">
+      <button class="product-type-tab active" id="tabSavings" onclick="switchProductType('savings')">Savings Products</button>
+      <button class="product-type-tab" id="tabLoan" onclick="switchProductType('loan')">Loan Products</button>
+    </div>
+
+    <!-- ═══════ SAVINGS PRODUCTS ═══════ -->
+    <div class="products-wrap active" id="wrapSavings">
+      <div class="product-cards-grid">
+        <div class="product-card" onclick="selectProduct(this,'Ordinary Savings Account','savings')">
+          <div class="product-card-icon"><svg viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg></div>
+          <h3>Ordinary Savings Account</h3>
+          <p>Our flagship savings product for members. Regular monthly contributions with competitive dividends paid annually.</p>
+          <div class="product-rate">Up to 14% annual dividend</div>
+          <span class="product-tag">Most Popular</span>
+        </div>
+        <div class="product-card" onclick="selectProduct(this,'Fixed Deposit Account','savings')">
+          <div class="product-card-icon"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg></div>
+          <h3>Fixed Deposit Account</h3>
+          <p>Lock in your money for a fixed term and earn higher interest. Ideal for surplus savings you can commit for 3–24 months.</p>
+          <div class="product-rate">Higher interest for fixed terms</div>
+          <span class="product-tag">3 – 24 Month Terms</span>
+        </div>
+        <div class="product-card" onclick="selectProduct(this,'Junior Savings Account','savings')">
+          <div class="product-card-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg></div>
+          <h3>Junior / Children's Savings</h3>
+          <p>Start your child's financial journey early. Opened and managed by a parent or guardian on behalf of a minor member.</p>
+          <div class="product-rate">Builds lifelong savings habits</div>
+          <span class="product-tag">For Members Under 18</span>
+        </div>
+        <div class="product-card" onclick="selectProduct(this,'Group / Chama Savings','savings')">
+          <div class="product-card-icon"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></div>
+          <h3>Group / Chama Savings</h3>
+          <p>Save together as a group (chama, investment club, or association). Each member has individual share tracking within the group account.</p>
+          <div class="product-rate">Collective wealth creation</div>
+          <span class="product-tag">Min. 5 Members</span>
+        </div>
+        <div class="product-card" onclick="selectProduct(this,'Holiday / Target Savings','savings')">
+          <div class="product-card-icon"><svg viewBox="0 0 24 24"><path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"/></svg></div>
+          <h3>Holiday / Target Savings</h3>
+          <p>Save towards a specific goal — school fees, travel, home improvement. Set a target amount and timeline, withdraw when you reach it.</p>
+          <div class="product-rate">Goal-oriented saving</div>
+          <span class="product-tag">Flexible Withdrawal</span>
+        </div>
+      </div>
+
+      <!-- SAVINGS APPLICATION FORM -->
+      <div class="apply-form-section" id="savingsFormSection">
+        <div class="success-card" id="savingsSuccess">
+          <div class="success-icon"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+          <h3>Application Submitted!</h3>
+          <p>Your savings product application has been received. Our team will review it and contact you within 24 hours.</p>
+          <button class="btn-reset" onclick="resetSavings()">Apply for Another</button>
+          <a href="index.html" class="btn-home">Back to Home</a>
+        </div>
+        <div id="savingsFormInner">
+          <div class="apply-form-header">
+            <div class="selected-product-badge" id="savingsProductBadge">📋 Selected Product</div>
+            <h2>Savings Product Application</h2>
+            <p>Fill in your details below. All fields marked <span style="color:var(--g500);">*</span> are required.</p>
+          </div>
+          <div class="form-grid">
+            <div class="form-section-label">Personal Information</div>
+            <div class="form-group"><label>Full Name <span class="req">*</span></label><input type="text" id="sv_name" placeholder="e.g. Amina Wanjiku Odhiambo"/></div>
+            <div class="form-group"><label>ID / Passport Number <span class="req">*</span></label><input type="text" id="sv_id" placeholder="12345678"/></div>
+            <div class="form-group"><label>Date of Birth <span class="req">*</span></label><input type="date" id="sv_dob"/></div>
+            <div class="form-group"><label>Gender <span class="req">*</span></label>
+              <select id="sv_gender"><option value="">— Select —</option><option>Female</option><option>Male</option><option>Prefer not to say</option></select>
+            </div>
+            <div class="form-group"><label>Phone Number <span class="req">*</span></label><input type="tel" id="sv_phone" placeholder="+254 7XX XXX XXX"/></div>
+            <div class="form-group"><label>Email Address <span class="req">*</span></label><input type="email" id="sv_email" placeholder="you@example.com"/></div>
+            <div class="form-group full"><label>Physical Address <span class="req">*</span></label><input type="text" id="sv_address" placeholder="e.g. House No., Street, Town, County"/></div>
+            <div class="form-group"><label>Occupation</label><input type="text" id="sv_occupation" placeholder="e.g. Teacher"/></div>
+            <div class="form-group"><label>Employer / Business</label><input type="text" id="sv_employer" placeholder="e.g. County Government"/></div>
+
+            <div class="form-section-label">Account Details</div>
+            <div class="form-group"><label>Existing Member Number (if any)</label><input type="text" id="sv_member" placeholder="Leave blank if new member"/></div>
+            <div class="form-group"><label>Monthly Contribution (KSh) <span class="req">*</span></label><input type="number" id="sv_monthly" placeholder="e.g. 1000" min="500"/></div>
+            <div class="form-group"><label>Initial Deposit (KSh) <span class="req">*</span></label><input type="number" id="sv_initial" placeholder="e.g. 2000" min="0"/></div>
+            <div class="form-group"><label>Preferred Payment Method <span class="req">*</span></label>
+              <select id="sv_payment"><option value="">— Select —</option><option>M-Pesa</option><option>Bank Transfer</option><option>Payroll Deduction</option></select>
+            </div>
+            <div class="form-group full"><label>Fixed Deposit Term (months, if applicable)</label>
+              <select id="sv_term"><option value="">— N/A —</option><option>3</option><option>6</option><option>12</option><option>24</option></select>
+            </div>
+
+            <div class="form-section-label">Next of Kin</div>
+            <div class="form-group"><label>Next of Kin Full Name <span class="req">*</span></label><input type="text" id="sv_kin_name" placeholder="e.g. John Odhiambo"/></div>
+            <div class="form-group"><label>Relationship <span class="req">*</span></label>
+              <select id="sv_kin_rel"><option value="">— Select —</option><option>Spouse</option><option>Parent</option><option>Child</option><option>Sibling</option><option>Other</option></select>
+            </div>
+            <div class="form-group"><label>Next of Kin Phone <span class="req">*</span></label><input type="tel" id="sv_kin_phone" placeholder="+254 7XX XXX XXX"/></div>
+            <div class="form-group"><label>Next of Kin ID Number</label><input type="text" id="sv_kin_id" placeholder="12345678"/></div>
+
+            <div class="form-section-label">Document Uploads</div>
+            <div class="form-group"><label>National ID / Passport <span class="req">*</span></label>
+              <div class="upload-area"><svg viewBox="0 0 24 24"><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg><p>Click to upload or drag & drop</p><span>JPG, PNG or PDF — max 5MB</span></div>
+            </div>
+            <div class="form-group"><label>KRA PIN Certificate <span class="req">*</span></label>
+              <div class="upload-area"><svg viewBox="0 0 24 24"><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg><p>Click to upload or drag & drop</p><span>JPG, PNG or PDF — max 5MB</span></div>
+            </div>
+            <div class="form-group full" style="margin-top:8px;">
+              <label class="check-opt"><input type="checkbox" id="sv_agree"/><span>I have read and agree to the <a href="#" style="color:var(--g600);">Savings Account Terms & Conditions</a> and <a href="#" style="color:var(--g600);">Privacy Policy</a>. <span class="req">*</span></span></label>
+            </div>
+            <div class="form-group full"><label>Digital Signature (Full Name) <span class="req">*</span></label><input type="text" id="sv_sig" placeholder="Type your full legal name as signature" style="font-style:italic;"/></div>
+            <div class="form-actions">
+              <div class="secure-note"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>256-bit encrypted & secure</div>
+              <button class="btn-submit" onclick="submitSavings()">Submit Application <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- end wrapSavings -->
+
+    <!-- ═══════ LOAN PRODUCTS ═══════ -->
+    <div class="products-wrap" id="wrapLoan">
+      <div class="product-cards-grid">
+        <div class="product-card" onclick="selectProduct(this,'Emergency Loan','loan')">
+          <div class="product-card-icon"><svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg></div>
+          <h3>Emergency Loan</h3>
+          <p>Fast access to funds in urgent situations. Minimal paperwork, disbursed within hours of approval via M-Pesa.</p>
+          <div class="product-rate">Up to 1× savings balance</div>
+          <span class="product-tag">Same Day Disbursement</span>
+        </div>
+        <div class="product-card" onclick="selectProduct(this,'Development Loan','loan')">
+          <div class="product-card-icon"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg></div>
+          <h3>Development Loan</h3>
+          <p>For home construction, renovation, or land purchase. Long repayment period with affordable monthly installments.</p>
+          <div class="product-rate">Up to 3× savings balance</div>
+          <span class="product-tag">Up to 60 Months</span>
+        </div>
+        <div class="product-card" onclick="selectProduct(this,'School Fees Loan','loan')">
+          <div class="product-card-icon"><svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg></div>
+          <h3>School Fees Loan</h3>
+          <p>Ensure your children never miss school due to fees. Applied term-by-term and disbursed directly or to the institution.</p>
+          <div class="product-rate">Competitive interest rate</div>
+          <span class="product-tag">Per School Term</span>
+        </div>
+        <div class="product-card" onclick="selectProduct(this,'Business Loan','loan')">
+          <div class="product-card-icon"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg></div>
+          <h3>Business Loan</h3>
+          <p>Grow your enterprise with working capital or asset financing. Ideal for SMEs and entrepreneurs with proven cash flow.</p>
+          <div class="product-rate">Up to 3× savings balance</div>
+          <span class="product-tag">Flexible Security</span>
+        </div>
+        <div class="product-card" onclick="selectProduct(this,'Salary Advance','loan')">
+          <div class="product-card-icon"><svg viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg></div>
+          <h3>Salary Advance</h3>
+          <p>Access up to 80% of your net monthly salary before payday. Repaid via payroll deduction at end of month.</p>
+          <div class="product-rate">Up to 80% net salary</div>
+          <span class="product-tag">1-Month Repayment</span>
+        </div>
+        <div class="product-card" onclick="selectProduct(this,'Asset Financing Loan','loan')">
+          <div class="product-card-icon"><svg viewBox="0 0 24 24"><path d="M13 2.05v2.02c3.95.49 7 3.85 7 7.93 0 3.21-1.81 6-4.72 7.28L13 17v5h5l-1.22-1.22C19.91 19.07 22 15.76 22 12c0-5.18-3.95-9.45-9-9.95zM11 2.05C5.95 2.55 2 6.82 2 12c0 3.76 2.09 7.07 5.22 8.78L6 22h5V2.05z"/></svg></div>
+          <h3>Asset Financing</h3>
+          <p>Finance vehicles, machinery, and equipment for personal or business use. The asset serves as collateral.</p>
+          <div class="product-rate">Up to KSh 3M</div>
+          <span class="product-tag">Asset as Collateral</span>
+        </div>
+      </div>
+
+      <!-- LOAN APPLICATION FORM -->
+      <div class="apply-form-section" id="loanFormSection">
+        <div class="success-card" id="loanSuccess">
+          <div class="success-icon"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+          <h3>Loan Application Submitted!</h3>
+          <p>Your application has been received and sent to our credit team. You'll receive a WhatsApp update within 24 hours.</p>
+          <button class="btn-reset" onclick="resetLoan()">Apply for Another</button>
+          <a href="index.html" class="btn-home">Back to Home</a>
+        </div>
+        <div id="loanFormInner">
+          <div class="apply-form-header">
+            <div class="selected-product-badge" id="loanProductBadge">📋 Selected Loan</div>
+            <h2>Loan Application Form</h2>
+            <p>Please complete all required fields. Approval takes 24–48 hours; disbursement via M-Pesa or bank transfer.</p>
+          </div>
+          <div class="form-grid">
+            <div class="form-section-label">Applicant Details</div>
+            <div class="form-group"><label>Full Name <span class="req">*</span></label><input type="text" id="ln_name" placeholder="e.g. David Kipchoge"/></div>
+            <div class="form-group"><label>Member Number <span class="req">*</span></label><input type="text" id="ln_member" placeholder="e.g. UM-002345"/></div>
+            <div class="form-group"><label>ID / Passport Number <span class="req">*</span></label><input type="text" id="ln_id" placeholder="12345678"/></div>
+            <div class="form-group"><label>Phone Number <span class="req">*</span></label><input type="tel" id="ln_phone" placeholder="+254 7XX XXX XXX"/></div>
+            <div class="form-group"><label>Email Address <span class="req">*</span></label><input type="email" id="ln_email" placeholder="you@example.com"/></div>
+            <div class="form-group"><label>Physical Address <span class="req">*</span></label><input type="text" id="ln_address" placeholder="Town, County"/></div>
+
+            <div class="form-section-label">Loan Details</div>
+            <div class="form-group"><label>Loan Amount Requested (KSh) <span class="req">*</span></label><input type="number" id="ln_amount" placeholder="e.g. 150,000" min="0"/></div>
+            <div class="form-group"><label>Repayment Period (months) <span class="req">*</span></label>
+              <select id="ln_period"><option value="">— Select —</option><option>3</option><option>6</option><option>12</option><option>24</option><option>36</option><option>48</option><option>60</option></select>
+            </div>
+            <div class="form-group full"><label>Purpose of Loan <span class="req">*</span></label><input type="text" id="ln_purpose" placeholder="e.g. Business stock, school fees, home renovation"/></div>
+            <div class="form-group"><label>Repayment Method <span class="req">*</span></label>
+              <select id="ln_repay"><option value="">— Select —</option><option>Payroll Deduction</option><option>M-Pesa</option><option>Bank Standing Order</option></select>
+            </div>
+            <div class="form-group"><label>Current Savings Balance (KSh)</label><input type="number" id="ln_savings" placeholder="e.g. 80,000" min="0"/></div>
+            <div class="form-group"><label>Existing Loan Balance (KSh)</label><input type="number" id="ln_existing" placeholder="0" min="0"/></div>
+
+            <div class="form-section-label">Employment & Income</div>
+            <div class="form-group"><label>Employment Status <span class="req">*</span></label>
+              <select id="ln_empstatus"><option value="">— Select —</option><option>Employed</option><option>Self-Employed</option><option>Business Owner</option><option>Retired</option></select>
+            </div>
+            <div class="form-group"><label>Employer / Business Name <span class="req">*</span></label><input type="text" id="ln_employer" placeholder="e.g. Safaricom PLC"/></div>
+            <div class="form-group"><label>Job Title</label><input type="text" id="ln_jobtitle" placeholder="e.g. Senior Accountant"/></div>
+            <div class="form-group"><label>Monthly Net Income (KSh) <span class="req">*</span></label>
+              <select id="ln_income"><option value="">— Select range —</option><option>Below KSh 20,000</option><option>KSh 20,000 – 50,000</option><option>KSh 50,000 – 100,000</option><option>KSh 100,000 – 250,000</option><option>Above KSh 250,000</option></select>
+            </div>
+            <div class="form-group"><label>Years in Current Employment</label><input type="number" id="ln_years" placeholder="e.g. 3" min="0"/></div>
+            <div class="form-group"><label>HR / Payroll Contact (for payroll deduction)</label><input type="tel" id="ln_hrphone" placeholder="+254 7XX XXX XXX"/></div>
+
+            <div class="form-section-label">Guarantors (minimum 2)</div>
+            <div class="form-group"><label>Guarantor 1 — Full Name <span class="req">*</span></label><input type="text" id="ln_g1name" placeholder="e.g. Jane Muthoni"/></div>
+            <div class="form-group"><label>Guarantor 1 — Member No. <span class="req">*</span></label><input type="text" id="ln_g1member" placeholder="e.g. UM-001122"/></div>
+            <div class="form-group"><label>Guarantor 1 — Phone <span class="req">*</span></label><input type="tel" id="ln_g1phone" placeholder="+254 7XX XXX XXX"/></div>
+            <div class="form-group"><label>Guarantor 1 — Savings to Pledge (KSh) <span class="req">*</span></label><input type="number" id="ln_g1pledge" placeholder="e.g. 50,000" min="0"/></div>
+            <div class="form-group"><label>Guarantor 2 — Full Name <span class="req">*</span></label><input type="text" id="ln_g2name" placeholder="e.g. Peter Kamau"/></div>
+            <div class="form-group"><label>Guarantor 2 — Member No. <span class="req">*</span></label><input type="text" id="ln_g2member" placeholder="e.g. UM-003344"/></div>
+            <div class="form-group"><label>Guarantor 2 — Phone <span class="req">*</span></label><input type="tel" id="ln_g2phone" placeholder="+254 7XX XXX XXX"/></div>
+            <div class="form-group"><label>Guarantor 2 — Savings to Pledge (KSh) <span class="req">*</span></label><input type="number" id="ln_g2pledge" placeholder="e.g. 50,000" min="0"/></div>
+
+            <div class="form-section-label">Documents</div>
+            <div class="form-group"><label>National ID Copy <span class="req">*</span></label>
+              <div class="upload-area"><svg viewBox="0 0 24 24"><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg><p>Click to upload or drag & drop</p><span>JPG, PNG or PDF — max 5MB</span></div>
+            </div>
+            <div class="form-group"><label>Latest Pay Slip or Bank Statement <span class="req">*</span></label>
+              <div class="upload-area"><svg viewBox="0 0 24 24"><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg><p>Click to upload or drag & drop</p><span>JPG, PNG or PDF — max 5MB</span></div>
+            </div>
+            <div class="form-group full" style="margin-top:8px;">
+              <label class="check-opt"><input type="checkbox" id="ln_agree"/><span>I authorize the SACCO to verify my employment, income, and credit history, and I agree to the <a href="#" style="color:var(--g600);">Loan Terms & Conditions</a>. <span class="req">*</span></span></label>
+            </div>
+            <div class="form-group full"><label>Digital Signature (Full Name) <span class="req">*</span></label><input type="text" id="ln_sig" placeholder="Type your full legal name as your digital signature" style="font-style:italic;"/></div>
+            <div class="form-actions">
+              <div class="secure-note"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>256-bit encrypted & secure</div>
+              <button class="btn-submit" onclick="submitLoan()">Submit Application <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- end wrapLoan -->
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-bottom">
+      <p>© 2026 Umoja Sacco Ltd. Licensed by SASRA. All rights reserved.</p>
+      <p style="color:rgba(255,255,255,0.4);font-size:13px;">Regulated by SASRA · 31 Branches · 350,000+ Members</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Hamburger
+  document.getElementById('navHamburger').addEventListener('click', () => {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  });
+
+  // Read URL param to set initial tab
+  const urlParams = new URLSearchParams(window.location.search);
+  const typeParam = urlParams.get('type');
+  if (typeParam === 'loan') {
+    switchProductType('loan');
+  }
+
+  function switchProductType(type) {
+    document.querySelectorAll('.product-type-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.products-wrap').forEach(w => w.classList.remove('active'));
+    document.getElementById('tab' + cap(type)).classList.add('active');
+    document.getElementById('wrap' + cap(type)).classList.add('active');
+    // Update hero
+    if (type === 'loan') {
+      document.getElementById('heroTitle').textContent = 'Loan Products';
+      document.getElementById('heroSub').textContent = 'Choose a loan product that fits your need and submit your application. Approval in 24–48 hours.';
+      document.getElementById('heroBreadcrumb').textContent = 'Loan Products';
+    } else {
+      document.getElementById('heroTitle').textContent = 'Savings Products';
+      document.getElementById('heroSub').textContent = 'Choose a savings product and apply today. Start building your financial future with Umoja Sacco.';
+      document.getElementById('heroBreadcrumb').textContent = 'Savings Products';
+    }
+    // Hide form sections
+    document.getElementById('savingsFormSection').classList.remove('show');
+    document.getElementById('loanFormSection').classList.remove('show');
+    document.querySelectorAll('.product-card').forEach(c => c.classList.remove('selected'));
+  }
+
+  function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+
+  function selectProduct(card, name, type) {
+    // Deselect all in this group
+    card.closest('.product-cards-grid').querySelectorAll('.product-card').forEach(c => c.classList.remove('selected'));
+    card.classList.add('selected');
+    if (type === 'savings') {
+      document.getElementById('savingsProductBadge').textContent = '📋 ' + name;
+      const fs = document.getElementById('savingsFormSection');
+      fs.classList.add('show');
+      setTimeout(() => fs.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+    } else {
+      document.getElementById('loanProductBadge').textContent = '📋 ' + name;
+      const fs = document.getElementById('loanFormSection');
+      fs.classList.add('show');
+      setTimeout(() => fs.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+    }
+  }
+
+  function submitSavings() {
+    document.getElementById('savingsFormInner').style.display = 'none';
+    document.getElementById('savingsSuccess').classList.add('show');
+    document.getElementById('savingsSuccess').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+  function resetSavings() {
+    document.getElementById('savingsSuccess').classList.remove('show');
+    document.getElementById('savingsFormInner').style.display = 'block';
+    document.getElementById('savingsFormSection').classList.remove('show');
+    document.querySelectorAll('#wrapSavings .product-card').forEach(c => c.classList.remove('selected'));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  function submitLoan() {
+    document.getElementById('loanFormInner').style.display = 'none';
+    document.getElementById('loanSuccess').classList.add('show');
+    document.getElementById('loanSuccess').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+  function resetLoan() {
+    document.getElementById('loanSuccess').classList.remove('show');
+    document.getElementById('loanFormInner').style.display = 'block';
+    document.getElementById('loanFormSection').classList.remove('show');
+    document.querySelectorAll('#wrapLoan .product-card').forEach(c => c.classList.remove('selected'));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>

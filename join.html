@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Join Us | Umoja Sacco</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --g50: #fff0ee; --g100: #ffd0cb; --g200: #ffb3ab; --g400: #f77060;
+    --g500: #f55544; --g600: #d93f2e; --g700: #14556c; --g800: #0d3545;
+    --neutral50: #fafafa; --neutral100: #f4f4f4; --neutral200: #e8e8e8;
+    --neutral400: #a0a0a0; --neutral600: #525252; --neutral700: #3a3a3a;
+    --neutral800: #1c1c1c; --white: #ffffff;
+    --radius-sm: 10px; --radius-md: 16px; --radius-lg: 24px;
+    --shadow-card: 0 2px 20px rgba(245,85,68,0.08), 0 1px 4px rgba(0,0,0,0.04);
+    --shadow-hover: 0 8px 32px rgba(245,85,68,0.14), 0 2px 8px rgba(0,0,0,0.06);
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--neutral50); color: var(--neutral800); font-size: 16px; line-height: 1.6; overflow-x: hidden; }
+  h1,h2,h3,h4 { font-family: 'Fraunces', serif; font-weight: 700; line-height: 1.2; }
+
+  /* ── TOP BAR ── */
+  .top-bar { background: var(--g700); color: rgba(255,255,255,0.88); font-size: 13px; padding: 8px 5%; }
+  .top-bar-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .top-bar-contact { display: flex; align-items: center; gap: 24px; }
+  .top-bar-contact a { color: rgba(255,255,255,0.88); text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
+  .top-bar-contact a:hover { color: #fff; }
+  .top-bar-socials { display: flex; align-items: center; gap: 12px; }
+  .top-bar-socials a { color: rgba(255,255,255,0.75); text-decoration: none; width: 28px; height: 28px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.25); display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+  .top-bar-socials a:hover { background: rgba(255,255,255,0.15); color: #fff; }
+  .top-bar-socials svg { width: 13px; height: 13px; fill: currentColor; }
+
+  /* ── NAV ── */
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.95); backdrop-filter: blur(16px); border-bottom: 1px solid var(--neutral200); padding: 0 5%; }
+  .nav-inner { max-width: 1200px; margin: 0 auto; height: 68px; display: flex; align-items: center; justify-content: space-between; }
+  .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .nav-logo-icon { width: 38px; height: 38px; background: var(--g500); border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+  .nav-logo-icon svg { fill: white; width: 22px; height: 22px; }
+  .nav-logo-text { font-family: 'Fraunces', serif; font-size: 20px; font-weight: 700; color: var(--g700); }
+  .nav-links { display: flex; align-items: center; gap: 28px; }
+  .nav-links a { text-decoration: none; color: var(--neutral600); font-size: 15px; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--g600); }
+  .nav-cta { background: var(--g500); color: white !important; padding: 9px 22px; border-radius: var(--radius-sm); font-weight: 600 !important; transition: background 0.2s !important; }
+  .nav-cta:hover { background: var(--g600) !important; }
+  /* Dropdown */
+  .nav-dropdown { position: relative; }
+  .nav-drop-btn { background: none; border: none; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; color: var(--neutral600); cursor: pointer; display: flex; align-items: center; gap: 5px; padding: 0; transition: color 0.2s; }
+  .nav-drop-btn:hover { color: var(--g600); }
+  .drop-arrow { width: 10px; height: 7px; transition: transform 0.2s; }
+  .nav-dropdown:hover .drop-arrow { transform: rotate(180deg); }
+  .nav-drop-menu { position: absolute; top: calc(100% + 14px); left: 50%; transform: translateX(-50%) translateY(6px); background: white; border: 1px solid var(--neutral200); border-radius: var(--radius-md); box-shadow: 0 8px 32px rgba(0,0,0,0.12); min-width: 230px; padding: 8px 0; opacity: 0; pointer-events: none; transition: opacity 0.18s ease, transform 0.18s ease; z-index: 200; }
+  .nav-dropdown:hover .nav-drop-menu, .nav-dropdown:focus-within .nav-drop-menu { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+  .nav-drop-menu a { display: block; padding: 10px 20px; font-size: 14px; color: var(--neutral700) !important; text-decoration: none; transition: background 0.15s; white-space: nowrap; }
+  .nav-drop-menu a:hover { background: var(--g50); color: var(--g600) !important; }
+  .nav-drop-menu a + a { border-top: 1px solid var(--neutral100); }
+  .nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+  .nav-hamburger span { display: block; width: 24px; height: 2px; background: var(--neutral800); border-radius: 2px; }
+  .mobile-menu { display: none; flex-direction: column; gap: 4px; padding: 12px 5% 20px; border-top: 1px solid var(--neutral200); background: white; }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { padding: 10px 4px; font-size: 15px; color: var(--neutral700); text-decoration: none; border-bottom: 1px solid var(--neutral100); }
+  .mob-group { display: flex; flex-direction: column; }
+  .mob-group-btn { background: none; border: none; border-bottom: 1px solid var(--neutral100); font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; color: var(--neutral700); text-align: left; padding: 10px 4px; cursor: pointer; display: flex; justify-content: space-between; }
+  .mob-group-items { display: none; padding-left: 16px; }
+  .mob-group.open .mob-group-items { display: flex; flex-direction: column; }
+  .mob-group-items a { font-size: 14px; color: var(--neutral600) !important; }
+  @media (max-width: 960px) { .nav-links { display: none !important; } .nav-hamburger { display: flex; } }
+
+  /* ── PAGE HERO ── */
+  .page-hero { background: linear-gradient(135deg, var(--g800) 0%, var(--g700) 50%, var(--g500) 100%); padding: 56px 5% 72px; }
+  .page-hero-inner { max-width: 1200px; margin: 0 auto; }
+  .page-hero h1 { font-size: clamp(32px, 4vw, 52px); color: white; margin-bottom: 14px; letter-spacing: -0.02em; }
+  .page-hero p { font-size: 18px; color: rgba(255,255,255,0.8); max-width: 580px; font-weight: 300; }
+  .breadcrumb { display: flex; align-items: center; gap: 8px; margin-bottom: 20px; font-size: 13px; color: rgba(255,255,255,0.6); }
+  .breadcrumb a { color: rgba(255,255,255,0.7); text-decoration: none; }
+  .breadcrumb a:hover { color: white; }
+  .breadcrumb span { color: rgba(255,255,255,0.4); }
+
+  /* ── BENEFITS STRIP ── */
+  .benefits-strip { background: var(--white); border-bottom: 1px solid var(--neutral200); padding: 32px 5%; }
+  .benefits-strip-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+  .benefit-item { display: flex; align-items: flex-start; gap: 12px; }
+  .benefit-icon { width: 40px; height: 40px; background: var(--g50); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .benefit-icon svg { fill: var(--g500); width: 20px; height: 20px; }
+  .benefit-item h4 { font-size: 14px; color: var(--neutral800); margin-bottom: 2px; }
+  .benefit-item p { font-size: 13px; color: var(--neutral600); line-height: 1.5; }
+
+  /* ── FORM SECTION ── */
+  .join-section { padding: 64px 5%; }
+  .join-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.8fr; gap: 56px; align-items: start; }
+  .join-info h2 { font-size: clamp(24px, 2.5vw, 34px); color: var(--neutral800); margin-bottom: 14px; }
+  .join-info p { font-size: 15px; color: var(--neutral600); margin-bottom: 24px; line-height: 1.7; }
+  .info-checklist { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .info-checklist li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--neutral700); }
+  .chk { width: 20px; height: 20px; background: var(--g500); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .chk svg { fill: white; width: 10px; height: 10px; }
+  .info-note { margin-top: 28px; background: var(--g50); border: 1px solid var(--g100); border-left: 4px solid var(--g500); border-radius: var(--radius-sm); padding: 16px 18px; }
+  .info-note strong { display: block; font-size: 13px; color: var(--g700); margin-bottom: 4px; }
+  .info-note p { font-size: 13px; color: var(--neutral600); line-height: 1.6; margin: 0; }
+
+  /* ── FORM CARD ── */
+  .form-card { background: var(--white); border-radius: var(--radius-lg); box-shadow: var(--shadow-hover); padding: 40px; border: 1px solid var(--neutral200); }
+  .form-header { margin-bottom: 28px; }
+  .form-header h3 { font-size: 22px; color: var(--neutral800); margin-bottom: 6px; }
+  .form-header p { font-size: 14px; color: var(--neutral600); }
+
+  /* PROGRESS */
+  .form-progress { display: flex; align-items: center; gap: 6px; margin-bottom: 28px; flex-wrap: wrap; overflow-x: auto; }
+  .prog-step { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: var(--neutral400); }
+  .prog-step.active { color: var(--g600); }
+  .prog-step.done { color: var(--g500); }
+  .prog-num { width: 24px; height: 24px; border-radius: 50%; background: var(--neutral200); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; }
+  .prog-step.active .prog-num { background: var(--g500); color: white; }
+  .prog-step.done .prog-num { background: var(--g100); color: var(--g600); }
+  .prog-step span { display: none; }
+  @media (min-width: 900px) { .prog-step span { display: inline; } }
+  .prog-line { height: 2px; flex: 1; min-width: 12px; background: var(--neutral200); border-radius: 1px; }
+  .prog-line.done { background: var(--g400); }
+
+  /* FORM ELEMENTS */
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .form-grid .full { grid-column: 1 / -1; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  label { font-size: 13px; font-weight: 600; color: var(--neutral700); }
+  .req { color: var(--g500); margin-left: 2px; }
+  input[type="text"], input[type="email"], input[type="tel"], input[type="number"], input[type="date"], select, textarea {
+    width: 100%; padding: 11px 14px; border: 1.5px solid var(--neutral200);
+    border-radius: var(--radius-sm); font-family: 'DM Sans', sans-serif;
+    font-size: 14px; color: var(--neutral800); background: white;
+    transition: border-color 0.2s, box-shadow 0.2s; appearance: none; -webkit-appearance: none;
+  }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--g400); box-shadow: 0 0 0 3px rgba(245,85,68,0.1); }
+  select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; cursor: pointer; }
+  textarea { min-height: 80px; resize: vertical; }
+  .form-section-label { font-size: 12px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--g600); padding-bottom: 10px; border-bottom: 1px solid var(--neutral200); margin-bottom: 4px; grid-column: 1/-1; }
+  .upload-area { border: 2px dashed var(--neutral200); border-radius: var(--radius-sm); padding: 20px; text-align: center; cursor: pointer; transition: border-color 0.2s, background 0.2s; background: white; }
+  .upload-area:hover { border-color: var(--g400); background: var(--g50); }
+  .upload-area svg { width: 26px; height: 26px; fill: var(--neutral400); margin: 0 auto 8px; display: block; }
+  .upload-area p { font-size: 13px; color: var(--neutral600); }
+  .upload-area span { font-size: 11px; color: var(--neutral400); display: block; margin-top: 2px; }
+  .check-opt { display: flex; align-items: flex-start; gap: 10px; cursor: pointer; font-size: 14px; color: var(--neutral700); }
+  .check-opt input[type="checkbox"] { appearance: none; width: 18px; height: 18px; border: 2px solid var(--neutral400); border-radius: 5px; flex-shrink: 0; margin-top: 2px; cursor: pointer; transition: all 0.15s; display: grid; place-items: center; }
+  .check-opt input[type="checkbox"]:checked { background: var(--g500); border-color: var(--g500); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='9' viewBox='0 0 11 9'%3E%3Cpath d='M1 4l3.5 3.5L10 1' stroke='white' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: center; }
+  .radio-group { display: flex; flex-wrap: wrap; gap: 12px; }
+  .radio-opt { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--neutral700); cursor: pointer; }
+  .radio-opt input[type="radio"] { appearance: none; width: 18px; height: 18px; border: 2px solid var(--neutral400); border-radius: 50%; flex-shrink: 0; cursor: pointer; display: grid; place-items: center; }
+  .radio-opt input[type="radio"]:checked { border-color: var(--g500); background: var(--g500); box-shadow: inset 0 0 0 3px white; }
+  .tc-box { border: 1px solid var(--neutral200); border-radius: var(--radius-sm); background: var(--neutral50); padding: 20px; max-height: 260px; overflow-y: auto; font-size: 13px; color: var(--neutral600); line-height: 1.8; }
+  .tc-box h4 { font-size: 14px; color: var(--neutral800); margin: 12px 0 4px; }
+  .tc-box h4:first-child { margin-top: 0; }
+  .doc-req-card { display: flex; align-items: flex-start; gap: 12px; border: 1.5px solid var(--neutral200); border-radius: var(--radius-sm); padding: 16px; margin-bottom: 12px; background: var(--neutral50); }
+  .doc-req-icon { width: 38px; height: 38px; background: var(--g100); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .doc-req-icon svg { width: 18px; height: 18px; fill: var(--g600); }
+  .doc-req-text strong { display: block; font-size: 14px; color: var(--neutral800); margin-bottom: 2px; }
+  .doc-req-text span { font-size: 13px; color: var(--neutral600); }
+
+  /* FORM FOOTER */
+  .form-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 28px; gap: 12px; flex-wrap: wrap; }
+  .btn-back { background: transparent; border: 1.5px solid var(--neutral200); padding: 12px 22px; border-radius: var(--radius-sm); font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; cursor: pointer; color: var(--neutral600); display: none; }
+  .btn-next { background: var(--g500); color: white; border: none; padding: 13px 28px; border-radius: var(--radius-sm); font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; margin-left: auto; transition: background 0.2s; }
+  .btn-next:hover { background: var(--g600); }
+  .btn-next svg { fill: white; width: 18px; height: 18px; }
+  .secure-note { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--neutral400); }
+  .secure-note svg { fill: var(--neutral400); width: 14px; height: 14px; }
+
+  /* SUCCESS */
+  .success-card { display: none; text-align: center; padding: 56px 32px; }
+  .success-card.show { display: block; }
+  .success-icon { width: 72px; height: 72px; background: var(--g50); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; border: 2px solid var(--g200); }
+  .success-icon svg { fill: var(--g500); width: 34px; height: 34px; }
+  .success-card h3 { font-size: 26px; color: var(--neutral800); margin-bottom: 10px; }
+  .success-card p { font-size: 15px; color: var(--neutral600); max-width: 400px; margin: 0 auto 28px; line-height: 1.7; }
+  .success-note { background: var(--g50); border: 1px solid var(--g100); border-radius: var(--radius-sm); padding: 16px 20px; font-size: 14px; color: var(--g700); text-align: left; max-width: 400px; margin: 0 auto; line-height: 1.8; }
+  .success-note strong { display: block; margin-bottom: 6px; }
+  .btn-reset { background: transparent; border: 1.5px solid var(--g500); color: var(--g600); padding: 10px 28px; border-radius: var(--radius-sm); font-family: 'DM Sans', sans-serif; font-weight: 600; cursor: pointer; font-size: 14px; margin-right: 12px; }
+  .btn-home { background: var(--g500); color: white; padding: 10px 28px; border-radius: var(--radius-sm); font-family: 'DM Sans', sans-serif; font-weight: 600; cursor: pointer; font-size: 14px; border: none; text-decoration: none; display: inline-block; }
+
+  @media (max-width: 960px) { .join-inner { grid-template-columns: 1fr; } }
+  @media (max-width: 640px) { .form-grid { grid-template-columns: 1fr; } .form-card { padding: 24px 18px; } }
+
+  /* ── FOOTER ── */
+  footer { background: var(--g800); padding: 48px 5% 28px; }
+  .footer-inner { max-width: 1200px; margin: 0 auto; }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; display: flex; align-items: center; justify-content: space-between; }
+  .footer-bottom p { font-size: 13px; color: rgba(255,255,255,0.4); }
+</style>
+</head>
+<body>
+
+<!-- TOP CONTACT BAR -->
+<div class="top-bar">
+  <div class="top-bar-inner">
+    <div class="top-bar-contact">
+      <a href="tel:0792333111">
+        <svg viewBox="0 0 24 24" style="width:13px;height:13px;fill:currentColor;"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+        0792 333 111
+      </a>
+      <a href="mailto:customercare@umojasacco.co.ke">
+        <svg viewBox="0 0 24 24" style="width:13px;height:13px;fill:currentColor;"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        customercare@umojasacco.co.ke
+      </a>
+    </div>
+    <div class="top-bar-socials">
+      <a href="https://www.facebook.com/UmojaSaccoLtd" target="_blank" title="Facebook"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+      <a href="https://twitter.com/umojasaccoltd" target="_blank" title="Twitter"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+      <a href="https://www.instagram.com/umoja_sacco" target="_blank" title="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7v10c0 5.25 3.75 10.15 10 11.25C18.25 27.15 22 22.25 22 17V7L12 2zm0 2.18l8 4.44V17c0 4.25-2.83 8.25-8 9.43C6.83 25.25 4 21.25 4 17V8.62l8-4.44z"/></svg></div>
+      <div><span class="nav-logo-text">Umoja Sacco</span></div>
+    </a>
+    <div class="nav-links">
+      <a href="index.html#about">About</a>
+      <div class="nav-dropdown">
+        <button class="nav-drop-btn" style="color:var(--g600);">Services <svg class="drop-arrow" viewBox="0 0 12 8"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg></button>
+        <div class="nav-drop-menu">
+          <a href="#">Visa Branded ATMs</a>
+          <a href="#">Mobile Banking</a>
+          <a href="#">Paybill</a>
+          <a href="#">Lipa Na Umoja Merchant Settlement</a>
+          <a href="#">Umoja Sacco Agents</a>
+          <a href="#">Internet Banking</a>
+          <a href="join.html">Join Us</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <button class="nav-drop-btn">Products <svg class="drop-arrow" viewBox="0 0 12 8"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg></button>
+        <div class="nav-drop-menu">
+          <a href="products.html?type=savings">Savings Products</a>
+          <a href="products.html?type=loan">Loan Products</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <button class="nav-drop-btn">Resources <svg class="drop-arrow" viewBox="0 0 12 8"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg></button>
+        <div class="nav-drop-menu">
+          <a href="#">Sacco Downloads</a>
+          <a href="#">Tenders</a>
+          <a href="#">Notices</a>
+          <a href="#">Careers</a>
+        </div>
+      </div>
+      <a href="index.html#contact">Contact Us</a>
+      <a href="join.html" class="nav-cta">Join Now</a>
+    </div>
+    <button class="nav-hamburger" id="navHamburger"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html#about">About</a>
+    <div class="mob-group">
+      <button class="mob-group-btn" onclick="this.parentElement.classList.toggle('open')">Services <span>▾</span></button>
+      <div class="mob-group-items">
+        <a href="#">Visa Branded ATMs</a>
+        <a href="#">Mobile Banking</a>
+        <a href="#">Paybill</a>
+        <a href="#">Internet Banking</a>
+        <a href="join.html">Join Us</a>
+      </div>
+    </div>
+    <div class="mob-group">
+      <button class="mob-group-btn" onclick="this.parentElement.classList.toggle('open')">Products <span>▾</span></button>
+      <div class="mob-group-items">
+        <a href="products.html?type=savings">Savings Products</a>
+        <a href="products.html?type=loan">Loan Products</a>
+      </div>
+    </div>
+    <div class="mob-group">
+      <button class="mob-group-btn" onclick="this.parentElement.classList.toggle('open')">Resources <span>▾</span></button>
+      <div class="mob-group-items">
+        <a href="#">Sacco Downloads</a><a href="#">Tenders</a><a href="#">Notices</a><a href="#">Careers</a>
+      </div>
+    </div>
+    <a href="index.html#contact">Contact Us</a>
+    <a href="join.html" class="nav-cta" style="display:inline-block;margin-top:8px;">Join Now</a>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span>›</span>
+      <span>Membership Application</span>
+    </div>
+    <h1>Join Umoja Sacco</h1>
+    <p>Become a member today and start your journey to financial freedom — savings, loans, dividends, and more.</p>
+  </div>
+</div>
+
+<!-- BENEFITS STRIP -->
+<div class="benefits-strip">
+  <div class="benefits-strip-inner">
+    <div class="benefit-item">
+      <div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg></div>
+      <div><h4>Up to 14% Dividend</h4><p>Annual dividend on your savings balance</p></div>
+    </div>
+    <div class="benefit-item">
+      <div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg></div>
+      <div><h4>Loans in 24 Hours</h4><p>Borrow up to 3× your savings balance</p></div>
+    </div>
+    <div class="benefit-item">
+      <div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg></div>
+      <div><h4>SASRA Licensed</h4><p>Regulated and trusted since 1999</p></div>
+    </div>
+    <div class="benefit-item">
+      <div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"/></svg></div>
+      <div><h4>100% Digital</h4><p>No branch visit — apply entirely online</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- MEMBERSHIP APPLICATION -->
+<section class="join-section">
+  <div class="join-inner">
+
+    <!-- LEFT INFO PANEL -->
+    <div class="join-info">
+      <h2>Why become a member?</h2>
+      <p>Umoja Sacco has helped over 350,000 Kenyans build financial security. Joining takes less than 10 minutes entirely online.</p>
+      <ul class="info-checklist">
+        <li><div class="chk"><svg viewBox="0 0 12 9"><path d="M1 4l3.5 3.5L11 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><span>Earn up to 14% annual dividend on deposits</span></li>
+        <li><div class="chk"><svg viewBox="0 0 12 9"><path d="M1 4l3.5 3.5L11 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><span>Borrow up to 3× your savings — disbursed in 24 hours</span></li>
+        <li><div class="chk"><svg viewBox="0 0 12 9"><path d="M1 4l3.5 3.5L11 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><span>Real-time account monitoring via member dashboard</span></li>
+        <li><div class="chk"><svg viewBox="0 0 12 9"><path d="M1 4l3.5 3.5L11 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><span>Life insurance coverage linked to your savings</span></li>
+        <li><div class="chk"><svg viewBox="0 0 12 9"><path d="M1 4l3.5 3.5L11 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><span>Access to 31 branches and 300+ agents nationwide</span></li>
+        <li><div class="chk"><svg viewBox="0 0 12 9"><path d="M1 4l3.5 3.5L11 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div><span>M-Pesa, mobile banking & internet banking access</span></li>
+      </ul>
+      <div class="info-note">
+        <strong>Registration Fee</strong>
+        <p>A one-time registration fee of <strong>KSh 2,000</strong> applies. You'll receive an M-Pesa STK push after your application is reviewed.</p>
+      </div>
+      <div class="info-note" style="margin-top:16px;">
+        <strong>Documents Required</strong>
+        <p>National ID or Passport · KRA PIN Certificate · Passport-size photo</p>
+      </div>
+    </div>
+
+    <!-- FORM CARD -->
+    <div class="form-card">
+      <!-- SUCCESS STATE -->
+      <div class="success-card" id="successCard">
+        <div class="success-icon"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+        <h3>Application Submitted!</h3>
+        <p>Welcome to the Umoja Sacco family! Your membership application is under review.</p>
+        <div class="success-note">
+          <strong>What happens next:</strong>
+          KYC verification in progress (24–48 hrs)<br>
+          You'll receive an M-Pesa STK push for the KSh 2,000 registration fee<br>
+          Member portal access granted on approval<br>
+          WhatsApp confirmation sent to your phone
+        </div>
+        <div style="margin-top:24px;">
+          <button class="btn-reset" onclick="resetForm()">Start New Application</button>
+          <a href="index.html" class="btn-home">Back to Home</a>
+        </div>
+      </div>
+
+      <!-- FORM -->
+      <div id="membershipForm">
+        <!-- PROGRESS -->
+        <div class="form-progress">
+          <div class="prog-step active" id="prog1"><div class="prog-num">1</div><span>Welcome</span></div>
+          <div class="prog-line" id="line1"></div>
+          <div class="prog-step" id="prog2"><div class="prog-num">2</div><span>Terms</span></div>
+          <div class="prog-line" id="line2"></div>
+          <div class="prog-step" id="prog3"><div class="prog-num">3</div><span>Documents</span></div>
+          <div class="prog-line" id="line3"></div>
+          <div class="prog-step" id="prog4"><div class="prog-num">4</div><span>Verification</span></div>
+          <div class="prog-line" id="line4"></div>
+          <div class="prog-step" id="prog5"><div class="prog-num">5</div><span>Identity</span></div>
+          <div class="prog-line" id="line5"></div>
+          <div class="prog-step" id="prog6"><div class="prog-num">6</div><span>Personal</span></div>
+          <div class="prog-line" id="line6"></div>
+          <div class="prog-step" id="prog7"><div class="prog-num">7</div><span>Next of Kin</span></div>
+          <div class="prog-line" id="line7"></div>
+          <div class="prog-step" id="prog8"><div class="prog-num">8</div><span>Confirm</span></div>
+        </div>
+
+        <div class="form-header"><h3>Membership Application Form</h3><p>All sections required. Data is securely encrypted and stored in our member system.</p></div>
+
+        <!-- STEP 1: Welcome & Product Interest -->
+        <div id="step1">
+          <div style="text-align:center;padding:8px 0 24px;">
+            <h3 style="font-size:22px;color:var(--neutral800);margin-bottom:8px;">Open Your Account</h3>
+            <p style="font-size:15px;color:var(--neutral600);">Select the product you're most interested in to personalise your application.</p>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:12px;margin-top:8px;">
+            <label style="display:flex;align-items:center;gap:14px;padding:16px 18px;border:1.5px solid var(--neutral200);border-radius:var(--radius-sm);cursor:pointer;background:var(--neutral50);transition:all 0.15s;" class="product-opt">
+              <input type="radio" name="product_interest" value="savings" style="appearance:none;width:18px;height:18px;border:2px solid var(--neutral400);border-radius:50%;display:grid;place-items:center;flex-shrink:0;cursor:pointer;"/>
+              <div style="width:38px;height:38px;background:var(--g100);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:var(--g600);"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg></div>
+              <div><strong style="font-size:15px;color:var(--neutral800);">Savings Account</strong><span style="display:block;font-size:13px;color:var(--neutral600);">Grow your money with competitive dividends</span></div>
+            </label>
+            <label style="display:flex;align-items:center;gap:14px;padding:16px 18px;border:1.5px solid var(--neutral200);border-radius:var(--radius-sm);cursor:pointer;background:var(--neutral50);transition:all 0.15s;" class="product-opt">
+              <input type="radio" name="product_interest" value="loan" style="appearance:none;width:18px;height:18px;border:2px solid var(--neutral400);border-radius:50%;display:grid;place-items:center;flex-shrink:0;cursor:pointer;"/>
+              <div style="width:38px;height:38px;background:var(--g100);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:var(--g600);"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg></div>
+              <div><strong style="font-size:15px;color:var(--neutral800);">Loan Product</strong><span style="display:block;font-size:13px;color:var(--neutral600);">Borrow up to 3× your savings, fast approval</span></div>
+            </label>
+            <label style="display:flex;align-items:center;gap:14px;padding:16px 18px;border:1.5px solid var(--neutral200);border-radius:var(--radius-sm);cursor:pointer;background:var(--neutral50);transition:all 0.15s;" class="product-opt">
+              <input type="radio" name="product_interest" value="both" style="appearance:none;width:18px;height:18px;border:2px solid var(--neutral400);border-radius:50%;display:grid;place-items:center;flex-shrink:0;cursor:pointer;"/>
+              <div style="width:38px;height:38px;background:var(--g100);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:var(--g600);"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg></div>
+              <div><strong style="font-size:15px;color:var(--neutral800);">Both Savings & Loan</strong><span style="display:block;font-size:13px;color:var(--neutral600);">Open savings and apply for a loan together</span></div>
+            </label>
+          </div>
+        </div>
+
+        <!-- STEP 2: Terms & Conditions -->
+        <div id="step2" style="display:none;">
+          <div class="form-grid">
+            <div class="form-section-label">Terms & Conditions</div>
+          </div>
+          <div class="tc-box" style="margin-bottom:20px;">
+            <h4>1. Membership</h4>
+            <p>By joining Umoja Sacco, you agree to uphold the cooperative's bylaws and contribute regularly to your savings account. Membership is open to Kenyan citizens and residents aged 18 and above.</p>
+            <h4>2. Contributions</h4>
+            <p>A minimum monthly contribution of KSh 500 is required. Failure to contribute for three consecutive months may result in account suspension pending review.</p>
+            <h4>3. Loans</h4>
+            <p>Loan eligibility is based on your savings balance and creditworthiness as assessed by the SACCO. Loans are subject to approval by the credit committee.</p>
+            <h4>4. Dividends</h4>
+            <p>Dividends are declared annually at the AGM and are based on the SACCO's financial performance. Past dividend rates do not guarantee future returns.</p>
+            <h4>5. Data Privacy</h4>
+            <p>Your personal data is processed in accordance with Kenya's Data Protection Act 2019. We will not share your data with third parties without your consent except where required by law.</p>
+            <h4>6. Account Closure</h4>
+            <p>You may withdraw from membership by giving 90 days written notice. All outstanding loans must be settled before membership is terminated.</p>
+          </div>
+          <label class="check-opt"><input type="checkbox" id="agree_terms"/><span style="font-size:14px;color:var(--neutral700);">I have read and agree to the Umoja Sacco Membership Terms & Conditions <span class="req">*</span></span></label>
+        </div>
+
+        <!-- STEP 3: Documents Checklist -->
+        <div id="step3" style="display:none;">
+          <div class="form-grid">
+            <div class="form-section-label">Document Requirements</div>
+          </div>
+          <p style="font-size:14px;color:var(--neutral600);margin-bottom:18px;">Please prepare and upload the following documents to complete your application.</p>
+          <div class="doc-req-card">
+            <div class="doc-req-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg></div>
+            <div class="doc-req-text"><strong>National ID / Passport</strong><span>Front and back of your Kenya National ID, or bio-data page of your passport.</span></div>
+          </div>
+          <div class="doc-req-card">
+            <div class="doc-req-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg></div>
+            <div class="doc-req-text"><strong>KRA PIN Certificate</strong><span>Your current Kenya Revenue Authority PIN certificate (PDF or image).</span></div>
+          </div>
+          <div class="form-grid" style="margin-top:18px;">
+            <div class="form-group">
+              <label>Upload National ID / Passport <span class="req">*</span></label>
+              <div class="upload-area"><svg viewBox="0 0 24 24"><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg><p>Click to upload or drag & drop</p><span>JPG, PNG or PDF — max 5MB</span></div>
+            </div>
+            <div class="form-group">
+              <label>Upload KRA PIN Certificate <span class="req">*</span></label>
+              <div class="upload-area"><svg viewBox="0 0 24 24"><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg><p>Click to upload or drag & drop</p><span>JPG, PNG or PDF — max 5MB</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 4: Verification -->
+        <div id="step4" style="display:none;">
+          <div class="form-grid">
+            <div class="form-section-label">Contact Verification</div>
+            <div class="form-group full">
+              <label for="v_country">Country of Residence <span class="req">*</span></label>
+              <select id="v_country"><option value="">— Select Country —</option><option selected>Kenya</option><option>Uganda</option><option>Tanzania</option><option>Rwanda</option><option>South Sudan</option><option>Other</option></select>
+            </div>
+            <div class="form-group">
+              <label for="v_email">Email Address <span class="req">*</span></label>
+              <input type="email" id="v_email" placeholder="you@example.com"/>
+            </div>
+            <div class="form-group">
+              <label for="v_phone">Phone Number <span class="req">*</span></label>
+              <input type="tel" id="v_phone" placeholder="+254 7XX XXX XXX"/>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 5: Identity -->
+        <div id="step5" style="display:none;">
+          <div class="form-grid">
+            <div class="form-section-label">Identification Document</div>
+            <div class="form-group full">
+              <label>Identification Type <span class="req">*</span></label>
+              <div class="radio-group">
+                <label class="radio-opt"><input type="radio" name="id_type" value="national_id" checked/> National ID</label>
+                <label class="radio-opt"><input type="radio" name="id_type" value="passport"/> Passport</label>
+              </div>
+            </div>
+            <div class="form-group full">
+              <label for="id_number">ID / Passport Number <span class="req">*</span></label>
+              <input type="text" id="id_number" placeholder="e.g. 12345678"/>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 6: Personal Details -->
+        <div id="step6" style="display:none;">
+          <div class="form-grid">
+            <div class="form-section-label">Personal Information</div>
+            <div class="form-group">
+              <label for="p_fname">Full Name <span class="req">*</span></label>
+              <input type="text" id="p_fname" placeholder="e.g. Amina Wanjiku Odhiambo"/>
+            </div>
+            <div class="form-group">
+              <label for="p_idno">ID Number <span class="req">*</span></label>
+              <input type="text" id="p_idno" placeholder="12345678"/>
+            </div>
+            <div class="form-group">
+              <label for="p_dob">Date of Birth <span class="req">*</span></label>
+              <input type="date" id="p_dob"/>
+            </div>
+            <div class="form-group">
+              <label>Gender <span class="req">*</span></label>
+              <div class="radio-group">
+                <label class="radio-opt"><input type="radio" name="gender" value="female"/> Female</label>
+                <label class="radio-opt"><input type="radio" name="gender" value="male"/> Male</label>
+                <label class="radio-opt"><input type="radio" name="gender" value="other"/> Prefer not to say</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="p_marital">Marital Status</label>
+              <select id="p_marital"><option value="">— Select —</option><option>Single</option><option>Married</option><option>Divorced</option><option>Widowed</option></select>
+            </div>
+            <div class="form-group">
+              <label for="p_occupation">Occupation</label>
+              <input type="text" id="p_occupation" placeholder="e.g. Teacher, Nurse, Business Owner"/>
+            </div>
+            <div class="form-section-label">Address Details</div>
+            <div class="form-group full">
+              <label for="p_addr">Address Line <span class="req">*</span></label>
+              <input type="text" id="p_addr" placeholder="e.g. House No., Street, Estate"/>
+            </div>
+            <div class="form-group">
+              <label for="p_city">City / Town <span class="req">*</span></label>
+              <input type="text" id="p_city" placeholder="e.g. Nairobi"/>
+            </div>
+            <div class="form-group">
+              <label for="p_county">County / Region <span class="req">*</span></label>
+              <input type="text" id="p_county" placeholder="e.g. Nairobi County"/>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 7: Next of Kin -->
+        <div id="step7" style="display:none;">
+          <div class="form-grid">
+            <div class="form-section-label">Next of Kin Details</div>
+            <div class="form-group">
+              <label for="k_name">Full Name <span class="req">*</span></label>
+              <input type="text" id="k_name" placeholder="e.g. John Odhiambo"/>
+            </div>
+            <div class="form-group">
+              <label for="k_relation">Relationship <span class="req">*</span></label>
+              <select id="k_relation"><option value="">— Select —</option><option>Spouse</option><option>Parent</option><option>Child</option><option>Sibling</option><option>Other</option></select>
+            </div>
+            <div class="form-group">
+              <label for="k_phone">Phone Number <span class="req">*</span></label>
+              <input type="tel" id="k_phone" placeholder="+254 7XX XXX XXX"/>
+            </div>
+            <div class="form-group">
+              <label for="k_id">ID / Passport Number <span class="req">*</span></label>
+              <input type="text" id="k_id" placeholder="12345678"/>
+            </div>
+            <div class="form-group">
+              <label for="k_email">Email Address</label>
+              <input type="email" id="k_email" placeholder="kin@example.com"/>
+            </div>
+            <div class="form-group">
+              <label for="k_dob">Date of Birth</label>
+              <input type="date" id="k_dob"/>
+            </div>
+            <div class="form-group full">
+              <label for="k_address">Physical Address</label>
+              <input type="text" id="k_address" placeholder="e.g. House No., Street, Town"/>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 8: Review & Declaration -->
+        <div id="step8" style="display:none;">
+          <div class="form-grid">
+            <div class="form-section-label">Review & Declaration</div>
+          </div>
+          <div style="background:var(--neutral50);border:1px solid var(--neutral200);border-radius:var(--radius-sm);padding:20px;margin-bottom:20px;">
+            <p style="font-size:14px;color:var(--neutral600);line-height:1.8;">By submitting this application, I confirm that:</p>
+            <ul style="font-size:14px;color:var(--neutral600);line-height:2;padding-left:20px;margin-top:8px;">
+              <li>All information provided is true, accurate, and complete to the best of my knowledge.</li>
+              <li>I authorise Umoja Sacco to verify my documents and conduct KYC as permitted by law.</li>
+              <li>I understand the minimum contribution requirements and loan eligibility criteria.</li>
+              <li>My data will be stored and processed in accordance with the Privacy Policy and Kenya's Data Protection Act 2019.</li>
+              <li>I agree to pay the one-time registration fee of KSh 2,000 upon approval.</li>
+            </ul>
+          </div>
+          <label class="check-opt" style="margin-bottom:20px;align-items:flex-start;gap:12px;">
+            <input type="checkbox" id="final_agree" style="margin-top:2px;"/>
+            <span style="font-size:14px;color:var(--neutral700);line-height:1.6;">I have read and agree to the <a href="#" style="color:var(--g600);text-decoration:underline;">Membership Terms & Conditions</a> and <a href="#" style="color:var(--g600);text-decoration:underline;">Privacy Policy</a>. <span class="req">*</span></span>
+          </label>
+          <div class="form-group">
+            <label for="m_signature">Digital Signature (Full Legal Name) <span class="req">*</span></label>
+            <input type="text" id="m_signature" placeholder="Type your full name as your digital signature" style="font-style:italic;"/>
+            <p style="font-size:12px;color:var(--neutral400);margin-top:4px;">This serves as your electronic signature for the membership agreement.</p>
+          </div>
+          <div style="background:var(--g50);border:1px solid var(--g200);border-radius:var(--radius-sm);padding:16px 18px;display:flex;gap:12px;align-items:flex-start;margin-top:20px;">
+            <svg style="fill:var(--g500);width:20px;height:20px;flex-shrink:0;margin-top:2px;" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+            <div>
+              <div style="font-size:14px;font-weight:600;color:var(--g700);margin-bottom:4px;">What happens after submission?</div>
+              <p style="font-size:13px;color:var(--g700);line-height:1.7;">Your application goes to our onboarding team. KYC is verified within 24–48 hours. On approval, you'll receive an M-Pesa STK push for the registration fee and instant access to your member portal.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- FOOTER NAVIGATION -->
+        <div class="form-footer" id="formFooter">
+          <div class="secure-note"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>256-bit encrypted & secure</div>
+          <button class="btn-back" id="btnBack" onclick="changeStep(-1)">← Back</button>
+          <button class="btn-next" id="btnNext" onclick="changeStep(1)">Next Step <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg></button>
+        </div>
+      </div><!-- end membershipForm -->
+    </div><!-- end form-card -->
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px;">
+      <div>
+        <div style="font-family:'Fraunces',serif;font-size:20px;font-weight:700;color:white;margin-bottom:10px;">Umoja Sacco</div>
+        <p style="font-size:14px;color:rgba(255,255,255,0.45);line-height:1.7;max-width:260px;">A basket for all your financial needs — empowering members across Kenya through reliable savings, loans, and digital banking.</p>
+      </div>
+      <div>
+        <h4 style="font-size:13px;font-weight:700;color:rgba(255,255,255,0.85);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:14px;">Services</h4>
+        <a href="#" style="display:block;font-size:14px;color:rgba(255,255,255,0.45);text-decoration:none;margin-bottom:8px;">Mobile Banking</a>
+        <a href="#" style="display:block;font-size:14px;color:rgba(255,255,255,0.45);text-decoration:none;margin-bottom:8px;">Paybill</a>
+        <a href="#" style="display:block;font-size:14px;color:rgba(255,255,255,0.45);text-decoration:none;margin-bottom:8px;">Sacco Agents</a>
+      </div>
+      <div>
+        <h4 style="font-size:13px;font-weight:700;color:rgba(255,255,255,0.85);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:14px;">Products</h4>
+        <a href="products.html?type=savings" style="display:block;font-size:14px;color:rgba(255,255,255,0.45);text-decoration:none;margin-bottom:8px;">Savings</a>
+        <a href="products.html?type=loan" style="display:block;font-size:14px;color:rgba(255,255,255,0.45);text-decoration:none;margin-bottom:8px;">Loans</a>
+        <a href="join.html" style="display:block;font-size:14px;color:rgba(255,255,255,0.45);text-decoration:none;margin-bottom:8px;">Join Us</a>
+      </div>
+      <div>
+        <h4 style="font-size:13px;font-weight:700;color:rgba(255,255,255,0.85);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:14px;">Contact</h4>
+        <a href="tel:+254792333111" style="display:block;font-size:14px;color:rgba(255,255,255,0.45);text-decoration:none;margin-bottom:8px;">+254 792 333 111</a>
+        <a href="mailto:customercare@umojasacco.co.ke" style="display:block;font-size:14px;color:rgba(255,255,255,0.45);text-decoration:none;margin-bottom:8px;">customercare@umojasacco.co.ke</a>
+        <a href="index.html#contact" style="display:block;font-size:14px;color:rgba(255,255,255,0.45);text-decoration:none;margin-bottom:8px;">Contact Page</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Umoja Sacco Ltd. Licensed by SASRA. All rights reserved.</p>
+      <p style="color:rgba(255,255,255,0.4);font-size:13px;">Regulated by SASRA · 31 Branches · 350,000+ Members</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Hamburger
+  document.getElementById('navHamburger').addEventListener('click', () => {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  });
+
+  // Product option hover styling
+  document.querySelectorAll('.product-opt').forEach(opt => {
+    opt.addEventListener('click', function() {
+      document.querySelectorAll('.product-opt').forEach(o => { o.style.borderColor = 'var(--neutral200)'; o.style.background = 'var(--neutral50)'; });
+      this.style.borderColor = 'var(--g400)';
+      this.style.background = 'var(--g50)';
+      const radio = this.querySelector('input[type="radio"]');
+      if (radio) { radio.checked = true; radio.style.borderColor = 'var(--g500)'; radio.style.background = 'var(--g500)'; radio.style.boxShadow = 'inset 0 0 0 3px white'; }
+    });
+  });
+
+  const TOTAL_STEPS = 8;
+  let currentStep = 1;
+
+  function changeStep(dir) {
+    if (dir === 1 && currentStep === TOTAL_STEPS) { submitForm(); return; }
+    const next = currentStep + dir;
+    if (next < 1 || next > TOTAL_STEPS) return;
+    document.getElementById('step' + currentStep).style.display = 'none';
+    document.getElementById('step' + next).style.display = 'block';
+    currentStep = next;
+    updateProgress();
+  }
+
+  function updateProgress() {
+    for (let i = 1; i <= TOTAL_STEPS; i++) {
+      const el = document.getElementById('prog' + i);
+      const num = el.querySelector('.prog-num');
+      el.classList.remove('active', 'done');
+      if (i < currentStep) { el.classList.add('done'); num.textContent = '✓'; }
+      else if (i === currentStep) { el.classList.add('active'); num.textContent = i; }
+      else { num.textContent = i; }
+    }
+    for (let i = 1; i < TOTAL_STEPS; i++) {
+      const line = document.getElementById('line' + i);
+      if (line) line.classList.toggle('done', i < currentStep);
+    }
+    const back = document.getElementById('btnBack');
+    const next = document.getElementById('btnNext');
+    back.style.display = currentStep > 1 ? 'block' : 'none';
+    if (currentStep === TOTAL_STEPS) {
+      next.innerHTML = 'Submit Application <svg viewBox="0 0 24 24" style="fill:white;width:18px;height:18px;"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>';
+    } else {
+      next.innerHTML = 'Next Step <svg viewBox="0 0 24 24" style="fill:white;width:18px;height:18px;"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>';
+    }
+  }
+
+  function submitForm() {
+    document.getElementById('membershipForm').style.display = 'none';
+    const sc = document.getElementById('successCard');
+    sc.classList.add('show');
+    sc.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function resetForm() {
+    document.getElementById('successCard').classList.remove('show');
+    document.getElementById('membershipForm').style.display = 'block';
+    currentStep = 1;
+    for (let i = 1; i <= TOTAL_STEPS; i++) {
+      document.getElementById('step' + i).style.display = i === 1 ? 'block' : 'none';
+    }
+    updateProgress();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Init
+  updateProgress();
+</script>
+</body>
+</html>
