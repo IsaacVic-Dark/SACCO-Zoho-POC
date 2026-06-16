@@ -814,8 +814,8 @@
                         <a href="#">Visa Branded ATMs</a>
                         <a href="#">Mobile Banking</a>
                         <a href="#">Paybill</a>
-                        <a href="#">Lipa Na Tower Merchant Settlement</a>
-                        <a href="#">Tower Sacco Agents</a>
+                        <a href="#">Lipa Na Redian Merchant Settlement</a>
+                        <a href="#">Redian Sacco Agents</a>
                         <a href="#">Internet Banking</a>
                         <a href="join.html">Join Us</a>
                     </div>
@@ -973,7 +973,7 @@
             <div class="products-wrap active" id="wrapSavings">
                 <div class="product-cards-grid">
 
-                    <div class="product-card" onclick="selectProduct(this,'Ordinary Savings Account','savings')">
+                    <div class="product-card" data-slug="ordinary" onclick="selectProduct(this,'Ordinary Savings Account','savings','ordinary')">
                         <div class="product-icon"><svg viewBox="0 0 24 24">
                                 <path
                                     d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z" />
@@ -985,7 +985,7 @@
                         <span class="product-tag">Most Popular</span>
                     </div>
 
-                    <div class="product-card" onclick="selectProduct(this,'Fixed Deposit Account','savings')">
+                    <div class="product-card" data-slug="fixed-deposit" onclick="selectProduct(this,'Fixed Deposit Account','savings','fixed-deposit')">
                         <div class="product-icon"><svg viewBox="0 0 24 24">
                                 <path
                                     d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z" />
@@ -997,7 +997,7 @@
                         <span class="product-tag">3 – 24 Month Terms</span>
                     </div>
 
-                    <div class="product-card" onclick="selectProduct(this,'Junior / Children\'s Savings','savings')">
+                    <div class="product-card" data-slug="junior" onclick="selectProduct(this,'Junior / Children\'s Savings','savings','junior')">
                         <div class="product-icon"><svg viewBox="0 0 24 24">
                                 <path
                                     d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" />
@@ -1009,7 +1009,7 @@
                         <span class="product-tag">For Members Under 18</span>
                     </div>
 
-                    <div class="product-card" onclick="selectProduct(this,'Group / Chama Savings','savings')">
+                    <div class="product-card" data-slug="chama" onclick="selectProduct(this,'Group / Chama Savings','savings','chama')">
                         <div class="product-icon"><svg viewBox="0 0 24 24">
                                 <path
                                     d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z" />
@@ -1021,7 +1021,7 @@
                         <span class="product-tag">Min. 5 Members</span>
                     </div>
 
-                    <div class="product-card" onclick="selectProduct(this,'Holiday / Target Savings','savings')">
+                    <div class="product-card" data-slug="holiday" onclick="selectProduct(this,'Holiday / Target Savings','savings','holiday')">
                         <div class="product-icon"><svg viewBox="0 0 24 24">
                                 <path
                                     d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z" />
@@ -1239,12 +1239,7 @@
                             </div>
 
                             <div class="form-actions">
-                                <div class="secure-note">
-                                    <svg viewBox="0 0 24 24">
-                                        <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z" />
-                                    </svg>
-                                    256-bit encrypted &amp; secure
-                                </div>
+                                <div class="secure-note"></div>
                                 <button class="btn-primary" onclick="submitSavings()">
                                     Submit Application
                                     <svg viewBox="0 0 24 24">
@@ -1262,7 +1257,7 @@
             <div class="products-wrap" id="wrapLoan">
                 <div class="product-cards-grid">
 
-                    <div class="product-card" onclick="selectProduct(this,'Normal Development Loan','loan')">
+                    <div class="product-card" data-slug="development" onclick="selectProduct(this,'Normal Development Loan','loan','development')">
                         <div class="product-icon"><svg viewBox="0 0 24 24">
                                 <path
                                     d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z" />
@@ -1274,7 +1269,7 @@
                         <span class="product-tag">Most Applied</span>
                     </div>
 
-                    <div class="product-card" onclick="selectProduct(this,'Emergency Loan','loan')">
+                    <div class="product-card" data-slug="emergency" onclick="selectProduct(this,'Emergency Loan','loan','emergency')">
                         <div class="product-icon"><svg viewBox="0 0 24 24">
                                 <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z" />
                             </svg></div>
@@ -1285,7 +1280,7 @@
                         <span class="product-tag">Fast Track</span>
                     </div>
 
-                    <div class="product-card" onclick="selectProduct(this,'School Fees Loan','loan')">
+                    <div class="product-card" data-slug="school-fees" onclick="selectProduct(this,'School Fees Loan','loan','school-fees')">
                         <div class="product-icon"><svg viewBox="0 0 24 24">
                                 <path
                                     d="M12 3L1 9l4 2.18V17c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2v-5.82L21 9l-9-6zm6 13H6v-4.18l6 3.27 6-3.27V16zm-6-4.05L4.06 9 12 4.05 19.94 9 12 11.95z" />
@@ -1297,7 +1292,7 @@
                         <span class="product-tag">Education</span>
                     </div>
 
-                    <div class="product-card" onclick="selectProduct(this,'Business Loan','loan')">
+                    <div class="product-card" data-slug="business" onclick="selectProduct(this,'Business Loan','loan','business')">
                         <div class="product-icon"><svg viewBox="0 0 24 24">
                                 <path
                                     d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z" />
@@ -1309,7 +1304,7 @@
                         <span class="product-tag">Business Growth</span>
                     </div>
 
-                    <div class="product-card" onclick="selectProduct(this,'Super Loan (Long-term)','loan')">
+                    <div class="product-card" data-slug="super" onclick="selectProduct(this,'Super Loan (Long-term)','loan','super')">
                         <div class="product-icon"><svg viewBox="0 0 24 24">
                                 <path
                                     d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z" />
@@ -1420,14 +1415,6 @@
                                     <option>M-Pesa</option>
                                     <option>Bank Standing Order</option>
                                 </select>
-                            </div>
-                            <div class="form-group">
-                                <label class="flabel">Current Savings Balance (KSh)</label>
-                                <input type="number" id="ln_savings" class="field" placeholder="e.g. 80,000" min="0" />
-                            </div>
-                            <div class="form-group">
-                                <label class="flabel">Existing Loan Balance (KSh)</label>
-                                <input type="number" id="ln_existing" class="field" placeholder="0" min="0" />
                             </div>
 
                             <div class="section-label">Employment &amp; Income</div>
@@ -1581,12 +1568,7 @@
                             </div>
 
                             <div class="form-actions">
-                                <div class="secure-note">
-                                    <svg viewBox="0 0 24 24">
-                                        <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z" />
-                                    </svg>
-                                    256-bit encrypted &amp; secure
-                                </div>
+                                <div class="secure-note"></div>
                                 <button class="btn-primary" onclick="submitLoan()">
                                     Submit Application
                                     <svg viewBox="0 0 24 24">
@@ -1720,11 +1702,27 @@
             document.getElementById('mobileMenu').classList.toggle('open');
         });
 
-        // ── URL PARAM: auto-switch to loans tab if ?type=loan ──
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get('type') === 'loan') switchType('loan');
+        function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
 
-        function switchType(type) {
+        // ── URL STATE HELPERS ──
+        // Builds and pushes/replaces a URL like ?type=loan&product=emergency&action=apply
+        function setUrl(type, slug, action, replace) {
+            const params = new URLSearchParams();
+            if (type) params.set('type', type);
+            if (slug) params.set('product', slug);
+            if (action) params.set('action', action);
+            const qs = params.toString();
+            const url = window.location.pathname + (qs ? '?' + qs : '');
+            const state = { type: type || null, product: slug || null, action: action || null };
+            if (replace) {
+                history.replaceState(state, '', url);
+            } else {
+                history.pushState(state, '', url);
+            }
+        }
+
+        function switchType(type, opts) {
+            opts = opts || {};
             ['savings', 'loan'].forEach(t => {
                 document.getElementById('wrap' + cap(t)).classList.toggle('active', t === type);
                 document.getElementById('tab' + cap(t)).classList.toggle('active', t === type);
@@ -1741,12 +1739,13 @@
             document.getElementById('savingsFormSection').classList.remove('show');
             document.getElementById('loanFormSection').classList.remove('show');
             document.querySelectorAll('.product-card').forEach(c => c.classList.remove('selected'));
+            // Reflect this in the address bar unless we're just restoring from a URL/popstate
+            if (!opts.fromUrl) setUrl(type, null, null, false);
         }
 
-        function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
-
         // ── CARD SELECT ──
-        function selectProduct(card, name, type) {
+        function selectProduct(card, name, type, slug, opts) {
+            opts = opts || {};
             card.closest('.product-cards-grid').querySelectorAll('.product-card').forEach(c => c.classList.remove('selected'));
             card.classList.add('selected');
             if (type === 'savings') {
@@ -1760,7 +1759,32 @@
                 fs.classList.add('show');
                 setTimeout(() => fs.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
             }
+            if (!opts.fromUrl) setUrl(type, slug, 'apply', false);
         }
+
+        // ── RESTORE STATE FROM URL (initial load + back/forward) ──
+        function applyStateFromUrl(replace) {
+            const params = new URLSearchParams(window.location.search);
+            const type = params.get('type') === 'loan' ? 'loan' : 'savings';
+            const slug = params.get('product');
+            const action = params.get('action');
+
+            if (params.get('type')) switchType(type, { fromUrl: true });
+
+            if (slug && action === 'apply') {
+                const card = document.querySelector('#wrap' + cap(type) + ' .product-card[data-slug="' + slug + '"]');
+                if (card) {
+                    const name = card.querySelector('h3') ? card.querySelector('h3').textContent : '';
+                    selectProduct(card, name, type, slug, { fromUrl: true });
+                }
+            }
+            // Normalize the URL in place (e.g. unknown product slug) without adding a history entry
+            if (replace) setUrl(type, (slug && action === 'apply') ? slug : null, (slug && action === 'apply') ? 'apply' : null, true);
+        }
+
+        applyStateFromUrl(false);
+
+        window.addEventListener('popstate', () => applyStateFromUrl(false));
 
         // ── FILE UPLOAD HANDLER ──
         function handleUpload(input, zoneId, nameId) {
@@ -1838,6 +1862,7 @@
             document.getElementById('savingsFormInner').style.display = '';
             document.getElementById('savingsFormSection').classList.remove('show');
             document.querySelectorAll('#wrapSavings .product-card').forEach(c => c.classList.remove('selected'));
+            setUrl('savings', null, null, true);
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -1857,6 +1882,7 @@
             document.getElementById('loanFormInner').style.display = '';
             document.getElementById('loanFormSection').classList.remove('show');
             document.querySelectorAll('#wrapLoan .product-card').forEach(c => c.classList.remove('selected'));
+            setUrl('loan', null, null, true);
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     </script>
