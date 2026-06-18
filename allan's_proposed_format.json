@@ -1,0 +1,61 @@
+/* New data proposed by Allan, reviewed by Isaac, and 
+** compared against Levi's format in the SACCO POC 
+** document. */
+
+{
+    "data": [
+        {
+            // Field (country of residence for field as referenced in SACCO POC is missing.)
+            "Product_Type": null,
+            "Product_Name": null,
+            "Terms_and_Conditions_Accepted": false,
+            "Phone": "555-555-5555",
+            "Email": "carissa-kidman@noemail.invalid",
+            "Identification_Type": null,
+            
+
+            // Next of kin details
+            "Name1": null, // assuming this is the full name of the next of kin
+            "ID_Number": null, //for next of kin
+            "Phone_1": null,
+            "Relationship": null,
+            "Address_1_City": null,
+            "City": "Sioux Falls",
+            "State": "SD",
+            "Zip_Code": "57105",
+            "Country": "United States",
+            
+            
+            // Personal Information (We are missing City and State/Region in Personal Information)
+            "First_Name": "Carissa",
+            "Last_Name": "Kidman (Sample)",
+            "Full_Name": "Carissa Kidman (Sample)",
+            "ID_No": null, //client ID number
+            "Address": "5 Boston Ave #88\nSioux Falls, SD 57105\nUnited States",
+
+
+            // Extra info not in SACCO POC Levis Format
+            "Company": "Oh My Goodknits Inc",
+            "Industry": "Data/Telecom OEM", // Not needed
+            "Contract_Signed_and_Received": false,
+            "Address_1": "",
+            "Currency": "KES",
+            "Address_1_Zip_Postal_Code": null,
+            "Street": "5 Boston Ave #88",
+            "No_of_Employees": null,
+            "Address_1_State_Province": null,
+            "Annual_Revenue": 200000,
+            "Secondary_Email": null,
+            "Payment_Received": false,
+            "Description": null,
+            "id": "7310745000000761206",            
+            "Salutation": "Ms.",
+            "Flat_House_No_Building_Apartment_Name": null,
+            "Address_1_Country_Region": null,
+            "Designation": "Director of Sales",
+            "Mobile": "555-555-5555",
+            "Record_Status__s": "Available",
+            "Address_1_Street_Address": null
+        }
+    ]
+}
