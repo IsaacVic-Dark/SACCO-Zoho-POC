@@ -7,11 +7,11 @@
         name=WebToLeads7310745000001809474 method='POST'
         onSubmit='javascript:document.charset="UTF-8"; return checkMandatory7310745000001809474()'
         accept-charset='UTF-8'> <input type='text' style='display:none;' name='xnQsjsdp'
-            value='506c7078f135012408407d5e59bae365ca96a01f2cb9c01d1fa1ecba07c781b2'> </input> <input type='hidden'
+    value='c77b47c8865016a86b652e875ff1092d7e95cf781669d3d076c5e33e306b4b76'> </input> <input type='hidden'
             name='zc_gad' id='zc_gad' value=''> </input> <input type='text' style='display:none;' name='xmIwtLD'
-            value='b486c9959d8f847a1e971c439a5cccaf7a403c170151687acb803eb04301bb09ff706467486278e81bd747926e3b55b0'>
+            value='84c36b9184f4bc2d6bd8384517954909d03f43db2eed99b14ac014f3f55e9db4a6cbce724af8dfebe1078c4e54e1f491'>
         </input> <input type='text' style='display:none;' name='actionType' value='TGVhZHM='> </input>
-        <input type='text' style='display:none;' name='returnURL' value='null'> </input>
+        <input type='text' style='display:none;' name='returnURL' value='https://cool-dango-8b8e56.netlify.app/'> </input>
         <!-- Do not remove this code. -->
         <style>
             html,
@@ -405,14 +405,14 @@
             </div>
         </div>
         <div class='zcwf_row'>
-            <div class='zcwf_col_lab' style='font-size:12px; font-family: Arial;'> <label for='LEADCF5'>Product
-                    Type</label> </div>
+            <div class='zcwf_col_lab' style='font-size:12px; font-family: Arial;'> <label for='LEADCF5'>Account Type</label> </div>
             <div class='zcwf_col_fld'> <select class='zcwf_col_fld_slt' role='combobox' aria-expanded='false'
                     aria-haspopup='listbox' id='LEADCF5' onChange='addAriaSelected7310745000001809474()'
                     aria-required='false' aria-label='LEADCF5' name='LEADCF5'>
-                    <option value='-None-'>-None-</option>
-                    <option value='Loans'>Loans</option>
-                    <option value='Savings'>Savings</option>
+<option value='-None-'>-None-</option>
+                    <option value='Loan Product'>Loan Product</option>
+                    <option value='Savings Account'>Savings Account</option>
+                    <option value='Both (Both Savings &amp; Loan)'>Both (Both Savings &amp; Loan)</option>
                 </select>
                 <div class='zcwf_col_help'> </div>
             </div>
@@ -466,8 +466,7 @@
             </div>
         </div>
         <div class='zcwf_row'>
-            <div class='zcwf_col_lab' style='font-size:12px; font-family: Arial;'> <label for='LEADCF13'>Address 1 -
-                    State / Province</label> </div>
+            <div class='zcwf_col_lab' style='font-size:12px; font-family: Arial;'> <label for='LEADCF13'>Kin Address - State / Province</label> </div>
             <div class='zcwf_col_fld'> <select class='zcwf_col_fld_slt' role='combobox' aria-expanded='false'
                     aria-haspopup='listbox' id='LEADCF13' onChange='addAriaSelected7310745000001809474()'
                     aria-required='false' aria-label='LEADCF13' name='LEADCF13'>
@@ -521,12 +520,11 @@
         <script> 							function addAriaChecked7310745000001809474() { var checkboxElem = event.target; if (checkboxElem != undefined && checkboxElem.checked) { checkboxElem.ariaChecked = 'true'; } else if (checkboxElem != undefined && !checkboxElem.checked) { checkboxElem.ariaChecked = 'false'; } } function addAriaSelected7310745000001809474() { var optionElem = event.target; var previousSelectedOption = optionElem.querySelector('[aria-selected=true]'); if (previousSelectedOption) { previousSelectedOption.removeAttribute('aria-selected'); } optionElem.querySelectorAll('option')[optionElem.selectedIndex].ariaSelected = 'true'; } function validateEmail7310745000001809474() { var form = document.forms['WebToLeads7310745000001809474']; var emailFld = form.querySelectorAll('[ftype=email]'); var i; for (i = 0; i < emailFld.length; i++) { var emailVal = emailFld[i].value; if ((emailVal.replace(/^\s+|\s+$/g, '')).length != 0) { var atpos = emailVal.indexOf('@'); var dotpos = emailVal.lastIndexOf('.'); if (atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= emailVal.length) { alert('Please enter a valid email address. '); emailFld[i].focus(); return false; } } } return true; } function checkMandatory7310745000001809474(isAjax) { var mndFileds = new Array('Last Name'); var fldLangVal = new Array('Product Name'); for (i = 0; i < mndFileds.length; i++) { var fieldObj = document.forms['WebToLeads7310745000001809474'][mndFileds[i]]; if (fieldObj) { if (((fieldObj.value).replace(/^\s+|\s+$/g, '')).length == 0) { if (fieldObj.type == 'file') { alert('Please select a file to upload.'); fieldObj.focus(); return false; } alert(fldLangVal[i] + ' cannot be empty.'); fieldObj.focus(); return false; } else if (fieldObj.nodeName == 'SELECT') { if (fieldObj.options[fieldObj.selectedIndex].value == '-None-') { alert(fldLangVal[i] + ' cannot be none.'); fieldObj.focus(); return false; } } else if (fieldObj.type == 'checkbox') { if (fieldObj.checked == false) { alert('Please accept  ' + fldLangVal[i]); fieldObj.focus(); return false; } } try { if (fieldObj.name == 'Last Name') { name = fieldObj.value; } } catch (e) { } } } if (!validateEmail7310745000001809474()) { return false; } var urlparams = new URLSearchParams(window.location.search); if (urlparams.has('service') && (urlparams.get('service') === 'smarturl')) { var webform = document.getElementById('webform7310745000001809474'); var service = urlparams.get('service'); var smarturlfield = document.createElement('input'); smarturlfield.setAttribute('type', 'hidden'); smarturlfield.setAttribute('value', service); smarturlfield.setAttribute('name', 'service'); webform.appendChild(smarturlfield); } document.querySelector('.crmWebToEntityForm .formsubmit').setAttribute('disabled', true); } function tooltipShow7310745000001809474(el) { var tooltip = el.nextElementSibling; var tooltipDisplay = tooltip.style.display; if (tooltipDisplay == 'none') { var allTooltip = document.getElementsByClassName('zcwf_tooltip_over'); for (i = 0; i < allTooltip.length; i++) { allTooltip[i].style.display = 'none'; } tooltip.style.display = 'block'; } else { tooltip.style.display = 'none'; } } 						
         </script>
         <script id='webformDependencyScript7310745000001809474'
-            src='https://crm.zohopublic.com/crm/WebFormDependencies?rid=58d2ccb2012c603804f46780fae14fab2b9bbf0c0c1014bbae6d3fe77cfcdf39%27'>
+    src='https://crm.zohopublic.com/crm/WebFormDependencies?rid=58d2ccb2012c603804f46780fae14fab2b9bbf0c0c1014bbae6d3fe77cfcdf39'>
             </script>
         <!-- Do not remove this --- Analytics Tracking code starts -->
-        <script id='
-                        wf_anal'
-            src='https://crm.zohopublic.com/crm/WebFormAnalyticsServeServlet?rid=882f5e6332fdab209dc0697bdd902d0ec09f646c21c0d6cf104088b9a9f6c6af3d29cb70fad0092862353ba6a8305a6agid13c6daa498bf017692252f9ca43b36a62790658cfca23d8504a6ec82a7a38639gid6bdaff3b6b8c760499be33bddf351b23d6e038936b2478397e02efbfdee7a96dgid526db0ef7ca2bb639454331ccb81994eb875fadee5e5418b2651e613b87d9f5c&tw=78196216ae66a5e1aa1599ff741a30df28af8847cd7bd9c5b5e884b0a2be3c6f%27'>
+        <script id='wf_anal'
+            src='https://crm.zohopublic.com/crm/WebFormAnalyticsServeServlet?rid=602285046b457efe576140c0f6aecc7245a9439c84748db96955069db530ef78e2190512f0617653b4c0945450f42118gid1cfebd34c7952e67adbf0f4083e5cca93d0ebcfd2eab2cea78f7d746227e3c0cgid49e55fc58ff6734b32e64168986679f08c931e010be842065aef62bd0bc47bb2gid8e3b21f45986b5f4ea3a58ff3c006a535508305088d12f834e3672cd559273b9&tw=bc890b0044ca9644bf5197ecc1ee8b55c99c26d74a2812131aa7757c860ba19f'>
             </script>
         <!-- Do not remove this --- Analytics Tracking code ends. -->
     </form>
