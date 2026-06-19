@@ -193,29 +193,6 @@
     }
     .apill:hover, .apill.active { border-color: var(--color-teal); background: #f0f7fa; color: var(--color-navy); }
 
-    /* Spinner overlay */
-    .spinner-overlay {
-      display: none; position: fixed; inset: 0; background: rgba(255,255,255,.88);
-      backdrop-filter: blur(6px); z-index: 9999;
-      flex-direction: column; align-items: center; justify-content: center; gap: 16px;
-    }
-    .spinner-overlay.active { display: flex; }
-    .spinner {
-      width: 48px; height: 48px; border: 4px solid var(--color-smoke);
-      border-top-color: var(--color-red); border-radius: 50%;
-      animation: spin .8s linear infinite;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    /* Debug panel */
-    .debug-toggle {
-      display: flex; align-items: center; gap: 8px; padding: 9px 14px;
-      background: #1e293b; border: none; font-family: var(--font-sans); font-size: 13px;
-      font-weight: 600; color: #94a3b8; cursor: pointer; transition: .2s;
-    }
-    .debug-toggle:hover { background: #273549; color: #e2e8f0; }
-    .debug-toggle.active { background: #0f3556; color: #7dd3fc; }
-
     /* Marquee */
     @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
     .marquee-inner { display: flex; animation: 28s linear infinite marquee; }
@@ -224,13 +201,6 @@
 </head>
 
 <body>
-
-  <!-- SPINNER OVERLAY -->
-  <div class="spinner-overlay" id="spinnerOverlay">
-    <div class="spinner"></div>
-    <div style="font-size:15px;font-weight:600;color:var(--color-muted);font-family:var(--font-sans);">Submitting your application…</div>
-    <div style="font-size:13px;color:#94a3b8;font-family:var(--font-sans);">Please wait, do not close this tab.</div>
-  </div>
 
   <!-- ── NAV ── -->
   <nav id="mainNav">
@@ -461,20 +431,6 @@
                   <a href="index.html" class="btn-primary text-sm px-5 py-2.5">Back to Home</a>
                 </div>
               </div>
-              <!-- Debug payload -->
-              <div class="mt-0">
-                <button class="debug-toggle w-full" id="successDebugToggle" onclick="toggleSuccessDebug()">
-                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M20 8h-2.81c-.45-.78-1.07-1.45-1.82-1.96L17 4.41 15.59 3l-2.17 2.17C12.96 5.06 12.49 5 12 5c-.49 0-.96.06-1.41.17L8.41 3 7 4.41l1.62 1.63C7.88 6.55 7.26 7.22 6.81 8H4v2h2.09c-.05.33-.09.66-.09 1v1H4v2h2v1c0 .34.04.67.09 1H4v2h2.81c1.04 1.79 2.97 3 5.19 3s4.15-1.21 5.19-3H20v-2h-2.09c.05-.33.09-.66.09-1v-1h2v-2h-2v-1c0-.34-.04-.67-.09-1H20V8zm-6 8h-4v-2h4v2zm0-4h-4v-2h4v2z"/></svg>
-                  View Submitted Payload
-                </button>
-                <div id="successDebugPanel" style="display:none;" class="bg-slate-900 border border-slate-800">
-                  <div class="flex items-center justify-between px-4 py-2.5 border-b border-slate-800">
-                    <span class="text-xs font-bold text-slate-400 tracking-widest uppercase">Request Payload</span>
-                    <span class="text-xs text-slate-600">Simulated backend POST</span>
-                  </div>
-                  <pre id="debugPayload" class="p-4 text-xs text-green-400 font-mono overflow-auto max-h-72 leading-relaxed">// Payload will appear here after submission</pre>
-                </div>
-              </div>
             </div>
 
             <!-- The form itself -->
@@ -489,23 +445,19 @@
                   <div class="h-full prog-fill" id="jProgressBar" style="width:12%;background:#215d72;"></div>
                 </div>
                 <!-- Step dots -->
-                <div class="flex items-center gap-1 overflow-x-auto pb-3">
-                  <div class="sdot-wrap flex items-center gap-1 active" id="jswrap1"><div class="sdot active" id="jsdot1">1</div><div class="sdot-label">Product</div></div>
-                  <div class="flex-1 h-px bg-slate-200 min-w-2" id="jline1"></div>
-                  <div class="sdot-wrap flex items-center gap-1" id="jswrap2"><div class="sdot" id="jsdot2">2</div><div class="sdot-label">Terms</div></div>
-                  <div class="flex-1 h-px bg-slate-200 min-w-2" id="jline2"></div>
-                  <div class="sdot-wrap flex items-center gap-1" id="jswrap3"><div class="sdot" id="jsdot3">3</div><div class="sdot-label">Docs</div></div>
-                  <div class="flex-1 h-px bg-slate-200 min-w-2" id="jline3"></div>
-                  <div class="sdot-wrap flex items-center gap-1" id="jswrap4"><div class="sdot" id="jsdot4">4</div><div class="sdot-label">Verify</div></div>
-                  <div class="flex-1 h-px bg-slate-200 min-w-2" id="jline4"></div>
-                  <div class="sdot-wrap flex items-center gap-1" id="jswrap5"><div class="sdot" id="jsdot5">5</div><div class="sdot-label">ID</div></div>
-                  <div class="flex-1 h-px bg-slate-200 min-w-2" id="jline5"></div>
-                  <div class="sdot-wrap flex items-center gap-1" id="jswrap6"><div class="sdot" id="jsdot6">6</div><div class="sdot-label">Personal</div></div>
-                  <div class="flex-1 h-px bg-slate-200 min-w-2" id="jline6"></div>
-                  <div class="sdot-wrap flex items-center gap-1" id="jswrap7"><div class="sdot" id="jsdot7">7</div><div class="sdot-label">Kin</div></div>
-                  <div class="flex-1 h-px bg-slate-200 min-w-2" id="jline7"></div>
-                  <div class="sdot-wrap flex items-center gap-1" id="jswrap8"><div class="sdot" id="jsdot8">8</div><div class="sdot-label">Submit</div></div>
-                </div>
+<div class="flex items-center gap-1 overflow-x-auto pb-3">
+  <div class="sdot-wrap flex items-center gap-1 active" id="jswrap1"><div class="sdot active" id="jsdot1">1</div><div class="sdot-label">Product</div></div>
+  <div class="flex-1 h-px bg-slate-200 min-w-2" id="jline1"></div>
+  <div class="sdot-wrap flex items-center gap-1" id="jswrap2"><div class="sdot" id="jsdot2">2</div><div class="sdot-label">Terms</div></div>
+  <div class="flex-1 h-px bg-slate-200 min-w-2" id="jline2"></div>
+  <div class="sdot-wrap flex items-center gap-1" id="jswrap3"><div class="sdot" id="jsdot3">3</div><div class="sdot-label">Docs</div></div>
+  <div class="flex-1 h-px bg-slate-200 min-w-2" id="jline3"></div>
+  <div class="sdot-wrap flex items-center gap-1" id="jswrap4"><div class="sdot" id="jsdot4">4</div><div class="sdot-label">Details</div></div>
+  <div class="flex-1 h-px bg-slate-200 min-w-2" id="jline4"></div>
+  <div class="sdot-wrap flex items-center gap-1" id="jswrap5"><div class="sdot" id="jsdot5">5</div><div class="sdot-label">Kin</div></div>
+  <div class="flex-1 h-px bg-slate-200 min-w-2" id="jline5"></div>
+  <div class="sdot-wrap flex items-center gap-1" id="jswrap6"><div class="sdot" id="jsdot6">6</div><div class="sdot-label">Submit</div></div>
+</div>
               </div>
 
               <div class="px-7 pb-7 pt-3 bg-white">
@@ -617,124 +569,16 @@
                   </div>
                 </div>
 
-                <!-- STEP 4: Contact verification -->
-                <div class="form-step" id="jsection4">
-                  <div class="text-xs font-bold tracking-widest uppercase mb-4 pb-3 border-b border-slate-100" style="color:#215d72;">Contact Verification</div>
-                  <div class="mb-4">
-                    <label class="flabel">Country of Residence <span class="req">*</span></label>
-                    <select class="field" id="j_country">
-                      <option value="">Select Country</option>
-                      <option selected>Kenya</option>
-                      <option>Uganda</option>
-                      <option>Tanzania</option>
-                      <option>Rwanda</option>
-                      <option>South Sudan</option>
-                      <option>Other</option>
-                    </select>
-                  </div>
-                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label class="flabel">Email Address <span class="req">*</span></label>
-                      <input type="email" class="field" id="j_email" placeholder="you@example.com" />
-                    </div>
-                    <div>
-                      <label class="flabel">Phone Number <span class="req">*</span></label>
-                      <input type="tel" class="field" id="j_phone" placeholder="+254 7XX XXX XXX" />
-                    </div>
-                  </div>
-                </div>
+<!-- STEP 4: Member Details (Zoho form) -->
+<div class="form-step" id="jsection4">
+  <div class="text-xs font-bold tracking-widest uppercase mb-4 pb-3 border-b border-slate-100" style="color:#215d72;">Member Details</div>
+  <div id="zohoFormMount">
+    <div class="text-slate-400 text-sm py-6 text-center">Loading form…</div>
+  </div>
+</div>
 
-                <!-- STEP 5: ID type -->
+                <!-- STEP 5: Next of Kin -->
                 <div class="form-step" id="jsection5">
-                  <div class="text-xs font-bold tracking-widest uppercase mb-4 pb-3 border-b border-slate-100" style="color:#215d72;">Identification Document</div>
-                  <div class="mb-4">
-                    <label class="flabel">Identification Type <span class="req">*</span></label>
-                    <div class="flex gap-3 flex-wrap">
-                      <label class="radio-opt flex-1"><input type="radio" name="j_id_type" value="national_id" checked /> National ID</label>
-                      <label class="radio-opt flex-1"><input type="radio" name="j_id_type" value="passport" /> Passport</label>
-                    </div>
-                  </div>
-                  <div>
-                    <label class="flabel">ID / Passport Number <span class="req">*</span></label>
-                    <input type="text" class="field" id="j_id_number" placeholder="e.g. 12345678" />
-                  </div>
-                </div>
-
-                <!-- STEP 6: Personal details -->
-                <div class="form-step" id="jsection6">
-                  <div class="text-xs font-bold tracking-widest uppercase mb-4 pb-3 border-b border-slate-100" style="color:#215d72;">Personal Details</div>
-                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-                    <div>
-                      <label class="flabel">Full Name <span class="req">*</span></label>
-                      <input type="text" class="field" id="j_fname" placeholder="Amina Wanjiku Odhiambo" />
-                    </div>
-                    <div>
-                      <label class="flabel">ID Number <span class="req">*</span></label>
-                      <input type="text" class="field" id="j_idno" placeholder="12345678" />
-                    </div>
-                    <div>
-                      <label class="flabel">Date of Birth <span class="req">*</span></label>
-                      <input type="date" class="field" id="j_dob" />
-                    </div>
-                    <div>
-                      <label class="flabel">Gender <span class="req">*</span></label>
-                      <select class="field" id="j_gender">
-                        <option value="">Select</option>
-                        <option>Female</option>
-                        <option>Male</option>
-                        <option>Prefer not to say</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label class="flabel">Marital Status</label>
-                      <select class="field" id="j_marital">
-                        <option value="">Select</option>
-                        <option>Single</option>
-                        <option>Married</option>
-                        <option>Divorced</option>
-                        <option>Widowed</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label class="flabel">Occupation</label>
-                      <input type="text" class="field" id="j_occupation" placeholder="e.g. Teacher, Nurse" />
-                    </div>
-                  </div>
-                  <div class="pt-4 border-t border-slate-100">
-                    <div class="text-xs font-bold tracking-widest uppercase mb-4" style="color:#215d72;">Address Details</div>
-                    <div class="mb-4">
-                      <label class="flabel">Address Line <span class="req">*</span></label>
-                      <input type="text" class="field" id="j_addr" placeholder="House No., Street, Estate" />
-                    </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div>
-                        <label class="flabel">City / Town <span class="req">*</span></label>
-                        <input type="text" class="field" id="j_city" placeholder="Nairobi" />
-                      </div>
-                      <div>
-                        <label class="flabel">Postal Code</label>
-                        <input type="text" class="field" id="j_zip" placeholder="00100" />
-                      </div>
-                      <div>
-                        <label class="flabel">County <span class="req">*</span></label>
-                        <input type="text" class="field" id="j_county" placeholder="Nairobi County" />
-                      </div>
-                      <div>
-                        <label class="flabel">Country</label>
-                        <select class="field" id="j_addr_country">
-                          <option selected>Kenya</option>
-                          <option>Uganda</option>
-                          <option>Tanzania</option>
-                          <option>Rwanda</option>
-                          <option>Other</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- STEP 7: Next of Kin -->
-                <div class="form-step" id="jsection7">
                   <div class="text-xs font-bold tracking-widest uppercase mb-4 pb-3 border-b border-slate-100" style="color:#215d72;">Next of Kin</div>
                   <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                     <div>
@@ -775,8 +619,8 @@
                   </div>
                 </div>
 
-                <!-- STEP 8: Review & Declaration -->
-                <div class="form-step" id="jsection8">
+                <!-- STEP 6: Review & Declaration -->
+                <div class="form-step" id="jsection6">
                   <div class="text-xs font-bold tracking-widest uppercase mb-4 pb-3 border-b border-slate-100" style="color:#215d72;">Review & Declaration</div>
                   <div class="p-5 mb-5 bg-slate-50 border border-slate-100">
                     <p class="text-sm text-slate-600 leading-relaxed mb-3">By submitting this form, I confirm that:</p>
@@ -813,8 +657,6 @@
                     Back
                   </button>
                   <div class="flex items-center gap-2 text-xs text-slate-400 ml-0">
-                    <svg class="w-3.5 h-3.5 fill-slate-300" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
-                    256-bit encrypted
                   </div>
                   <button type="button" id="jNextBtn" onclick="jChangeStep(1)" class="btn-primary ml-auto">
                     Next Step
@@ -946,22 +788,20 @@
     });
 
     // ── FORM STEPPER ──
-    const J_TOTAL = 8;
+    const J_TOTAL = 6;
     let jCurrent = 1;
 
-    const jStepsInfo = [
-      'Step 1 of 8: Select Product',
-      'Step 2 of 8: Terms & Conditions',
-      'Step 3 of 8: Upload Documents',
-      'Step 4 of 8: Contact Verification',
-      'Step 5 of 8: Identification',
-      'Step 6 of 8: Personal Details',
-      'Step 7 of 8: Next of Kin',
-      'Step 8 of 8: Review & Submit'
-    ];
+const jStepsInfo = [
+  'Step 1 of 6: Select Product',
+  'Step 2 of 6: Terms & Conditions',
+  'Step 3 of 6: Upload Documents',
+  'Step 4 of 6: Member Details',
+  'Step 5 of 6: Next of Kin',
+  'Step 6 of 6: Review & Submit'
+];
 
     function jChangeStep(dir) {
-      if (dir === 1 && jCurrent === J_TOTAL) { jSubmit(); return; }
+      if (dir === 1 && jCurrent === J_TOTAL) { return; } // Zoho form submits itself
       const next = jCurrent + dir;
       if (next < 1 || next > J_TOTAL) return;
 
@@ -1013,112 +853,13 @@
       const nextBtn = document.getElementById('jNextBtn');
       prevBtn.style.display = jCurrent > 1 ? 'flex' : 'none';
 
-      if (jCurrent === J_TOTAL) {
-        nextBtn.innerHTML = 'Submit Application <svg class="w-4 h-4 fill-white" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>';
-        nextBtn.style.background = '#16a34a';
-      } else {
-        nextBtn.innerHTML = 'Next Step <svg class="w-4 h-4 fill-white" viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>';
-        nextBtn.style.background = '';
-      }
-    }
-
-    // ── COLLECT FORM DATA ──
-    function jCollectData() {
-      const data = {
-        _form: 'membership_application',
-        _submittedAt: new Date().toISOString(),
-        _endpoint: '/api/v1/members/apply'
-      };
-
-      // Text/select/radio/checkbox fields
-      document.getElementById('joinForm').querySelectorAll('input:not([type=file]), select, textarea').forEach(el => {
-        if (!el.id && !el.name) return;
-        const key = el.id || el.name;
-        if (el.type === 'radio') { if (el.checked) data[key] = el.value; }
-        else if (el.type === 'checkbox') { data[key] = el.checked; }
-        else { data[key] = el.value; }
-      });
-
-      // File fields — record name/size/type metadata (can't JSON.stringify File objects)
-      ['doc_id_passport', 'doc_kra_pin'].forEach(id => {
-        const input = document.getElementById(id);
-        if (input && input.files[0]) {
-          const f = input.files[0];
-          data[id] = { fileName: f.name, fileSize: f.size, fileType: f.type };
-        } else {
-          data[id] = null;
-        }
-      });
-
-      return data;
-    }
-
-    // ── SIMULATE BACKEND SUBMISSION ──
-    async function jSubmit() {
-      const payload = jCollectData();
-
-      // Build a realistic multipart FormData (files included)
-      const formData = new FormData();
-      Object.entries(payload).forEach(([k, v]) => {
-        if (typeof v === 'object' && v !== null && !(v instanceof File)) {
-          formData.append(k, JSON.stringify(v));
-        } else {
-          formData.append(k, v ?? '');
-        }
-      });
-
-      // Attach actual file objects
-      ['doc_id_passport', 'doc_kra_pin'].forEach(id => {
-        const input = document.getElementById(id);
-        if (input && input.files[0]) formData.append(id + '_file', input.files[0], input.files[0].name);
-      });
-
-      // Show spinner
-      document.getElementById('spinnerOverlay').classList.add('active');
-
-      try {
-        // Simulated POST — uses jsonplaceholder as a real HTTP round-trip
-        await fetch('https://jsonplaceholder.typicode.com/posts', {
-          method: 'POST',
-          body: formData
-        });
-        // Artificial delay so loading feels real
-        await new Promise(r => setTimeout(r, 1400));
-      } catch (e) {
-        console.error('Submission error:', e);
-      }
-
-      document.getElementById('spinnerOverlay').classList.remove('active');
-
-      // Show success
-      document.getElementById('joinForm').style.display = 'none';
-      const succ = document.getElementById('joinSuccess');
-      succ.classList.remove('hidden');
-      succ.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-      // Populate debug payload
-      document.getElementById('debugPayload').textContent = JSON.stringify({
-        request: {
-          method: 'POST',
-          url: '/api/v1/members/apply',
-          headers: { 'Content-Type': 'multipart/form-data', 'X-Requested-With': 'XMLHttpRequest' }
-        },
-        payload: payload,
-        files: ['doc_id_passport', 'doc_kra_pin'].map(id => {
-          const input = document.getElementById(id);
-          const f = input && input.files[0];
-          return f ? { field: id, fileName: f.name, fileSize: f.size, fileType: f.type } : { field: id, fileName: null };
-        }),
-        response: { status: 201, body: { success: true, applicationId: 'RD-APP-' + Date.now(), message: 'Application received. KYC verification will be completed within 48 hours.' } }
-      }, null, 2);
-    }
-
-    function toggleSuccessDebug() {
-      const panel = document.getElementById('successDebugPanel');
-      const btn = document.getElementById('successDebugToggle');
-      const visible = panel.style.display !== 'none';
-      panel.style.display = visible ? 'none' : 'block';
-      btn.classList.toggle('active', !visible);
+if (jCurrent === J_TOTAL) {
+  nextBtn.style.display = 'none'; // Zoho form has its own submit button on this step
+} else {
+  nextBtn.style.display = '';
+  nextBtn.innerHTML = 'Next Step <svg class="w-4 h-4 fill-white" viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>';
+  nextBtn.style.background = '';
+}
     }
 
     function resetJoinForm() {
@@ -1157,6 +898,24 @@
 
     // Init
     jUpdateProgress();
+
+    // ── Load Zoho form component ──
+fetch('zoho-form.html')
+  .then(r => r.text())
+  .then(html => {
+    document.getElementById('zohoFormMount').innerHTML = html;
+    // Re-run any Zoho dependency scripts that were inserted as HTML strings
+    document.getElementById('zohoFormMount').querySelectorAll('script').forEach(oldScript => {
+      const s = document.createElement('script');
+      if (oldScript.src) { s.src = oldScript.src; s.async = true; }
+      else { s.textContent = oldScript.textContent; }
+      oldScript.parentNode.replaceChild(s, oldScript);
+    });
+  })
+  .catch(() => {
+    document.getElementById('zohoFormMount').innerHTML =
+      '<p class="text-sm text-red-500 py-4">Could not load the form. Please refresh or try again.</p>';
+  });
   </script>
 
 </body>
