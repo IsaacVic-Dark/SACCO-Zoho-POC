@@ -1,1241 +1,730 @@
-<!-- Note :
-   - You can modify the font style and form style to suit your website. 
-   - Code lines with comments Do not remove this code are required for the form to work properly, make sure that you do not remove these lines of code. 
-   - The Mandatory check script can modified as to suit your business needs. 
-   - It is important that you test the modified form before going live.-->
-<div id='crmWebToEntityForm' class='zcwf_lblLeft crmWebToEntityForm'
-    style='background-color: white;color: black;max-width: 600px;'>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <META HTTP-EQUIV='content-type' CONTENT='text/html;charset=UTF-8'>
-    <form id='webform7310745000001849088' action='https://crm.zoho.com/crm/WebForm' name=WebForm7310745000001849088
-        method='POST' onSubmit='javascript:document.charset="UTF-8"; return checkMandatory7310745000001849088()'
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Redian Sacco | Savings Application</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+
+  <style>
+    :root {
+      --color-red: #f14e3f;
+      --color-red-dk: #c8311f;
+      --color-teal: #215d72;
+      --color-navy: #024460;
+      --color-offwhite: #f7f8fa;
+      --color-smoke: #eef0f3;
+      --color-border: #dde1e6;
+      --color-muted: #64748b;
+      --color-dark: #0e1a24;
+      --font-display: "DM Serif Display", Georgia, serif;
+      --font-sans: "Inter", system-ui, sans-serif;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      background: #fff;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      color: var(--color-dark);
+      font-size: 14px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: var(--font-display);
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* ---- layout shell ---- */
+    .zwiz-wrap {
+      padding: 0;
+    }
+
+    /* ---- progress header ---- */
+    .zwiz-progress {
+      margin-bottom: 28px;
+    }
+
+    .zwiz-progress-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    #zStepLabel {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--color-muted);
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    #zStepPct {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--color-teal);
+    }
+
+    .zwiz-bar-track {
+      height: 6px;
+      background: var(--color-smoke);
+      overflow: hidden;
+    }
+
+    .zwiz-bar-fill {
+      height: 100%;
+      background: var(--color-teal);
+      transition: width .4s cubic-bezier(.4, 0, .2, 1);
+    }
+
+    .zwiz-dots {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 16px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+
+    .sdot-wrap {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+
+    .sdot {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #e2e8f0;
+      color: #94a3b8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      flex-shrink: 0;
+      transition: .3s;
+    }
+
+    .sdot.active {
+      background: var(--color-teal);
+      color: #fff;
+      box-shadow: 0 0 0 3px rgba(33, 93, 114, .2);
+    }
+
+    .sdot.done {
+      background: #16a34a;
+      color: #fff;
+    }
+
+    .sdot-label {
+      font-size: 10px;
+      font-weight: 600;
+      color: #94a3b8;
+      white-space: nowrap;
+    }
+
+    .sdot-wrap.active .sdot-label {
+      color: var(--color-teal);
+    }
+
+    .sdot-wrap.done .sdot-label {
+      color: #16a34a;
+    }
+
+    .zwiz-line {
+      flex: 1;
+      height: 1px;
+      background: #e2e8f0;
+      min-width: 8px;
+    }
+
+    /* ---- steps ---- */
+    .form-step {
+      display: none;
+      animation: stepIn .3s;
+    }
+
+    .form-step.active {
+      display: block;
+    }
+
+    @keyframes stepIn {
+      from {
+        opacity: 0;
+        transform: translateX(12px);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    .zwiz-section-title {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      color: var(--color-teal);
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--color-smoke);
+    }
+
+    .zwiz-section-hint {
+      font-size: 13px;
+      color: var(--color-muted);
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    /* ---- fields ---- */
+    .flabel {
+      font-size: 12px;
+      font-weight: 600;
+      color: #475569;
+      margin-bottom: 5px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      display: block;
+    }
+
+    .req {
+      color: var(--color-red);
+    }
+
+    .field {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1.5px solid var(--color-border);
+      background: #fff;
+      color: var(--color-dark);
+      font-family: var(--font-sans);
+      font-size: 14px;
+      outline: 0;
+      transition: border-color .2s, box-shadow .2s;
+    }
+
+    .field:focus {
+      border-color: var(--color-teal);
+      box-shadow: 0 0 0 3px rgba(33, 93, 114, .1);
+    }
+
+    select.field {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2394a3b8' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 36px;
+      appearance: none;
+      cursor: pointer;
+    }
+
+    textarea.field {
+      resize: vertical;
+      min-height: 88px;
+      font-family: var(--font-sans);
+    }
+
+    .zgrid2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .zfull {
+      margin-bottom: 16px;
+    }
+
+    @media (max-width: 560px) {
+      .zgrid2 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ---- radio / checkbox options ---- */
+    .radio-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .radio-opt {
+      padding: 11px 14px;
+      border: 1.5px solid var(--color-border);
+      font-size: 14px;
+      color: #475569;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      font-weight: 500;
+      background: #fff;
+      transition: .15s;
+    }
+
+    .radio-opt input[type=radio] {
+      appearance: none;
+      width: 17px;
+      height: 17px;
+      border: 2px solid #cbd5e1;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      cursor: pointer;
+      transition: .15s;
+    }
+
+    .radio-opt input[type=radio]:checked {
+      border-color: var(--color-teal);
+      background: var(--color-teal);
+      box-shadow: inset 0 0 0 3px #fff;
+    }
+
+    .radio-opt:has(input:checked) {
+      border-color: var(--color-teal);
+      background: #f0f7fa;
+      color: var(--color-navy);
+    }
+
+    .chk-opt {
+      font-size: 14px;
+      color: #475569;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      cursor: pointer;
+    }
+
+    .chk-opt input[type=checkbox] {
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      min-width: 18px;
+      border: 2px solid #cbd5e1;
+      margin-top: 1px;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: .15s;
+    }
+
+    .chk-opt input[type=checkbox]:checked {
+      background: var(--color-teal);
+      border-color: var(--color-teal);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='9' viewBox='0 0 11 9'%3E%3Cpath d='M1 4l3.5 3.5L10 1' stroke='white' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    /* ---- buttons / nav ---- */
+    .zwiz-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 28px;
+      padding-top: 20px;
+      border-top: 1px solid var(--color-smoke);
+    }
+
+    .btn-primary {
+      background: var(--color-red);
+      color: #fff;
+      border: none;
+      padding: 13px 28px;
+      font-family: var(--font-sans);
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background .2s, transform .15s;
+      margin-left: auto;
+    }
+
+    .btn-primary:hover {
+      background: var(--color-red-dk);
+      transform: translateY(-1px);
+    }
+
+    .btn-primary:disabled {
+      opacity: .6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--color-navy);
+      border: 1.5px solid var(--color-navy);
+      padding: 12px 26px;
+      font-size: 15px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-sans);
+      font-weight: 600;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .btn-outline:hover {
+      background: var(--color-navy);
+      color: #fff;
+    }
+
+    .zicon {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="zwiz-wrap">
+
+    <!-- Note:
+       - Code lines with comments "Do not remove this code" are required for the form to work properly with Zoho CRM.
+       - The Mandatory check script can be modified to suit business needs.
+       - Test the modified form before going live. -->
+    <div id='crmWebToEntityForm' class='crmWebToEntityForm'>
+      <form id='webform7310745000001849088' action='https://crm.zoho.com/crm/WebForm'
+        name='WebForm7310745000001849088' method='POST'
+        onSubmit='javascript:document.charset="UTF-8"; return checkMandatory7310745000001849088()'
         accept-charset='UTF-8'>
         <input type='text' style='display:none;' name='xnQsjsdp'
-            value='2a6b2ed6403203ecf1d596b8bdcca6d48c8939b37bbbfe36132e974ef5822b40'>
-        </input>
-        <input type='hidden' name='zc_gad' id='zc_gad' value=''>
-        </input>
+          value='16c57ab5a53d04dc88b56fd36e25b6f8579577a59f9f855cadaf75ba86689af5'></input>
+        <input type='hidden' name='zc_gad' id='zc_gad' value=''></input>
         <input type='text' style='display:none;' name='xmIwtLD'
-            value='7a6cd5b5d936adc4fbea44696c34aa9e174aea18f94a49d04556ed057c5ea6b819b1cce5a7b215a7e17d6c6c638bce34'>
-        </input>
-        <input type='text' style='display:none;' name='actionType' value='Q3VzdG9tTW9kdWxlOA=='>
-        </input>
+          value='6a6ee2563245cc66bb8dc0885d5acc2a9bde4b9154b8b7ac64dbaeee68413ba132be6c03112ed5a77e8596af56c4952e'></input>
+        <input type='text' style='display:none;' name='actionType' value='Q3VzdG9tTW9kdWxlOA=='></input>
         <input type='text' style='display:none;' name='returnURL'
-            value='https://cool-dango-8b8e56.netlify.app/products?type=savings'>
-        </input>
+          value='https://cool-dango-8b8e56.netlify.app/'></input>
         <!-- Do not remove this code. -->
-        <style>
-            html,
-            body {
-                margin: 0px;
-            }
 
-            .formsubmit.zcwf_button {
-                color: white !important;
-                background: transparent linear-gradient(0deg, #0279FF 0%, #00A3F3 100%);
-            }
-
-            #crmWebToEntityForm.zcwf_lblLeft {
-                width: 100%;
-                padding: 25px;
-                margin: 0 auto;
-                box-sizing: border-box;
-            }
-
-            #crmWebToEntityForm.zcwf_lblLeft * {
-                box-sizing: border-box;
-            }
-
-            #crmWebToEntityForm {
-                text-align: left;
-            }
-
-            #crmWebToEntityForm * {
-                direction: ltr;
-            }
-
-            .zcwf_lblLeft .zcwf_title {
-                word-wrap: break-word;
-                padding: 0px 6px 10px;
-                font-weight: bold
-            }
-
-            .zcwf_lblLeft.cpT_primaryBtn:hover {
-                background: linear-gradient(#02acff 0, #006be4 100%)no-repeat padding-box !important;
-                box-shadow: 0 -2px 0 0 #0159b9 inset !important;
-                border: 0 !important;
-                color: #fff !important;
-                outline: 0 !important;
-            }
-
-            .zcwf_lblLeft .zcwf_col_fld input[ type=text],
-            input[ type=password],
-            .zcwf_lblLeft .zcwf_col_fld textarea {
-                width: 60%;
-                border: 1px solid #c0c6cc !important;
-                resize: vertical;
-                border-radius: 2px;
-                float: left;
-            }
-
-            .zcwf_lblLeft .zcwf_col_lab {
-                width: 30%;
-                word-break: break-word;
-                padding: 0px 6px 0px;
-                margin-right: 10px;
-                margin-top: 5px;
-                float: left;
-                min-height: 1px;
-            }
-
-            .zcwf_lblLeft .zcwf_col_fld {
-                float: left;
-                width: 68%;
-                padding: 0px 6px 0px;
-                position: relative;
-                margin-top: 5px;
-            }
-
-            .zcwf_lblLeft .zcwf_privacy {
-                padding: 6px;
-            }
-
-            .zcwf_lblLeft .wfrm_fld_dpNn {
-                display: none;
-            }
-
-            .dIB {
-                display: inline-block;
-            }
-
-            .zcwf_lblLeft .zcwf_col_fld_slt {
-                width: 60%;
-                border: 1px solid #ccc;
-                background: #fff;
-                border-radius: 4px;
-                font-size: 12px;
-                float: left;
-                resize: vertical;
-                padding: 2px 5px;
-            }
-
-            .zcwf_lblLeft .zcwf_row:after,
-            .zcwf_lblLeft .zcwf_col_fld:after {
-                content: '';
-                display: table;
-                clear: both;
-            }
-
-            .zcwf_lblLeft .zcwf_col_help {
-                float: left;
-                margin-left: 7px;
-                font-size: 12px;
-                max-width: 35%;
-                word-break: break-word;
-            }
-
-            .zcwf_lblLeft .zcwf_help_icon {
-                cursor: pointer;
-                width: 16px;
-                height: 16px;
-                display: inline-block;
-                background: #fff;
-                border: 1px solid #c0c6cc;
-                color: #c1c1c1;
-                text-align: center;
-                font-size: 11px;
-                line-height: 16px;
-                font-weight: bold;
-                border-radius: 50%;
-            }
-
-            .zcwf_lblLeft .zcwf_row {
-                margin: 15px 0px;
-            }
-
-            .zcwf_lblLeft .formsubmit {
-                margin-right: 5px;
-                cursor: pointer;
-                color: #313949;
-                font-size: 12px;
-            }
-
-            .zcwf_lblLeft .zcwf_privacy_txt {
-                width: 90%;
-                color: rgb(0, 0, 0);
-                font-size: 12px;
-                font-family: Arial;
-                display: inline-block;
-                vertical-align: top;
-                color: #313949;
-                padding-top: 2px;
-                margin-left: 6px;
-            }
-
-            .zcwf_lblLeft .zcwf_button {
-                font-size: 12px;
-                color: #313949;
-                border: 1px solid #c0c6cc;
-                padding: 3px 9px;
-                border-radius: 4px;
-                cursor: pointer;
-                max-width: 120px;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-            }
-
-            .zcwf_lblLeft .zcwf_tooltip_over {
-                position: relative;
-            }
-
-            .zcwf_lblLeft .zcwf_tooltip_ctn {
-                position: absolute;
-                background: #dedede;
-                padding: 3px 6px;
-                top: 3px;
-                border-radius: 4px;
-                word-break: break-word;
-                min-width: 100px;
-                max-width: 150px;
-                color: #313949;
-                z-index: 100;
-            }
-
-            .zcwf_lblLeft .zcwf_ckbox {
-                float: left;
-            }
-
-            .zcwf_lblLeft .zcwf_file {
-                width: 55%;
-                box-sizing: border-box;
-                float: left;
-            }
-
-            .cBoth:after {
-                content: '';
-                display: block;
-                clear: both;
-            }
-
-            @media all and (max-width: 600px) {
-
-                .zcwf_lblLeft .zcwf_col_lab,
-                .zcwf_lblLeft .zcwf_col_fld {
-                    width: auto;
-                    float: none !important;
-                }
-
-                .zcwf_lblLeft .zcwf_col_help {
-                    width: 40%;
-                }
-            }
-        </style>
-        <div class='zcwf_title' style='max-width: 600px;color: black; font-family:Arial;'>Savings</div>
-        <div class='zcwf_row'>
-            <div class='zcwf_col_lab' style='font-size:12px; font-family: Arial;'>
-                <label for='NAME'>Member Number
-                    <span style='color:red;'>*</span>
-                </label>
+        <!-- Progress -->
+        <div class="zwiz-progress">
+          <div class="zwiz-progress-top">
+            <span id="zStepLabel">Step 1 of 4: Account Information</span>
+            <span id="zStepPct">25%</span>
+          </div>
+          <div class="zwiz-bar-track">
+            <div class="zwiz-bar-fill" id="zProgressBar" style="width:25%;"></div>
+          </div>
+          <div class="zwiz-dots">
+            <div class="sdot-wrap active" id="zswrap1">
+              <div class="sdot active" id="zsdot1">1</div>
+              <div class="sdot-label">Account</div>
             </div>
-            <div class='zcwf_col_fld'>
-                <input type='text' id='NAME' aria-required='true' aria-label='NAME' name='NAME' aria-valuemax='120'
-                    maxlength='120'>
-                </input>
-                <div class='zcwf_col_help'>
-                </div>
+            <div class="zwiz-line" id="zline1"></div>
+            <div class="sdot-wrap" id="zswrap2">
+              <div class="sdot" id="zsdot2">2</div>
+              <div class="sdot-label">Fees</div>
             </div>
+            <div class="zwiz-line" id="zline2"></div>
+            <div class="sdot-wrap" id="zswrap3">
+              <div class="sdot" id="zsdot3">3</div>
+              <div class="sdot-label">Contributions</div>
+            </div>
+            <div class="zwiz-line" id="zline3"></div>
+            <div class="sdot-wrap" id="zswrap4">
+              <div class="sdot" id="zsdot4">4</div>
+              <div class="sdot-label">Status</div>
+            </div>
+          </div>
         </div>
-        <div class='zcwf_row'>
-            <div class='zcwf_col_lab' style='font-size:12px; font-family: Arial;'>
-                <label for='COBJ8CF9'>Member Category</label>
+
+        <!-- STEP 1: Account Information -->
+        <div class="form-step active" id="zsection1">
+          <div class="zwiz-section-title">Account Information</div>
+          <div class="zgrid2">
+            <div>
+              <label class="flabel" for="NAME">Member Number <span class="req">*</span></label>
+              <input type="text" class="field" id="NAME" aria-required="true" aria-label="NAME" name="NAME"
+                maxlength="120" placeholder="RD-002345">
             </div>
-            <div class='zcwf_col_fld'>
-                <select class='zcwf_col_fld_slt' role='combobox' aria-expanded='false' aria-haspopup='listbox'
-                    id='COBJ8CF9' onChange='addAriaSelected7310745000001849088()' aria-required='false'
-                    aria-label='COBJ8CF9' name='COBJ8CF9'>
-                    <option value='-None-'>-None-</option>
-                    <option value='Individual'>Individual</option>
-                    <option value='Group'>Group</option>
-                    <option value='Corporate'>Corporate</option>
-                </select>
-                <div class='zcwf_col_help'>
-                </div>
+            <div>
+              <label class="flabel" for="COBJ8CF9">Member Category</label>
+              <select class="field" id="COBJ8CF9" onChange="addAriaSelected7310745000001849088()"
+                aria-label="COBJ8CF9" name="COBJ8CF9">
+                <option value="-None-">Select Member Category</option>
+                <option value="Individual">Individual</option>
+                <option value="Group">Group</option>
+                <option value="Corporate">Corporate</option>
+              </select>
             </div>
+            <div>
+              <label class="flabel" for="COBJ8CF4">Prime Account No</label>
+              <input type="text" class="field" id="COBJ8CF4" aria-label="COBJ8CF4" name="COBJ8CF4" maxlength="255"
+                placeholder="PRM-00123">
+            </div>
+            <div>
+              <label class="flabel" for="COBJ8CF5">Alpha Account No</label>
+              <input type="text" class="field" id="COBJ8CF5" aria-label="COBJ8CF5" name="COBJ8CF5" maxlength="255"
+                placeholder="ALP-00123">
+            </div>
+          </div>
+          <div class="zfull">
+            <label class="flabel" for="COBJ8CF6">Share Capital Account</label>
+            <input type="text" class="field" id="COBJ8CF6" aria-label="COBJ8CF6" name="COBJ8CF6" maxlength="255"
+              placeholder="SC-00123">
+          </div>
         </div>
-        <div class='zcwf_row'>
-            <div class='zcwf_col_lab' style='font-size:12px; font-family: Arial;'>
-                <label for='COBJ8CF68'>Share Capital Fee</label>
+
+        <!-- STEP 2: Fees & Payment Status -->
+        <div class="form-step" id="zsection2">
+          <div class="zwiz-section-title">Fees &amp; Payment Status</div>
+          <div class="zgrid2">
+            <div>
+              <label class="flabel" for="COBJ8CF68">Share Capital Fee (KSh)</label>
+              <input type="number" class="field" id="COBJ8CF68" aria-label="COBJ8CF68" name="COBJ8CF68"
+                maxlength="16" placeholder="5000">
             </div>
-            <div class='zcwf_col_fld'>
-                <input type='text' id='COBJ8CF68' aria-required='false' aria-label='COBJ8CF68' name='COBJ8CF68'
-                    aria-valuemax='16' maxlength='16'>
-                </input>
-                <div class='zcwf_col_help'>
-                </div>
+            <div>
+              <label class="flabel" for="COBJ8CF10">Payment Status</label>
+              <select class="field" id="COBJ8CF10" onChange="addAriaSelected7310745000001849088()"
+                aria-label="COBJ8CF10" name="COBJ8CF10">
+                <option value="-None-">Select Payment Status</option>
+                <option value="Paid">Paid</option>
+                <option value="Unpaid">Unpaid</option>
+                <option value="Pending">Pending</option>
+              </select>
             </div>
+          </div>
         </div>
-        <div class='zcwf_row'>
-            <div class='zcwf_col_lab' style='font-size:12px; font-family: Arial;'>
-                <label for='COBJ8CF4'>Prime Account No</label>
+
+        <!-- STEP 3: Contributions -->
+        <div class="form-step" id="zsection3">
+          <div class="zwiz-section-title">Contribution Details</div>
+          <div class="zgrid2">
+            <div>
+              <label class="flabel" for="COBJ8CF69">Initial Deposit Amount (KSh)</label>
+              <input type="number" class="field" id="COBJ8CF69" aria-label="COBJ8CF69" name="COBJ8CF69"
+                maxlength="16" placeholder="1000">
             </div>
-            <div class='zcwf_col_fld'>
-                <input type='text' id='COBJ8CF4' aria-required='false' aria-label='COBJ8CF4' name='COBJ8CF4'
-                    aria-valuemax='255' maxlength='255'>
-                </input>
-                <div class='zcwf_col_help'>
-                </div>
+            <div>
+              <label class="flabel" for="COBJ8CF66">Contribution Amount (KSh)</label>
+              <input type="number" class="field" id="COBJ8CF66" aria-label="COBJ8CF66" name="COBJ8CF66"
+                maxlength="16" placeholder="1000">
             </div>
+            <div>
+              <label class="flabel" for="COBJ8CF51">First Contribution Date</label>
+              <input type="date" class="field" id="COBJ8CF51" aria-label="COBJ8CF51" name="COBJ8CF51">
+            </div>
+            <div>
+              <label class="flabel" for="COBJ8CF52">Next Contribution Due</label>
+              <input type="date" class="field" id="COBJ8CF52" aria-label="COBJ8CF52" name="COBJ8CF52">
+            </div>
+          </div>
+          <div class="zfull">
+            <label class="flabel" style="margin-bottom:10px;">Membership Frequency</label>
+            <div class="radio-group">
+              <label class="radio-opt"><input type="radio" name="COBJ8CF7" value="Daily" /> Daily</label>
+              <label class="radio-opt"><input type="radio" name="COBJ8CF7" value="Monthly" /> Monthly</label>
+            </div>
+          </div>
         </div>
-        <div class='zcwf_row'>
-            <div class='zcwf_col_lab' style='font-size:12px; font-family: Arial;'>
-                <label for='COBJ8CF5'>Alpha Account No</label>
+
+        <!-- STEP 4: Account Status -->
+        <div class="form-step" id="zsection4">
+          <div class="zwiz-section-title">Account Status</div>
+          <div class="zgrid2">
+            <div>
+              <label class="flabel" for="COBJ8CF55">Activation Date</label>
+              <input type="date" class="field" id="COBJ8CF55" aria-label="COBJ8CF55" name="COBJ8CF55">
             </div>
-            <div class='zcwf_col_fld'>
-                <input type='text' id='COBJ8CF5' aria-required='false' aria-label='COBJ8CF5' name='COBJ8CF5'
-                    aria-valuemax='255' maxlength='255'>
-                </input>
-                <div class='zcwf_col_help'>
-                </div>
+            <div style="display:flex;align-items:flex-end;">
+              <label class="chk-opt">
+                <input type="checkbox" aria-checked="false" id="COBJ8CF53" aria-label="COBJ8CF53" name="COBJ8CF53"
+                  maxlength="3" onclick="addAriaChecked7310745000001849088()">
+                <span>Can Access Loans</span>
+              </label>
             </div>
+          </div>
         </div>
-        <div class='zcwf_row'>
-            <div class='zcwf_col_lab' style='font-size:12px; font-family: Arial;'>
-                <label for='COBJ8CF10'>Payment Status</label>
-            </div>
-            <div class='zcwf_col_fld'>
-                <select class='zcwf_col_fld_slt' role='combobox' aria-expanded='false' aria-haspopup='listbox'
-                    id='COBJ8CF10' onChange='addAriaSelected7310745000001849088()' aria-required='false'
-                    aria-label='COBJ8CF10' name='COBJ8CF10'>
-                    <option value='-None-'>-None-</option>
-                    <option value='Paid'>Paid</option>
-                    <option value='Unpaid'>Unpaid</option>
-                    <option value='Pending'>Pending</option>
-                </select>
-                <div class='zcwf_col_help'>
-                </div>
-            </div>
-        </div>
-        <div class='zcwf_row'>
-            <div class='zcwf_col_lab' style='font-size:12px; font-family: Arial;'>
-                <label for='COBJ8CF6'>Share Capital Account</label>
-            </div>
-            <div class='zcwf_col_fld'>
-                <input type='text' id='COBJ8CF6' aria-required='false' aria-label='COBJ8CF6' name='COBJ8CF6'
-                    aria-valuemax='255' maxlength='255'>
-                </input>
-                <div class='zcwf_col_help'>
-                </div>
-            </div>
-        </div>
-        <div class='zcwf_row'>
-            <div class='zcwf_col_lab' style='font-size:12px; font-family: Arial;'>
-                <label for='COBJ8CF55'>Activation Date</label>
-            </div>
-            <div class='zcwf_col_fld'>
-                <input type='text' id='COBJ8CF55' aria-required='false' aria-label='COBJ8CF55' name='COBJ8CF55'
-                    aria-valuemax='20' maxlength='20' ftype='date' placeholder='DD/MM/YYYY'
-                    aria-placeholder='DD/MM/YYYY' tplid='7310745000001849088COBJ8CF55'
-                    onfocus='formCalender.stEv(event);formCalender.createCalendar(this);' autocomplete='off'>
-                </input>
-                <div id='template7310745000001849088COBJ8CF55' onclick='formCalender.stEv(event);' class='tempCalDiv'>
-                </div>
-                <div class='zcwf_col_help'>
-                </div>
-            </div>
-        </div>
-        <div class='zcwf_row'>
-            <div class='zcwf_col_lab' style='font-size:12px; font-family: Arial;'>
-                <label for='COBJ8CF69'>Initial Deposit Amount</label>
-            </div>
-            <div class='zcwf_col_fld'>
-                <input type='text' id='COBJ8CF69' aria-required='false' aria-label='COBJ8CF69' name='COBJ8CF69'
-                    aria-valuemax='16' maxlength='16'>
-                </input>
-                <div class='zcwf_col_help'>
-                </div>
-            </div>
-        </div>
-        <div class='zcwf_row'>
-            <div class='zcwf_col_lab' style='font-size:12px; font-family: Arial;'>
-                <label for='COBJ8CF7'>Membership Frequency</label>
-            </div>
-            <div class='zcwf_col_fld'>
-                <select class='zcwf_col_fld_slt' role='combobox' aria-expanded='false' aria-haspopup='listbox'
-                    id='COBJ8CF7' onChange='addAriaSelected7310745000001849088()' aria-required='false'
-                    aria-label='COBJ8CF7' name='COBJ8CF7'>
-                    <option value='-None-'>-None-</option>
-                    <option value='Daily'>Daily</option>
-                    <option value='Monthly'>Monthly</option>
-                </select>
-                <div class='zcwf_col_help'>
-                </div>
-            </div>
-        </div>
-        <div class='zcwf_row'>
-            <div class='zcwf_col_lab' style='font-size:12px; font-family: Arial;'>
-                <label for='COBJ8CF51'>First Contribution Date</label>
-            </div>
-            <div class='zcwf_col_fld'>
-                <input type='text' id='COBJ8CF51' aria-required='false' aria-label='COBJ8CF51' name='COBJ8CF51'
-                    aria-valuemax='20' maxlength='20' ftype='date' placeholder='DD/MM/YYYY'
-                    aria-placeholder='DD/MM/YYYY' tplid='7310745000001849088COBJ8CF51'
-                    onfocus='formCalender.stEv(event);formCalender.createCalendar(this);' autocomplete='off'>
-                </input>
-                <div id='template7310745000001849088COBJ8CF51' onclick='formCalender.stEv(event);' class='tempCalDiv'>
-                </div>
-                <div class='zcwf_col_help'>
-                </div>
-            </div>
-        </div>
-        <div class='zcwf_row'>
-            <div class='zcwf_col_lab' style='font-size:12px; font-family: Arial;'>
-                <label for='COBJ8CF52'>Next Contribution Due</label>
-            </div>
-            <div class='zcwf_col_fld'>
-                <input type='text' id='COBJ8CF52' aria-required='false' aria-label='COBJ8CF52' name='COBJ8CF52'
-                    aria-valuemax='20' maxlength='20' ftype='date' placeholder='DD/MM/YYYY'
-                    aria-placeholder='DD/MM/YYYY' tplid='7310745000001849088COBJ8CF52'
-                    onfocus='formCalender.stEv(event);formCalender.createCalendar(this);' autocomplete='off'>
-                </input>
-                <div id='template7310745000001849088COBJ8CF52' onclick='formCalender.stEv(event);' class='tempCalDiv'>
-                </div>
-                <div class='zcwf_col_help'>
-                </div>
-            </div>
-        </div>
-        <div class='zcwf_row'>
-            <div class='zcwf_col_lab' style='font-size:12px; font-family: Arial;'>
-                <label for='COBJ8CF66'>Contribution Amount</label>
-            </div>
-            <div class='zcwf_col_fld'>
-                <input type='text' id='COBJ8CF66' aria-required='false' aria-label='COBJ8CF66' name='COBJ8CF66'
-                    aria-valuemax='16' maxlength='16'>
-                </input>
-                <div class='zcwf_col_help'>
-                </div>
-            </div>
-        </div>
-        <div class='zcwf_row'>
-            <div class='zcwf_col_lab' style='font-size:12px; font-family: Arial;'>
-                <label for='COBJ8CF53'>Can Acces Loans</label>
-            </div>
-            <div class='zcwf_col_fld'>
-                <input type='checkbox' aria-checked='false' class='zcwf_ckbox' id='COBJ8CF53' aria-required='false'
-                    aria-label='COBJ8CF53' name='COBJ8CF53' aria-valuemax='3' maxlength='3'
-                    onclick='addAriaChecked7310745000001849088()'>
-                </input>
-                <div class='zcwf_col_help'>
-                </div>
-            </div>
-        </div>
+
         <input type='text' type='hidden' style='display: none;' name='aG9uZXlwb3Q' value='' />
-        <div class='zcwf_row'>
-            <div class='zcwf_col_lab'>
-            </div>
-            <div class='zcwf_col_fld'>
-                <input type='submit' id='formsubmit' role='button' class='formsubmit zcwf_button' value='Submit'
-                    aria-label='Submit' title='Submit'>
-                <input type='reset' class='zcwf_button' role='button' name='reset' value='Reset' aria-label='Reset'
-                    title='Reset'>
-            </div>
+
+        <!-- Nav -->
+        <div class="zwiz-nav">
+          <button type="button" id="zPrevBtn" class="btn-outline hidden" onclick="zChangeStep(-1)">
+            <svg class="zicon" viewBox="0 0 24 24">
+              <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
+            </svg>Back
+          </button>
+          <button type="button" id="zNextBtn" class="btn-primary" onclick="zChangeStep(1)">
+            Next Step
+            <svg class="zicon" style="fill:#fff;" viewBox="0 0 24 24">
+              <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" />
+            </svg>
+          </button>
+          <input type='submit' id='formsubmit' role='button' class='btn-primary hidden' value='Submit Application'
+            aria-label='Submit' title='Submit'>
         </div>
-        <script type='text/javascript'>
-            var formCalender = {
-                userPattern: 'YYYY-MM-DD',
-                currDateObj: void 0,
-                currMonth: void 0,
-                currYear: void 0,
-                currDate: void 0,
-                currMonthEnd: [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31],
-                monthName: void 0,
-                days: void 0,
-                displayPanel: void 0,
-                isHideToday: void 0,
-                calDefColor: '#515CCB',
-                weekdays: {
-                    1: 'Sunday',
-                    2: 'Monday',
-                    3: 'Tuesday',
-                    4: 'Wednesday',
-                    5: 'Thursday',
-                    6: 'Friday',
-                    7: 'Saturday'
-                },
-                months: {
-                    1: 'January',
-                    2: 'February',
-                    3: 'March',
-                    4: 'April',
-                    5: 'May',
-                    6: 'June',
-                    7: 'July',
-                    8: 'August',
-                    9: 'September',
-                    10: 'October',
-                    11: 'November',
-                    12: 'December'
-                },
-                init: function () {
-                    this.monthName = [{
-                        html: 'January',
-                        value: 0
-                    },
-                    {
-                        html: 'February',
-                        value: 1
-                    },
-                    {
-                        html: 'March',
-                        value: 2
-                    },
-                    {
-                        html: 'April',
-                        value: 3
-                    },
-                    {
-                        html: 'May',
-                        value: 4
-                    },
-                    {
-                        html: 'June',
-                        value: 5
-                    },
-                    {
-                        html: 'July',
-                        value: 6
-                    },
-                    {
-                        html: 'August',
-                        value: 7
-                    },
-                    {
-                        html: 'September',
-                        value: 8
-                    },
-                    {
-                        html: 'October',
-                        value: 9
-                    },
-                    {
-                        html: 'November',
-                        value: 10
-                    },
-                    {
-                        html: 'December',
-                        value: 11
-                    }], this.days = ['ssunday', 'smonday', 'stuesday', 'swednesday', 'sthursday', 'sfriday', 'ssaturday'], this.dayNamesShort = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'], this.daysBasedOnPrefernce = ['ssunday', 'smonday', 'stuesday', 'swednesday', 'sthursday', 'sfriday', 'ssaturday'];
-                    var e = this.daysBasedOnPrefernce[0];
-                    this.daysBasedOnPrefernce.shift(1), this.daysBasedOnPrefernce.push(e);
-                    var t = this.dayNamesShort[0];
-                    this.dayNamesShort.shift(1), this.dayNamesShort.push(t), this.currDateObj = new Date, this.currMonth = this.currDateObj.getMonth(), this.currYear = this.currDateObj.getFullYear(), this.currYear < 1e3 && (this.currYear += 1900), this.currDate = this.currDateObj.getDate()
-                },
-                getTitle: function () {
-                    return this.monthName[this.currMonth].html + ' ' + this.currYear
-                },
-                createCalendar: function (e) {
-                    for (var t = document.getElementsByClassName('tempCalDiv'), a = t.length, r = 0; r < a; r++) {
-                        var n = t[r].style;
-                        'block' === n.display && (n.display = 'none')
-                    }
-                    this.calendarNode = e, this.userPattern = this.calendarNode.placeholder;
-                    var s = this.calendarNode.value, i = !1;
-                    if (s) {
-                        var l = dateFormatConvert.validate(s, this.userPattern);
-                        l && (this.currDate = l.getDate(), this.currMonth = l.getMonth(), this.currYear = l.getFullYear(), this.currYear < 1e3 && (this.currYear = Number(this.currYear) + 1900))
-                    } else i = !0, formCalender.init();
-                    this.monthName || formCalender.init(), this.createDatePicker(this.currDate, this.currMonth, this.currYear, i, !1)
-                },
-                createDatePicker: function (e, t, a, r, n) {
-                    1 === this.currMonth && (this.currMonthEnd[1] = this.currYear % 400 == 0 || this.currYear % 4 == 0 && this.currYear % 100 != 0 ? 29 : 28);
-                    var s = new Date(a, t, 1), i = 6, l = this.daysBasedOnPrefernce.indexOf(this.days[s.getDay()]) + 1;
-                    i = 31 === this.currMonthEnd[t] && l >= 6 || 30 === this.currMonthEnd[t] && 7 === l ? 7 : 28 === this.currMonthEnd[t] && 1 === l ? 5 : 6;
-                    var d = this.getTitle(e, a, t), o = this.dayNamesShort, h = '<div id=\'calenDiv\'><i id=\'calArrow\' style=\'display:none;\' class=\'dIB SocialArrow\'></i><div><div>';
-                    h += '<div class=\'aligncenter\'><span class=\'calNav dIB vaM yearNavLft\' onclick=\'formCalender.updateDatePicker(event,undefined, -1)\'><i class=\'arrow left mRMinus2\'></i><i class=\'arrow left\'></i></span><span class=\'calNav dLft dIB vaM\' onClick=\'formCalender.updateDatePicker(event,-1)\' id=\'pm\'><i class=\'arrow left\'></i></span><span class=\'sCalMon\'>' + d + '</span><span class=\'calNav dRgt vaM\' onClick =\'formCalender.updateDatePicker(event,1)\' id=\'nm\'><i class=\'arrow right\'></i></span><span class=\'calNav dIB vaM yearNavRgt\' onclick=\'formCalender.updateDatePicker(event,undefined, 1)\'><i class=\'arrow right\'></i><i class=\'arrow right mLMinus2\'></i></span></div>', h += '<table  class=\'calDay\'  id =\'weekDays\' style=\'color:#8b9ab9; font-size:8px; margin-left:0\'><tr> <th>' + o[0] + '</th> <th>' + o[1] + '</th><th>' + o[2] + '</th><th>' + o[3] + '</th> <th>' + o[4] + '</th> <th>' + o[5] + '</th> <th>' + o[6] + '</th></tr></table>', h += '</div>', h += '<table id=\'calHeader\' class=\'calDay\' style=\'margin-left:0; margin-top:-5px;\' width=\'100%\' cellspacing=\'0\' cellpadding=\'0\' border=\'0\' >';
-                    var c = '', u = new Date, y = a || u.getFullYear(), v = e || u.getDate(), g = void 0 === t ? u.getMonth() : t,
-                        m = u.getMonth(), p = u.getFullYear();
-                    u.getDate();
-                    m === t && a === p && (c = ' style=\'display:none\'');
-                    for (var f, D, M, b = s.getDay(); 1 !== b;)
-                        s.setDate(s.getDate() - 1), b = s.getDay();
-                    for (var x = 1; x <= i; x++) {
-                        h += '<tr>';
-                        for (var Y = 1; Y < 8; Y++) {
-                            f = s.getMonth(), D = s.getFullYear(), M = s.getDate(), D + '-' + (parseInt(f) + 1) + '-' + M;
-                            var F = 'cdate lt-gray';
-                            if (M === v && D === y && f === g && (F = 'cdate lt-gray'), f === g && (F = 'cdate'), (r && M === v && m === g && p === y || !n && M === v && f === g && D === y) && (F = 'sel'), n) {
-                                var k = dateFormatConvert.validate(this.calendarNode.value, formCalender.userPattern);
-                                k && M === k.getDate() && f === k.getMonth() && D === k.getFullYear() && (F = 'sel')
-                            }
-                            h += '<td class=\'' + F + '\' onClick=\'formCalender.displaySelectedDate(\"' + M + ' ' + f + ' ' + D + '\")\'>' + M + '</td>', s.setDate(s.getDate() + 1)
-                        }
-                        h += '</tr>'
-                    }
-                    h += '</table>', h += '<div>', this.isHideToday || (h += '<div id=\'calBtns\' class=\'pT15 pB15 fL\'><a' + c + ' class=\'cP fL\' href=\'javascript:;\' id=\'todayBtn\' onclick=\'formCalender.displaySelectedDate(\"today\")\'>Today</a>'), h += '</div>', h += '</div>', h += '</div></div>';
-                    var C = document.getElementById('template' + this.calendarNode.getAttribute('tplid'));
-                    C.innerHTML = h, C.style.display = 'block'
-                },
-                displaySelectedDate: function (e, t) {
-                    if (!t)
-                        t = this.calendarNode;
-                    if ('today' === e) {
-                        var a = new Date;
-                        e = a.getDate() + ' ' + a.getMonth() + ' ' + a.getFullYear()
-                    }
-                    e = e.split(' ');
-                    var r = dateFormatConvert.convertFormat(new Date(e[2], e[1], e[0]), this.userPattern);
-                    t.value = r, t.focus(), t.placeholder = this.userPattern, formCalender.closeDatePicker(), t.addEventListener('keyup', function (e) {
-                        formCalender.calendarNode = this;
-                        var t = this.value, a = dateFormatConvert.validate(t, formCalender.userPattern);
-                        if (a) {
-                            var r = {};
-                            r.date = a.getDate(), r.month = a.getMonth(), r.year = a.getFullYear(), formCalender.updateDatePicker(e, void 0, void 0, r)
-                        }
-                    }),
-                        t.blur()
-                },
-                closeDatePicker: function () {
-                    document.getElementById('template' + this.calendarNode.getAttribute('tplid')).style.display = 'none'
-                },
-                updateDatePicker: function (e, t, a, r) {
-                    var n = document.getElementById('template' + this.calendarNode.getAttribute('tplid'));
-                    r && (this.currDate = r.date, this.currMonth = r.month, this.currYear = r.year), void 0 !== t ? 1 === t ? 11 === this.currMonth ? (this.currMonth = 0, this.currYear++) : this.currMonth++ : 0 === this.currMonth ? (this.currMonth = 11, this.currYear--) : this.currMonth-- : void 0 !== a && (this.currYear = parseInt(this.currYear) + a), this.createDatePicker(this.currDate, this.currMonth, this.currYear, !1, !0), n.style.display = 'block'
-                },
-                stEv: function (e) {
-                    e || (e = window.event), e && (e.cancelBubble = !0, e.stopPropagation && e.stopPropagation())
-                }
-            };
-            window.onclick = function () {
-                for (var e = document.getElementsByClassName('tempCalDiv'), t = e.length, a = 0; a < t; a++) {
-                    var r = e[a];
-                    if (document.activeElement === document.querySelector('input[tplid=\'' + r.id.replace('template', '') + '\']'))
-                        return;
-                    var n = e[a].style;
-                    'block' === n.display && (n.display = 'none')
-                }
-            };
-            var dateFormatConvert = {
-                shortMon: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                longMon: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-                dayArr: [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31],
-                wod: 1,
-                lm: 'userdate',
-                _dateObj: void 0,
-                lLimit: 80,
-                formats: [{
-                    val: 'YYYY',
-                    type: 'year',
-                    regex: /\d{4}/,
-                    len: 4
-                },
-                {
-                    val: 'GGGG',
-                    type: 'year',
-                    regex: /\d{4}/,
-                    len: 4,
-                    isWEG: !0
-                },
-                {
-                    val: 'gggg',
-                    type: 'year',
-                    regex: /\d{4}/,
-                    len: 4,
-                    isWEG: !0
-                },
-                {
-                    val: 'YY',
-                    type: 'year',
-                    regex: /\d{2}/,
-                    len: 2
-                },
-                {
-                    val: 'GG',
-                    type: 'year',
-                    regex: /\d{2}/,
-                    len: 2,
-                    isWEG: !0
-                },
-                {
-                    val: 'gg',
-                    type: 'year',
-                    regex: /\d{2}/,
-                    len: 2,
-                    isWEG: !0
-                },
-                {
-                    val: 'MMMM',
-                    type: 'month',
-                    regex: /[A-z]{3,}/,
-                    long: !0,
-                    str: !0,
-                    array: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-                },
-                {
-                    val: 'MMM',
-                    str: !0,
-                    type: 'month',
-                    regex: /[A-z]{3,}/,
-                    array: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-                },
-                {
-                    val: 'Mo',
-                    suff: !0,
-                    type: 'month',
-                    regex: /\d{1,2}(?=st|nd|rd|th)/,
-                    max: 12
-                },
-                {
-                    val: 'MM',
-                    type: 'month',
-                    regex: /\d{2}/,
-                    len: 2,
-                    max: 12,
-                    alt: !0
-                },
-                {
-                    val: 'M',
-                    type: 'month',
-                    regex: /\d{1,2}/,
-                    max: 12
-                },
-                {
-                    val: 'DDDD',
-                    type: 'date',
-                    regex: /\d{3}/,
-                    len: 3,
-                    year: !0
-                },
-                {
-                    val: 'DDDo',
-                    type: 'date',
-                    suff: !0,
-                    regex: /\d{1,3}(?=st|nd|rd|th)/,
-                    len: 3,
-                    year: !0,
-                    ignore: /\d{3}(?=st|nd|rd|th)/
-                },
-                {
-                    val: 'DDD',
-                    type: 'date',
-                    regex: /\d{1,3}/,
-                    year: !0,
-                    ignore: /\d{3}/
-                },
-                {
-                    val: 'Do',
-                    type: 'date',
-                    suff: !0,
-                    regex: /\d{1,2}(?=st|nd|rd|th)/
-                },
-                {
-                    val: 'DD',
-                    type: 'date',
-                    regex: /\d{2}/,
-                    len: 2,
-                    alt: !0
-                },
-                {
-                    val: 'D',
-                    type: 'date',
-                    regex: /\d{1,2}/
-                },
-                {
-                    val: 'dddd',
-                    type: 'longdate',
-                    regex: /[A-z]{3,}/,
-                    long: !0,
-                    str: !0,
-                    array: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-                },
-                {
-                    val: 'ddd',
-                    type: 'longdate',
-                    regex: /[A-z]{3}/,
-                    str: !0,
-                    array: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-                },
-                {
-                    val: 'dd',
-                    type: 'longdate',
-                    regex: /[A-z]{2}/,
-                    str: !0,
-                    array: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']
-                },
-                {
-                    val: 'do',
-                    type: 'longdate',
-                    regex: /\d{1}(?=st|nd|rd|th)/,
-                    suff: !0
-                },
-                {
-                    val: 'd',
-                    type: 'longdate',
-                    regex: /\d{1}/
-                }],
-                parseFormat: function (e, t) {
-                    for (var a, r = this.formats, n = [], s = r.length, i = 0; i < s; i++) {
-                        var l = r[i];
-                        if (!e.length)
-                            break;
-                        if (e.indexOf(l.val) > -1) {
-                            if (t && l.alt) {
-                                a = !0;
-                                continue
-                            }
-                            a && (l.val = r[i - 1].val, l = r[i - 1]), a = !1, n.push({
-                                format: l,
-                                index: e.indexOf(l.val)
-                            }),
-                                e = e.replace(l.val, Math.pow(10, l.val.length - 1)), i--
-                        } else;
-                    }
-                    return n.sort(function (e, t) {
-                        return e.index - t.index
-                    })
-                },
-                convertFormat: function (e, t) {
-                    this._dateObj = e;
-                    var a = this._dateObj, r = this.parseFormat(t, !0), n = {},
-                        s = {
-                            date: a.getDate(),
-                            month: a.getMonth(),
-                            year: a.getFullYear(),
-                            day: a.getDay()
-                        };
-                    t = this.fmReplace(t.replace(/{{|}}/g, ''), r);
-                    for (var i = r.length, l = 0; l < i; l++) {
-                        var d = r[l].format;
-                        switch (d.type) {
-                            case 'date':
-                                t = t.replace(d.val + this.lm, this.crctLength(d.year ? this.totdate(s.month, this.isLeap(s.year), s.date) :
-                                    s.date, d.len, d.suff));
-                                break;
-                            case 'month':
-                                t = d.str ? t.replace(d.val + this.lm, d.array[s.month]) :
-                                    t.replace(d.val + this.lm, this.crctLength(s.month + 1, d.len, d.suff));
-                                break;
-                            case 'year':
-                                t = t.replace(d.val + this.lm, 2 === d.len ? this.crctLength(s.year % 100, 2) :
-                                    4 === (s.year + '').length ? s.year :
-                                        this.crctLength(s.year, 4)), n.year = n.year || [], n.year.push(d);
-                                break;
-                            case 'day':
-                            case 'week':
-                                n.flag = !0, n[d.type] = n[d.type] || [], n[d.type].push(d);
-                                break;
-                            case 'longdate':
-                                t = d.str ? t.replace(d.val + this.lm, d.array[s.day]) :
-                                    t.replace(d.val + this.lm, this.crctLength(s.day, null, d.suff))
-                        }
-                    }
-                    return t.replace(/{{|}}/g, '')
-                },
-                fmReplace: function (e, t) {
-                    for (var a = 0, r = t.length, n = 0; n < r; n++)
-                        e = e.slice(0, t[n].index + a) + t[n].format.val + this.lm + e.slice(t[n].index + a + t[n].format.val.length), a += 8;
-                    return e
-                },
-                totdate: function (e, t, a) {
-                    for (var r = 0, n = 0; n < e; n++)
-                        r += this.dayArr[n], t && 1 === n && (r += 1);
-                    return r + (a || 0)
-                },
-                crctLength: function (e, t, a) {
-                    var r = '';
-                    if (a && (r = this.nthconv(e)), t) {
-                        e = e.toString();
-                        for (var n = 1; n < t; n++)
-                            e.length <= n && (e = '0' + e)
-                    }
-                    return e + r
-                },
-                nthconv: function (e) {
-                    if (e > 3 && e < 21)
-                        return 'th';
-                    switch (e % 10) {
-                        case 1:
-                            return 'st';
-                        case 2:
-                            return 'nd';
-                        case 3:
-                            return 'rd';
-                        default:
-                            return 'th'
-                    }
-                },
-                isLeap: function (e) {
-                    return 2 === (e += '').length && (e = this.getCorrectYear(parseInt(e))), (e = parseInt(e)) % 4 == 0 && e % 100 != 0 || e % 400 == 0
-                },
-                getCorrectYear: function (e) {
-                    var t = e + '';
-                    if (e = parseInt(e), 2 === t.length) {
-                        var a = (new Date).getFullYear(), r = parseInt(a / 100), n = a % 100, s = (n - this.lLimit + 100) % 100;
-                        e = n > s ? e < s ? r + 1 + '' + this.crctLength(e, 2) : r + '' + this.crctLength(e, 2) : e < s ? r + '' + this.crctLength(e, 2) : r - 1 + '' + this.crctLength(e, 2)
-                    }
-                    return e
-                },
-                valFormat: function (e, t) {
-                    for (var a = {}, r = new Date((new Date).getFullYear(), 0), n = this.parseFormat(t, !0), s = e, i = t = t.replace(/{{|}}/g, ''), l = n.length, d = 0; d < l; d++) {
-                        var o, h = n[d].format;
-                        switch (h.type) {
-                            case 'date':
-                            case 'year':
-                            case 'week':
-                            case 'day':
-                                h.regex.test(e) ? (o = 'year' === h.type ? e.match(h.regex)[h.match || 0] :
-                                    parseInt(e.match(h.regex)[h.match || 0]), a[h.type] = o, e = this.replaceVal(e, h.regex, h.suff), s = this.replaceVal(s, h.regex, h.suff, h.val), h.year && (a.date = getDay(a.date).day)) :
-                                    a.year && a.week ? (a[h.type] = this.wod, t = t.replace(h.val, ''), i = i.replace(h.val, '')) :
-                                        a[h.type] = 'Invalid', /date/i.test(h.type) && 0 === a[h.type] && (a[h.type] = 'Invalid');
-                                break;
-                            case 'month':
-                                h.regex.test(e) ? (o = this.getMonth(e.match(h.regex)[0], h.suff, h.str, h.long), a.month = o.val, e = this.replaceVal(e, o.mon || h.regex, h.suff), s = this.replaceVal(s, o.mon || h.regex, h.suff, h.val)) :
-                                    a.month = 'Invalid', a.month < 0 && (a.month = 'Invalid');
-                                break;
-                            case 'longdate':
-                                h.regex.test(e) && (o = h.str ? this.findVal(h.array, e.match(h.regex)[0]) :
-                                    parseInt(e.match(h.regex)[0]), a.longdate = this.isDef(o.index) ? o.index :
-                                        o, e = this.replaceVal(e, o.mon || o, h.suff), s = this.replaceVal(s, o.mon || o, h.suff, h.val))
-                        }
-                        t = t.replace(h.valForm || h.val, '')
-                    }
-                    if (this.isDef(a.longdate) && a.day && a.day !== a.longdate ? r.setFullYear('Invalid') : this.isDef(a.year) && r.setFullYear(this.getCorrectYear(a.year)), this.isDef(a.month) && r.setMonth(a.month), this.isDef(a.date) && r.setDate(a.date <= this.dayArr[r.getMonth()] + (1 === r.getMonth() && this.isLeap(r.getFullYear()) ? 1 : 0) ? a.date : 'Invalid'), this._isCorrectFormat = e.length === t.length && i === s && this.validate(r))
-                        return r
-                },
-                validate: function (e, t) {
-                    var a = e.constructor;
-                    if (a === Date)
-                        return this._dateObj = e, 'Invalid Date' !== e.toString();
-                    if (a === String && t) {
-                        var r = this.valFormat(e, t);
-                        return r && this._isCorrectFormat && (this._format = t), r
-                    }
-                },
-                replaceVal: function (e, t, a, r) {
-                    return e = e.replace(t, r || ''), a && (e = e.replace(/st|nd|rd|th/, '')), e
-                },
-                getMonth: function (e, t, a, r) {
-                    var n;
-                    if (a) {
-                        var s = this.findVal(r ? this.longMon : this.shortMon, e);
-                        n = s.mon, e = s.index, (!n || e > 11) && (e = 'Invalid')
-                    } else (e = parseInt(e) - 1) > 11 && (e = 'Invalid');
-                    return {
-                        val: e,
-                        mon: n
-                    }
-                },
-                findVal: function (e, t) {
-                    var a, r, n = e.length;
-                    for (r = 0; r < n; r++)
-                        if (new RegExp(e[r]).test(t)) {
-                            a = e[r];
-                            break
-                        }
-                    return {
-                        mon: a,
-                        index: r
-                    }
-                },
-                isDef: function (e) {
-                    return void 0 !== e
-                }
-            };
-        </script>
-        <style>
-            #calenDiv {
-                padding: 10px;
-                display: table;
-                width: 195px;
-                font-family: helvetica, sans-serif !important;
-            }
-
-            .calNav {
-                width: 20px;
-                height: 15px;
-                display: inline-block;
-                position: relative;
-                top: 4px;
-                cursor: pointer
-            }
-
-            #calenDiv .calNav {
-                width: 15px;
-            }
-
-            #calenDiv .yearNavLft {
-                right: 10px;
-            }
-
-            #calenDiv .yearNavRgt {
-                left: 10px;
-            }
-
-            #calenDiv .dLft {
-                right: 5px;
-            }
-
-            #calenDiv .dRgt {
-                left: 5px;
-            }
-
-            .dLft {
-                right: 10px;
-                opacity: 0.8;
-            }
-
-            .dRgt {
-                left: 10px;
-                opacity: 0.8;
-            }
-
-            .yearNavLft {
-                right: 15px;
-            }
-
-            .yearNavRgt {
-                left: 15px;
-                opacity: 0.6;
-            }
-
-            #calenDiv table.calDay {
-                border-spacing: 6px;
-                margin-top: 0
-            }
-
-            #calenDiv table.calDay td {
-                padding: 3px 4px;
-                font-size: 11px
-            }
-
-            #calenDiv table.calDay th {
-                padding: 0 3px;
-                font-size: 11px;
-                padding-right: 0;
-                padding-left: 1px;
-                color: #888;
-                width: 22px;
-                cursor: default;
-                border-radius: 3px;
-                text-align: center;
-                font-weight: normal;
-            }
-
-            #calenDiv #weekDays {
-                margin-top: 10px;
-                margin-bottom: 5px;
-                border-top: 1px solid #c0c6cc;
-                border-bottom: 1px solid #c0c6cc;
-                border-spacing: 5px;
-                margin-left: 0;
-                color: #8b9ab9;
-            }
-
-            #calenDiv .sCalMon {
-                cursor: default;
-                display: inline-block;
-                color: #888;
-                width: 110px;
-                font-size: 12px;
-            }
-
-            table.calDay td:hover {
-                background-color: #e8e8e8;
-            }
-
-            table.calDay {
-                color: #222;
-                margin-left: -10px;
-                border-spacing: 12px;
-            }
-
-            table.calDay td,
-            table.calDay th {
-                font-size: var(--crm-extra-medium-font-size);
-                cursor: default;
-                border-radius: 3px;
-                text-align: center;
-                padding: 3px 5px;
-                font-family: helvetica, sans-serif !important;
-            }
-
-            table.calDay td.sel,
-            table.calDay td.sel:hover {
-                color: #fff;
-                background: #b3b3b3;
-                border-radius: 3px;
-            }
-
-            table.calDay td.noNum,
-            table.calDay td.lt-gray {
-                color: #c1c1c1;
-            }
-
-            .aligncenter {
-                text-align: center;
-            }
-
-            #calBtns a,
-            .lyteCalBtns .lyteCalCurrentDate a {
-                color: var(--linkColor);
-                font-size: 14px;
-                text-decoration: none;
-            }
-
-            #calenDiv #calBtns {
-                width: 183px;
-                margin-left: 10px;
-                border-top: 0;
-                font-size: 11px;
-                padding: 3px 0 12px !important;
-            }
-
-            .arrow {
-                border: solid #666;
-                border-width: 0 1px 1px 0;
-                display: inline-block;
-                height: 6px;
-                width: 6px;
-            }
-
-            #calenDiv .right {
-                transform: rotate(-45deg);
-                -webkit-transform: rotate(-45deg);
-            }
-
-            #calenDiv .left {
-                transform: rotate(135deg);
-                -webkit-transform: rotate(135deg);
-            }
-
-            .mLMinus2 {
-                margin-left: -2px;
-            }
-
-            .mRMinus2 {
-                margin-right: -2px;
-            }
-
-            .vaM {
-                vertical-align: middle;
-            }
-
-            .tempCalDiv {
-                display: none;
-                margin: 0;
-                position: absolute;
-                z-index: 1000;
-                background-color: #fff;
-                border: 1px solid #c0c6cc;
-                -webkit-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-                border-top: 0;
-                top: 20px;
-            }
-        </style>
-        <script>
-            function addAriaChecked7310745000001849088() {
-                var checkboxElem = event.target;
-                if (checkboxElem != undefined && checkboxElem.checked) {
-                    checkboxElem.ariaChecked = 'true';
-                } else if (checkboxElem != undefined && !checkboxElem.checked) {
-                    checkboxElem.ariaChecked = 'false';
-                }
-            }
-            function addAriaSelected7310745000001849088() {
-                var optionElem = event.target;
-                var previousSelectedOption = optionElem.querySelector('[aria-selected=true]');
-                if (previousSelectedOption) {
-                    previousSelectedOption.removeAttribute('aria-selected');
-                }
-                optionElem.querySelectorAll('option')[optionElem.selectedIndex].ariaSelected = 'true';
-            }
-            function validateDateFormat7310745000001849088() {
-                var form = document.forms['WebForm7310745000001849088'];
-                var dateFlds = form.querySelectorAll('[ftype=date]');
-                var i;
-                for (i = 0; i < dateFlds.length; i++) {
-                    var dateFld = dateFlds[i];
-                    var usrPtrn = dateFld.placeholder;
-                    var dateVal = dateFld.value;
-                    if (dateVal.trim() != '') {
-                        var vald = dateFormatConvert.validate(dateVal, usrPtrn);
-                        if (!vald) {
-                            alert('Please enter a valid date ');
-                            dateFld.focus();
-                            return false;
-                        }
-                    }
-                }
-                return true;
-            }
-            function checkMandatory7310745000001849088(isAjax) {
-                var mndFileds = new Array('NAME');
-                var fldLangVal = new Array('Member Number');
-                for (i = 0; i < mndFileds.length; i++) {
-                    var fieldObj = document.forms['WebForm7310745000001849088'][mndFileds[i]];
-                    if (fieldObj) {
-                        if (((fieldObj.value).replace(/^\s+|\s+$/g, '')).length == 0) {
-                            if (fieldObj.type == 'file') {
-                                alert('Please select a file to upload.');
-                                fieldObj.focus();
-                                return false;
-                            }
-                            alert(fldLangVal[i] + ' cannot be empty.');
-                            fieldObj.focus();
-                            return false;
-                        } else if (fieldObj.nodeName == 'SELECT') {
-                            if (fieldObj.options[fieldObj.selectedIndex].value == '-None-') {
-                                alert(fldLangVal[i] + ' cannot be none.');
-                                fieldObj.focus();
-                                return false;
-                            }
-                        } else if (fieldObj.type == 'checkbox') {
-                            if (fieldObj.checked == false) {
-                                alert('Please accept  ' + fldLangVal[i]);
-                                fieldObj.focus();
-                                return false;
-                            }
-                        }
-                        try {
-                            if (fieldObj.name == 'Last Name') {
-                                name = fieldObj.value;
-                            }
-                        } catch (e) { }
-                    }
-                }
-                if (!validateDateFormat7310745000001849088()) {
-                    return false;
-                }
-                var urlparams = new URLSearchParams(window.location.search);
-                if (urlparams.has('service') && (urlparams.get('service') === 'smarturl')) {
-                    var webform = document.getElementById('webform7310745000001849088');
-                    var service = urlparams.get('service');
-                    var smarturlfield = document.createElement('input');
-                    smarturlfield.setAttribute('type', 'hidden');
-                    smarturlfield.setAttribute('value', service);
-                    smarturlfield.setAttribute('name', 'service');
-                    webform.appendChild(smarturlfield);
-                }
-                document.querySelector('.crmWebToEntityForm .formsubmit').setAttribute('disabled', true);
-            }
-            function tooltipShow7310745000001849088(el) {
-                var tooltip = el.nextElementSibling;
-                var tooltipDisplay = tooltip.style.display;
-                if (tooltipDisplay == 'none') {
-                    var allTooltip = document.getElementsByClassName('zcwf_tooltip_over');
-                    for (i = 0; i < allTooltip.length; i++) {
-                        allTooltip[i].style.display = 'none';
-                    }
-                    tooltip.style.display = 'block';
-                } else {
-                    tooltip.style.display = 'none';
-                }
-            }
-        </script>
         <!-- Do not remove this --- Analytics Tracking code starts -->
         <script id='wf_anal'
-            src='https://crm.zohopublic.com/crm/WebFormAnalyticsServeServlet?rid=826c7d5ec19ecdc41f61c8a7eabdf19661b7c13bf3f813b4af05142a1ca33604575612371edce7a5c3d46eeb72712b5fgidf0d59b229611c6beff071f3332f79b2d81a79267d6257297d4f5fb3e1a9c4be7gid04580c736b54c1c62fa5d70ff420be7dd52d6ab79931d8c925c368aff9b15fc4gid8e3ec874e39ec45958c957d1ee03df4783502aa6cb2c3561cb324a080d6712c5&tw=7447302ed480fc7999f1d9f7c3b99e28f0f62fbd7dd5bb04e21db5971e46bb5d'>
-            </script>
+          src='https://crm.zohopublic.com/crm/WebFormAnalyticsServeServlet?rid=78f91d70b57acac9248444f43d5d9bedce609ff2a7ddb5fe502bb8ba4e6c5e9eb748d7e8ef9165bc88c71c569cb72d06gidc194b9a9bc49643593f0304c4b9993f87948967a6eba25bd114864f95b2d6e80gidfe01f43b1282e3b989b7ad0af127c6c2b517f019730b9497cab3da8880ff3e4cgid20a1fbf00a6c811a2b82bc7bd8c6c13c154c5fff0407eee8975f917f2dec7675&tw=2953fd665c77409d4abcd0698337bbd7ccd9a00fd77a6c5eaea7e0c1485b60a3'>
+        </script>
         <!-- Do not remove this --- Analytics Tracking code ends. -->
-    </form>
-</div>
+      </form>
+    </div>
+
+  </div>
+
+  <script>
+    function addAriaChecked7310745000001849088() {
+      var checkboxElem = event.target;
+      if (checkboxElem != undefined && checkboxElem.checked) {
+        checkboxElem.ariaChecked = 'true';
+      } else if (checkboxElem != undefined && !checkboxElem.checked) {
+        checkboxElem.ariaChecked = 'false';
+      }
+    }
+    function addAriaSelected7310745000001849088() {
+      var optionElem = event.target;
+      var previousSelectedOption = optionElem.querySelector('[aria-selected=true]');
+      if (previousSelectedOption) {
+        previousSelectedOption.removeAttribute('aria-selected');
+      }
+      optionElem.querySelectorAll('option')[optionElem.selectedIndex].ariaSelected = 'true';
+    }
+    function checkMandatory7310745000001849088(isAjax) {
+      var mndFileds = new Array('NAME');
+      var fldLangVal = new Array('Member Number');
+      for (i = 0; i < mndFileds.length; i++) {
+        var fieldObj = document.forms['WebForm7310745000001849088'][mndFileds[i]];
+        if (fieldObj) {
+          if (((fieldObj.value).replace(/^\s+|\s+$/g, '')).length == 0) {
+            if (fieldObj.type == 'file') {
+              alert('Please select a file to upload.');
+              fieldObj.focus();
+              zJumpToFieldStep(fieldObj);
+              return false;
+            }
+            alert(fldLangVal[i] + ' cannot be empty.');
+            fieldObj.focus();
+            zJumpToFieldStep(fieldObj);
+            return false;
+          } else if (fieldObj.nodeName == 'SELECT') {
+            if (fieldObj.options[fieldObj.selectedIndex].value == '-None-') {
+              alert(fldLangVal[i] + ' cannot be none.');
+              fieldObj.focus();
+              zJumpToFieldStep(fieldObj);
+              return false;
+            }
+          } else if (fieldObj.type == 'checkbox') {
+            if (fieldObj.checked == false) {
+              alert('Please accept  ' + fldLangVal[i]);
+              fieldObj.focus();
+              zJumpToFieldStep(fieldObj);
+              return false;
+            }
+          }
+        }
+      }
+      document.querySelector('.crmWebToEntityForm #formsubmit').setAttribute('disabled', true);
+    }
+
+    /* ---- step wizard controller ---- */
+    var zTotalSteps = 4;
+    var zCurrentStep = 1;
+    var zStepTitles = ['Account Information', 'Fees & Payment Status', 'Contribution Details', 'Account Status'];
+
+    function zEl(id) { return document.getElementById(id); }
+
+    function zJumpToFieldStep(fieldObj) {
+      var stepEl = fieldObj.closest ? fieldObj.closest('.form-step') : null;
+      if (!stepEl) return;
+      var match = /zsection(\d+)/.exec(stepEl.id);
+      if (match) {
+        zCurrentStep = parseInt(match[1], 10);
+        zRender();
+      }
+    }
+
+    function zRender() {
+      for (var i = 1; i <= zTotalSteps; i++) {
+        var sec = zEl('zsection' + i);
+        if (sec) sec.classList.toggle('active', i === zCurrentStep);
+
+        var dot = zEl('zsdot' + i);
+        var wrap = zEl('zswrap' + i);
+        if (dot) {
+          dot.classList.remove('active', 'done');
+          if (i < zCurrentStep) {
+            dot.classList.add('done');
+            dot.innerHTML = '&#10003;';
+          } else {
+            dot.textContent = i;
+            if (i === zCurrentStep) dot.classList.add('active');
+          }
+        }
+        if (wrap) {
+          wrap.classList.toggle('active', i === zCurrentStep);
+          wrap.classList.toggle('done', i < zCurrentStep);
+        }
+        if (i < zTotalSteps) {
+          var line = zEl('zline' + i);
+          if (line) line.style.background = (i < zCurrentStep) ? '#16a34a' : '#e2e8f0';
+        }
+      }
+      zEl('zStepLabel').textContent = 'Step ' + zCurrentStep + ' of ' + zTotalSteps + ': ' + zStepTitles[zCurrentStep - 1];
+      var pct = Math.round((zCurrentStep / zTotalSteps) * 100);
+      zEl('zStepPct').textContent = pct + '%';
+      zEl('zProgressBar').style.width = pct + '%';
+      zEl('zPrevBtn').classList.toggle('hidden', zCurrentStep === 1);
+      zEl('zNextBtn').classList.toggle('hidden', zCurrentStep === zTotalSteps);
+      zEl('formsubmit').classList.toggle('hidden', zCurrentStep !== zTotalSteps);
+      zSendHeight();
+    }
+
+    function zChangeStep(dir) {
+      var next = zCurrentStep + dir;
+      if (next < 1 || next > zTotalSteps) return;
+      zCurrentStep = next;
+      zRender();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function zSendHeight() {
+      try {
+        var h = document.documentElement.scrollHeight;
+        parent.postMessage({ type: 'zohoSavingsFormHeight', height: h }, '*');
+      } catch (e) { }
+    }
+
+    window.addEventListener('load', zSendHeight);
+    window.addEventListener('resize', zSendHeight);
+    zRender();
+  </script>
+</body>
+
+</html>

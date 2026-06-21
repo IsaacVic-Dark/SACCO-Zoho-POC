@@ -730,165 +730,10 @@
                   style="width:100%;border:0;display:block;overflow:hidden;height:560px;" scrolling="no"></iframe>
               </div>
 
-              <!-- ===== SAVINGS FORM ===== -->
+              <!-- ===== SAVINGS FORM (Zoho CRM web form, embedded) ===== -->
               <div id="wrapSavings" style="display:none;">
-                <div id="sForm">
-                  <div class="mb-7">
-                    <div class="flex items-center justify-between mb-2">
-                      <span class="text-xs font-semibold text-slate-500 uppercase tracking-widest" id="sStepLabel">Step
-                        1 of 3: Account Info</span>
-                      <span class="text-xs font-bold" id="sStepPct" style="color:#215d72;">33%</span>
-                    </div>
-                    <div class="h-1.5 bg-slate-100 overflow-hidden">
-                      <div class="h-full prog-fill" id="sProgressBar" style="width:33%;background:#215d72;"></div>
-                    </div>
-                    <div class="flex items-center gap-2 mt-4">
-                      <div class="sdot-wrap flex items-center gap-1 active" id="sswrap1">
-                        <div class="sdot active" id="ssdot1">1</div>
-                        <div class="sdot-label">Account</div>
-                      </div>
-                      <div class="flex-1 h-px bg-slate-200" id="sline1"></div>
-                      <div class="sdot-wrap flex items-center gap-1" id="sswrap2">
-                        <div class="sdot" id="ssdot2">2</div>
-                        <div class="sdot-label">Contributions</div>
-                      </div>
-                      <div class="flex-1 h-px bg-slate-200" id="sline2"></div>
-                      <div class="sdot-wrap flex items-center gap-1" id="sswrap3">
-                        <div class="sdot" id="ssdot3">3</div>
-                        <div class="sdot-label">Submit</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="form-step active" id="ssection1">
-                    <div class="text-xs font-bold tracking-widest uppercase mb-4 pb-3 border-b border-slate-100"
-                      style="color:#215d72;">Account Information</div>
-                    <div class="grid grid-cols-2 gap-4 mb-4">
-                      <div><label class="flabel">Member Number <span class="req">*</span></label><input type="text"
-                          class="field" id="s_member_no" placeholder="RD-002345" /></div>
-                      <div><label class="flabel">Full Name <span class="req">*</span></label><input type="text"
-                          class="field" id="s_fullname" placeholder="Amina Wanjiku" /></div>
-                      <div><label class="flabel">Email Address <span class="req">*</span></label><input type="email"
-                          class="field" id="s_email" placeholder="you@example.com" /></div>
-                      <div><label class="flabel">Phone Number <span class="req">*</span></label><input type="tel"
-                          class="field" id="s_phone" placeholder="+254 7XX XXX XXX" /></div>
-                    </div>
-                    <div>
-                      <label class="flabel mb-2">Account Type <span class="req">*</span></label>
-                      <div class="flex flex-wrap gap-2">
-                        <label class="radio-opt"><input type="radio" name="s_acct_type" value="regular" checked />
-                          Regular Savings</label>
-                        <label class="radio-opt"><input type="radio" name="s_acct_type" value="fixed" /> Fixed
-                          Deposit</label>
-                        <label class="radio-opt"><input type="radio" name="s_acct_type" value="holiday" /> Holiday
-                          Savings</label>
-                        <label class="radio-opt"><input type="radio" name="s_acct_type" value="group" /> Group /
-                          Chama</label>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="form-step" id="ssection2">
-                    <div class="text-xs font-bold tracking-widest uppercase mb-4 pb-3 border-b border-slate-100"
-                      style="color:#215d72;">Contribution Details</div>
-                    <div class="mb-5">
-                      <label class="flabel mb-2">Monthly Contribution Amount (KSh) <span class="req">*</span></label>
-                      <div class="grid grid-cols-4 gap-2 mb-2" id="amountOptionsSavings">
-                        <div class="apill" data-val="500">500</div>
-                        <div class="apill" data-val="1000">1,000</div>
-                        <div class="apill" data-val="2500">2,500</div>
-                        <div class="apill" data-val="5000">5,000</div>
-                        <div class="apill" data-val="10000">10,000</div>
-                        <div class="apill" data-val="25000">25,000</div>
-                        <div class="apill" data-val="50000">50,000</div>
-                        <div class="apill" data-val="custom" style="font-size:12px;color:#94a3b8;">Custom</div>
-                      </div>
-                      <input type="number" class="field" id="custom_amount_savings"
-                        placeholder="Enter custom amount (KSh)" style="display:none;" />
-                    </div>
-                    <div class="mb-4">
-                      <label class="flabel mb-2">Preferred Payment Method <span class="req">*</span></label>
-                      <div class="flex flex-wrap gap-2">
-                        <label class="radio-opt"><input type="radio" name="s_paymethod" value="mpesa" checked />
-                          M-Pesa</label>
-                        <label class="radio-opt"><input type="radio" name="s_paymethod" value="bank" /> Bank
-                          Transfer</label>
-                        <label class="radio-opt"><input type="radio" name="s_paymethod" value="payroll" />
-                          Payroll</label>
-                      </div>
-                    </div>
-                    <div class="grid grid-cols-2 gap-4 mb-4">
-                      <div><label class="flabel">Initial Deposit (KSh) <span class="req">*</span></label><input
-                          type="number" class="field" id="s_initial_deposit" placeholder="1000" /></div>
-                      <div><label class="flabel">Fixed Deposit Term</label><select class="field" id="s_term">
-                          <option value="">N/A or select</option>
-                          <option>3 months</option>
-                          <option>6 months</option>
-                          <option>12 months</option>
-                          <option>24 months</option>
-                        </select></div>
-                    </div>
-                    <div>
-                      <label class="flabel mb-2">Communication Preferences</label>
-                      <div class="flex flex-col gap-2.5">
-                        <label class="chk-opt"><input type="checkbox" checked /><span class="text-sm">WhatsApp - account
-                            alerts & dividends</span></label>
-                        <label class="chk-opt"><input type="checkbox" checked /><span class="text-sm">Email - SACCO news
-                            and financial tips</span></label>
-                        <label class="chk-opt"><input type="checkbox" /><span class="text-sm">SMS - transaction
-                            confirmations</span></label>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="form-step" id="ssection3">
-                    <div class="text-xs font-bold tracking-widest uppercase mb-4 pb-3 border-b border-slate-100"
-                      style="color:#215d72;">Review & Declaration</div>
-                    <div class="p-5 mb-5 bg-slate-50 border border-slate-100">
-                      <ul class="text-sm text-slate-600 flex flex-col gap-2 pl-4">
-                        <li class="list-disc">All information provided is true and accurate.</li>
-                        <li class="list-disc">I understand the minimum balance and notice period requirements.</li>
-                        <li class="list-disc">I consent to KYC verification as permitted by law.</li>
-                        <li class="list-disc">My data will be stored and processed per the Privacy Policy.</li>
-                      </ul>
-                    </div>
-                    <div class="mb-5"><label class="chk-opt"><input type="checkbox" id="s_declaration" /><span
-                          class="text-sm">I agree to the <a href="#" style="color:#215d72;" class="underline">Savings
-                            Terms & Conditions</a></span></label></div>
-                    <div><label class="flabel">Digital Signature (Full Name) <span class="req">*</span></label><input
-                        type="text" class="field" id="s_signature" placeholder="Type your full name"
-                        style="font-style:italic;" /></div>
-                  </div>
-
-                  <div class="flex items-center justify-between mt-7 pt-5 border-t border-slate-100">
-                    <button type="button" id="sPrevBtn" onclick="changeStep('savings',-1)"
-                      class="hidden items-center gap-2 px-5 py-2.5 border border-slate-200 text-slate-600 font-semibold text-sm cursor-pointer hover:bg-slate-50 transition-all bg-white">
-                      <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                        <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
-                      </svg>Back
-                    </button>
-                    <button type="button" id="sNextBtn" onclick="changeStep('savings',1)" class="btn-primary ml-auto">
-                      Next Step <svg class="w-4 h-4 fill-white" viewBox="0 0 24 24">
-                        <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" />
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-                <div id="sSuccess" class="hidden text-center py-10">
-                  <div
-                    class="w-16 h-16 border-2 border-green-200 flex items-center justify-center mx-auto mb-5 bg-green-50">
-                    <svg class="w-8 h-8 fill-green-500" viewBox="0 0 24 24">
-                      <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
-                    </svg>
-                  </div>
-                  <h3 class="font-display text-2xl text-slate-900 mb-3"
-                    style="font-family:'DM Serif Display',Georgia,serif;">Savings Application Submitted!</h3>
-                  <p class="text-slate-500 text-sm max-w-sm mx-auto mb-6">Your savings account application is being
-                    processed. You'll hear from us shortly.</p>
-                  <button onclick="resetForm('savings')"
-                    class="px-6 py-2.5 border font-semibold text-sm cursor-pointer hover:bg-slate-50 transition-all bg-white"
-                    style="border-color:#215d72;color:#215d72;">Start a New Application</button>
-                </div>
+                <iframe id="savingsFormFrame" src="savings-zoho-form.html" title="Redian Sacco Savings Application"
+                  style="width:100%;border:0;display:block;overflow:hidden;height:520px;" scrolling="no"></iframe>
               </div>
 
             </div>
@@ -902,11 +747,15 @@
 
   <script src="script.js"></script>
   <script>
-    // Auto-resize the embedded Zoho loan form iframe to match its content height.
+    // Auto-resize the embedded Zoho loan/savings form iframes to match their content height.
     window.addEventListener('message', function (e) {
-      if (e.data && e.data.type === 'zohoLoanFormHeight') {
-        var frame = document.getElementById('loanFormFrame');
-        if (frame) frame.style.height = e.data.height + 'px';
+      if (!e.data || !e.data.type) return;
+      if (e.data.type === 'zohoLoanFormHeight') {
+        var loanFrame = document.getElementById('loanFormFrame');
+        if (loanFrame) loanFrame.style.height = e.data.height + 'px';
+      } else if (e.data.type === 'zohoSavingsFormHeight') {
+        var savingsFrame = document.getElementById('savingsFormFrame');
+        if (savingsFrame) savingsFrame.style.height = e.data.height + 'px';
       }
     });
   </script>
