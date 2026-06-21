@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Savings Application Submitted | Redian Sacco</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style type="text/tailwindcss">
+    @theme {
+      --color-red: #f14e3f;
+      --color-red-dk: #c8311f;
+      --color-teal: #215d72;
+      --color-navy: #024460;
+      --color-navy-dk: #012e42;
+      --color-offwhite: #f7f8fa;
+      --color-smoke: #eef0f3;
+      --color-border: #dde1e6;
+      --color-muted: #64748b;
+      --color-dark: #0e1a24;
+      --font-display: "DM Serif Display", Georgia, serif;
+      --font-sans: "Inter", system-ui, sans-serif;
+    }
+
+    :root {
+      --color-red: #f14e3f;
+      --color-red-dk: #c8311f;
+      --color-teal: #215d72;
+      --color-navy: #024460;
+      --color-navy-dk: #012e42;
+      --color-offwhite: #f7f8fa;
+      --color-smoke: #eef0f3;
+      --color-border: #dde1e6;
+      --color-muted: #64748b;
+      --color-dark: #0e1a24;
+      --font-display: "DM Serif Display", Georgia, serif;
+      --font-sans: "Inter", system-ui, sans-serif;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: #fff;
+      color: var(--color-dark);
+      overflow-x: hidden;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: var(--font-display);
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      padding: 0 20px;
+      border-bottom: 1px solid var(--color-border);
+      background: #fff;
+    }
+
+    .btn-primary {
+      background: var(--color-red);
+      color: #fff;
+      border: none;
+      padding: 13px 28px;
+      font-family: var(--font-sans);
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background .2s, transform .15s;
+      text-decoration: none;
+    }
+
+    .btn-primary:hover {
+      background: var(--color-red-dk);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--color-navy);
+      border: 1.5px solid var(--color-navy);
+      padding: 12px 26px;
+      font-size: 15px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-sans);
+      font-weight: 600;
+      cursor: pointer;
+      transition: .2s;
+      text-decoration: none;
+    }
+
+    .btn-outline:hover {
+      background: var(--color-navy);
+      color: #fff;
+    }
+
+    .step-num {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--color-teal);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <section class="px-6 py-20 md:py-28">
+    <div class="max-w-2xl mx-auto text-center reveal" id="revealCard">
+
+      <div
+        class="inline-flex items-center gap-2 mb-7 px-3 py-1.5 border border-slate-200 bg-slate-50 text-slate-500 text-xs font-semibold tracking-widest uppercase">
+        <div class="w-2 h-2 rounded-full bg-emerald-500"></div>
+        Application Received
+      </div>
+
+      <div class="w-20 h-20 border-2 border-green-200 flex items-center justify-center mx-auto mb-7 bg-green-50">
+        <svg class="w-10 h-10 fill-green-500" viewBox="0 0 24 24">
+          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+        </svg>
+      </div>
+
+      <h1 class="mb-4" style="font-size:clamp(32px,4.5vw,46px);line-height:1.15;color:#0e1a24;">Savings Application
+        <br /><em class="not-italic" style="color:#215d72;">Submitted!</em>
+      </h1>
+
+      <p class="text-slate-500 text-lg font-light leading-relaxed mb-10 max-w-lg mx-auto">
+        Thank you for applying to open a savings account with Redian Sacco. Your application has been received and
+        our membership team will begin processing it shortly.
+      </p>
+
+      <div class="p-6 md:p-7 text-left mb-10 border border-slate-100 bg-slate-50">
+        <div class="font-bold mb-5 text-slate-700 text-sm uppercase tracking-widest" style="color:#024460;">What
+          happens next</div>
+        <div class="flex flex-col gap-5">
+          <div class="flex items-start gap-4">
+            <div class="step-num">1</div>
+            <div>
+              <div class="font-semibold text-slate-800 text-sm mb-0.5">Application received</div>
+              <div class="text-slate-500 text-sm leading-relaxed">Your savings application has been logged in our
+                member system and assigned for processing.</div>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="step-num">2</div>
+            <div>
+              <div class="font-semibold text-slate-800 text-sm mb-0.5">KYC &amp; account verification</div>
+              <div class="text-slate-500 text-sm leading-relaxed">We'll confirm your member details, share capital
+                payment, and initial deposit.</div>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="step-num">3</div>
+            <div>
+              <div class="font-semibold text-slate-800 text-sm mb-0.5">Account activation</div>
+              <div class="text-slate-500 text-sm leading-relaxed">Once verified, your savings account is activated
+                and your account numbers are issued.</div>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="step-num">4</div>
+            <div>
+              <div class="font-semibold text-slate-800 text-sm mb-0.5">Start saving</div>
+              <div class="text-slate-500 text-sm leading-relaxed">You'll receive a confirmation via SMS or email and
+                can begin making regular contributions.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-center gap-3 mb-10">
+        <a href="index.html" class="btn-outline">&larr; Back to Home</a>
+        <a href="index.html#apply" class="btn-primary">Explore Loan Products</a>
+      </div>
+
+      <p class="text-slate-400 text-sm">Have questions about your application? Call us on <span
+          class="font-semibold text-slate-600">+254 700 000 000</span> or email <span
+          class="font-semibold text-slate-600">support@rediansacco.co.ke</span>.</p>
+
+    </div>
+  </section>
+
+  <script>
+    window.addEventListener('load', function () {
+      document.getElementById('revealCard').classList.add('visible');
+    });
+  </script>
+</body>
+
+</html>
