@@ -84,13 +84,14 @@ const formState = {
 const pfxMap = {
   membership: { sec: 'msection', prev: 'mPrevBtn', next: 'mNextBtn', label: 'mStepLabel', pct: 'mStepPct', bar: 'mProgressBar', form: 'mForm', success: 'mSuccess', sdot: 'msdot', swrap: 'mswrap', line: 'mline', wrap: 'wrapMembership' },
   loan: { sec: 'lsection', prev: 'lPrevBtn', next: 'lNextBtn', label: 'lStepLabel', pct: 'lStepPct', bar: 'lProgressBar', form: 'lForm', success: 'lSuccess', sdot: 'lsdot', swrap: 'lswrap', line: 'lline', wrap: 'wrapLoan' },
-  savings: { sec: 'ssection', prev: 'sPrevBtn', next: 'sNextBtn', label: 'sStepLabel', pct: 'sStepPct', bar: 'sProgressBar', form: 'sForm', success: 'sSuccess', sdot: 'ssdot', swrap: 'sswrap', line: 'sline', wrap: 'wrapSavings' }
+  savings: { sec: 'ssection', prev: 'sPrevBtn', next: 'sNextBtn', label: 'sStepLabel', pct: 'sStepPct', bar: 'sProgressBar', form: 'sForm', success: 'sSuccess', sdot: 'ssdot', swrap: 'sswrap', line: 'sline', wrap: 'wrapSavings' },
+  leads: { wrap: 'wrapLeads' }
 };
 
 function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
 
 function switchTab(name) {
-  ['membership', 'loan', 'savings'].forEach(f => {
+  ['membership', 'loan', 'savings', 'leads'].forEach(f => {
     document.getElementById(pfxMap[f].wrap).style.display = f === name ? '' : 'none';
     document.getElementById('tab' + cap(f)).classList.toggle('active', f === name);
   });
