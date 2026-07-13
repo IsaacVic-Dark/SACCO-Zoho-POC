@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Redian Sacco | Event Sign-Up Invite</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root {
+      --color-red: #f14e3f;
+      --color-red-dk: #c8311f;
+      --color-teal: #215d72;
+      --color-navy: #024460;
+      --color-navy-dk: #012e42;
+      --color-offwhite: #f7f8fa;
+      --color-smoke: #eef0f3;
+      --color-border: #dde1e6;
+      --color-muted: #475569;
+      --color-dark: #0e1a24;
+      --font-display: "DM Serif Display", Georgia, serif;
+      --font-sans: "Inter", system-ui, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-sans);
+      background: var(--color-offwhite);
+      color: var(--color-dark);
+      min-height: 100vh;
+    }
+    h1, h2, h3 { font-family: var(--font-display); }
+
+    .bg-hero {
+      background: radial-gradient(circle at 15% 20%, rgba(255,255,255,.08), transparent 40%),
+                  linear-gradient(135deg, var(--color-navy) 0%, var(--color-navy-dk) 100%);
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid var(--color-border);
+      box-shadow: 0 8px 32px rgba(2, 68, 96, .10);
+    }
+
+    .qr-frame {
+      background: #fff;
+      border: 1.5px solid var(--color-border);
+      padding: 18px;
+      display: inline-block;
+    }
+
+    .code-pill {
+      font-family: var(--font-sans);
+      font-weight: 800;
+      letter-spacing: .12em;
+      background: var(--color-smoke);
+      border: 1.5px dashed var(--color-teal);
+      color: var(--color-navy);
+    }
+
+    .link-box {
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      word-break: break-all;
+      background: var(--color-smoke);
+      border: 1px solid var(--color-border);
+      color: var(--color-muted);
+    }
+
+    .btn-primary {
+      background: var(--color-red);
+      color: #fff;
+      border: none;
+      padding: 13px 28px;
+      font-family: var(--font-sans);
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background .2s, transform .15s;
+    }
+    .btn-primary:hover { background: var(--color-red-dk); transform: translateY(-1px); }
+
+    .btn-ghost {
+      background: var(--color-smoke);
+      color: var(--color-navy);
+      border: 1.5px solid var(--color-border);
+      padding: 12px 26px;
+      font-size: 14px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-sans);
+      cursor: pointer;
+      transition: background .2s, border-color .2s;
+    }
+    .btn-ghost:hover { background: #e7ebf0; border-color: var(--color-teal); }
+
+    .copied-toast {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--color-navy-dk);
+      color: #fff;
+      padding: 12px 22px;
+      font-size: 14px;
+      font-weight: 600;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .25s, transform .25s;
+      z-index: 100;
+    }
+    .copied-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    .stat-tag {
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.18);
+      color: rgba(255,255,255,.85);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HERO / HEADER -->
+  <section class="bg-hero py-14 px-6">
+    <div class="max-w-3xl mx-auto text-center">
+      <div class="inline-flex items-center gap-2 stat-tag px-4 py-1.5 mb-6 text-xs font-semibold tracking-widest uppercase">
+        Your own CRM · SACCO
+      </div>
+      <h1 class="text-white mb-4" style="font-size:clamp(28px,4.5vw,46px);">Sign-Up for your own CRM</h1>
+      <p class="text-white/60 text-lg font-light max-w-xl mx-auto">
+        Want to follow what Zoho Offers in your own experience?  Scan the QR code below or open the link to get started
+      </p>
+    </div>
+  </section>
+
+  <!-- MAIN CARD -->
+  <section class="px-6 -mt-10 pb-16">
+    <div class="max-w-3xl mx-auto">
+      <div class="card p-8 md:p-12">
+
+        <div class="grid md:grid-cols-2 gap-10 items-center">
+
+          <!-- QR CODE -->
+          <div class="text-center">
+            <p class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-4">Scan to Sign Up</p>
+            <div class="qr-frame">
+              <img src="data:image/png;base64,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" alt="QR code linking to sign-up form" class="w-48 h-48 md:w-56 md:h-56" />
+            </div>
+          </div>
+
+          <!-- LINK -->
+          <div>
+            <p class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-4">Direct Link</p>
+            <div class="link-box p-4 mb-4" id="inviteLink">https://store.zoho.com/ResellerCustomerSignUp.do?id=74aa5e52dd7b4e553b8ab68258d9b4fb</div>
+            <div class="flex flex-col sm:flex-row gap-3">
+              <button class="btn-primary" onclick="copyLink()">
+                <svg class="w-4 h-4 fill-white" viewBox="0 0 24 24"><path d="M16 1H4a2 2 0 00-2 2v14h2V3h12V1zm3 4H8a2 2 0 00-2 2v14a2 2 0 002 2h11a2 2 0 002-2V7a2 2 0 00-2-2zm0 16H8V7h11v14z"/></svg>
+                Copy Link
+              </button>
+              <a href="https://store.zoho.com/ResellerCustomerSignUp.do?id=74aa5e52dd7b4e553b8ab68258d9b4fb" target="_blank" rel="noopener" class="btn-ghost">
+                Open Sign-Up Form
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="mt-10 pt-8 border-t" style="border-color:var(--color-border);">
+          <p class="text-sm text-slate-500 text-center">
+            <span class="font-semibold text-slate-700">Need help?</span>
+            If you have any questions about signing up or setting up your own CRM experience, reach out to us at
+            <a href="mailto:enquiry@rediansoftware.com" class="font-semibold" style="color:var(--color-teal);">enquiry@rediansoftware.com</a>
+            and our team will be happy to assist.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="copied-toast" id="toast">Link copied to clipboard</div>
+
+  <script>
+    function copyLink() {
+      const text = document.getElementById('inviteLink').innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        const toast = document.getElementById('toast');
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2000);
+      });
+    }
+  </script>
+
+</body>
+
+</html>
